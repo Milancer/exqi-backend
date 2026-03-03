@@ -6,6 +6,9 @@ import { JobProfileCompetency } from './entities/job-profile-competency.entity';
 import { JobProfileSkill } from './entities/job-profile-skill.entity';
 import { JobProfileDeliverable } from './entities/job-profile-deliverable.entity';
 import { JobProfileRequirement } from './entities/job-profile-requirement.entity';
+import { JpCompetencyType } from './entities/jp-competency-type.entity';
+import { JpCompetencyCluster } from './entities/jp-competency-cluster.entity';
+import { JpCompetency } from './entities/jp-competency.entity';
 
 describe('JobProfilesService', () => {
   let service: JobProfilesService;
@@ -41,6 +44,18 @@ describe('JobProfilesService', () => {
         },
         {
           provide: getRepositoryToken(JobProfileRequirement),
+          useValue: mockRepository,
+        },
+        {
+          provide: getRepositoryToken(JpCompetencyType),
+          useValue: mockRepository,
+        },
+        {
+          provide: getRepositoryToken(JpCompetencyCluster),
+          useValue: mockRepository,
+        },
+        {
+          provide: getRepositoryToken(JpCompetency),
           useValue: mockRepository,
         },
       ],

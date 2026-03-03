@@ -22,6 +22,12 @@ import { AddCompetencyDto } from './dto/add-competency.dto';
 import { AddSkillDto } from './dto/add-skill.dto';
 import { AddDeliverableDto } from './dto/add-deliverable.dto';
 import { UpdateRequirementsDto } from './dto/update-requirements.dto';
+import { CreateJpCompetencyTypeDto } from './dto/jp-competency-type/create-jp-competency-type.dto';
+import { UpdateJpCompetencyTypeDto } from './dto/jp-competency-type/update-jp-competency-type.dto';
+import { CreateJpCompetencyClusterDto } from './dto/jp-competency-cluster/create-jp-competency-cluster.dto';
+import { UpdateJpCompetencyClusterDto } from './dto/jp-competency-cluster/update-jp-competency-cluster.dto';
+import { CreateJpCompetencyDto } from './dto/jp-competency/create-jp-competency.dto';
+import { UpdateJpCompetencyDto } from './dto/jp-competency/update-jp-competency.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
@@ -33,6 +39,152 @@ import { UserRole } from '../users/entities/user.entity';
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class JobProfilesController {
   constructor(private readonly jobProfilesService: JobProfilesService) {}
+
+  // ─── JP Competency Types (MUST be before :id routes) ───────────
+
+  @Post('competency-types')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Create a JP competency type (ADMIN only)' })
+  @ApiResponse({ status: 201, description: 'JP type created successfully' })
+  createJpType(@Body() dto: CreateJpCompetencyTypeDto, @Request() req) {
+    return this.jobProfilesService.createJpType(dto, req.user);
+  }
+
+  @Get('competency-types')
+  @ApiOperation({ summary: 'Get all JP competency types' })
+  @ApiResponse({ status: 200, description: 'List of JP types' })
+  findAllJpTypes() {
+    return this.jobProfilesService.findAllJpTypes();
+  }
+
+  @Get('competency-types/:id')
+  @ApiOperation({ summary: 'Get JP competency type by ID' })
+  @ApiResponse({ status: 200, description: 'JP type found' })
+  @ApiResponse({ status: 404, description: 'JP type not found' })
+  findOneJpType(@Param('id') id: string) {
+    return this.jobProfilesService.findOneJpType(+id);
+  }
+
+  @Patch('competency-types/:id')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Update a JP competency type (ADMIN only)' })
+  @ApiResponse({ status: 200, description: 'JP type updated successfully' })
+  updateJpType(
+    @Param('id') id: string,
+    @Body() dto: UpdateJpCompetencyTypeDto,
+    @Request() req,
+  ) {
+    return this.jobProfilesService.updateJpType(+id, dto, req.user);
+  }
+
+  @Delete('competency-types/:id')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Delete a JP competency type (ADMIN only)' })
+  @ApiResponse({ status: 200, description: 'JP type deleted successfully' })
+  removeJpType(@Param('id') id: string, @Request() req) {
+    return this.jobProfilesService.removeJpType(+id, req.user);
+  }
+
+  // ─── JP Competency Clusters (MUST be before :id routes) ────────
+
+  @Post('competency-clusters')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Create a JP competency cluster (ADMIN only)' })
+  @ApiResponse({ status: 201, description: 'JP cluster created successfully' })
+  createJpCluster(@Body() dto: CreateJpCompetencyClusterDto, @Request() req) {
+    return this.jobProfilesService.createJpCluster(dto, req.user);
+  }
+
+  @Get('competency-clusters')
+  @ApiOperation({ summary: 'Get all JP competency clusters' })
+  @ApiResponse({ status: 200, description: 'List of JP clusters' })
+  findAllJpClusters() {
+    return this.jobProfilesService.findAllJpClusters();
+  }
+
+  @Get('competency-clusters/:id')
+  @ApiOperation({ summary: 'Get JP competency cluster by ID' })
+  @ApiResponse({ status: 200, description: 'JP cluster found' })
+  @ApiResponse({ status: 404, description: 'JP cluster not found' })
+  findOneJpCluster(@Param('id') id: string) {
+    return this.jobProfilesService.findOneJpCluster(+id);
+  }
+
+  @Patch('competency-clusters/:id')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Update a JP competency cluster (ADMIN only)' })
+  @ApiResponse({ status: 200, description: 'JP cluster updated successfully' })
+  updateJpCluster(
+    @Param('id') id: string,
+    @Body() dto: UpdateJpCompetencyClusterDto,
+    @Request() req,
+  ) {
+    return this.jobProfilesService.updateJpCluster(+id, dto, req.user);
+  }
+
+  @Delete('competency-clusters/:id')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Delete a JP competency cluster (ADMIN only)' })
+  @ApiResponse({ status: 200, description: 'JP cluster deleted successfully' })
+  removeJpCluster(@Param('id') id: string, @Request() req) {
+    return this.jobProfilesService.removeJpCluster(+id, req.user);
+  }
+
+  // ─── JP Competencies (MUST be before :id routes) ───────────────
+
+  @Post('competency-items')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Create a JP competency (ADMIN only)' })
+  @ApiResponse({
+    status: 201,
+    description: 'JP competency created successfully',
+  })
+  createJpCompetency(@Body() dto: CreateJpCompetencyDto, @Request() req) {
+    return this.jobProfilesService.createJpCompetency(dto, req.user);
+  }
+
+  @Get('competency-items')
+  @ApiOperation({ summary: 'Get all JP competencies' })
+  @ApiResponse({ status: 200, description: 'List of JP competencies' })
+  findAllJpCompetencies(@Request() req) {
+    return this.jobProfilesService.findAllJpCompetencies(req.user);
+  }
+
+  @Get('competency-items/:id')
+  @ApiOperation({ summary: 'Get JP competency by ID' })
+  @ApiResponse({ status: 200, description: 'JP competency found' })
+  @ApiResponse({ status: 404, description: 'JP competency not found' })
+  findOneJpCompetency(@Param('id') id: string) {
+    return this.jobProfilesService.findOneJpCompetency(+id);
+  }
+
+  @Patch('competency-items/:id')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Update a JP competency (ADMIN only)' })
+  @ApiResponse({
+    status: 200,
+    description: 'JP competency updated successfully',
+  })
+  updateJpCompetency(
+    @Param('id') id: string,
+    @Body() dto: UpdateJpCompetencyDto,
+    @Request() req,
+  ) {
+    return this.jobProfilesService.updateJpCompetency(+id, dto, req.user);
+  }
+
+  @Delete('competency-items/:id')
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Delete a JP competency (ADMIN only)' })
+  @ApiResponse({
+    status: 200,
+    description: 'JP competency deleted successfully',
+  })
+  removeJpCompetency(@Param('id') id: string, @Request() req) {
+    return this.jobProfilesService.removeJpCompetency(+id, req.user);
+  }
+
+  // ─── Job Profile CRUD ──────────────────────────────────────────
 
   @Post()
   @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
