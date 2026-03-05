@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BulkImportController } from './bulk-import.controller';
-import { BulkImportService } from './bulk-import.service';
 
 // JP competency entities
 import { JpCompetencyType } from '../job-profiles/entities/jp-competency-type.entity';
@@ -13,6 +11,8 @@ import { CompetencyType } from '../competencies/entities/competency-type.entity'
 import { CompetencyCluster } from '../competencies/entities/competency-cluster.entity';
 import { Competency } from '../competencies/entities/competency.entity';
 import { CompetencyQuestion } from '../cbi/entities/competency-question.entity';
+import { BulkImportController } from './bulk-import.controller';
+import { BulkImportService } from './bulk-import.service';
 
 @Module({
   imports: [
