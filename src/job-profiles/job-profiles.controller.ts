@@ -28,6 +28,7 @@ import { CreateJpCompetencyClusterDto } from './dto/jp-competency-cluster/create
 import { UpdateJpCompetencyClusterDto } from './dto/jp-competency-cluster/update-jp-competency-cluster.dto';
 import { CreateJpCompetencyDto } from './dto/jp-competency/create-jp-competency.dto';
 import { UpdateJpCompetencyDto } from './dto/jp-competency/update-jp-competency.dto';
+import { AssignReviewerDto } from './dto/assign-reviewer.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
@@ -184,12 +185,23 @@ export class JobProfilesController {
     return this.jobProfilesService.removeJpCompetency(+id, req.user);
   }
 
+  // ─── Reviewer workflow (MUST be before :id routes) ─────────────
+
+  @Get('reviewer-candidates')
+  @ApiOperation({
+    summary: 'Get list of OFFICE_MANAGER users for reviewer selection',
+  })
+  @ApiResponse({ status: 200, description: 'List of reviewer candidates' })
+  getReviewerCandidates(@Request() req) {
+    return this.jobProfilesService.getReviewerCandidates(req.user);
+  }
+
   // ─── Job Profile CRUD ──────────────────────────────────────────
 
   @Post()
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
   @ApiOperation({
-    summary: 'Create a new job profile (ADMIN or OFFICE_MANAGER)',
+    summary: 'Create a new job profile',
   })
   @ApiResponse({ status: 201, description: 'Job profile created successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -213,8 +225,8 @@ export class JobProfilesController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
-  @ApiOperation({ summary: 'Update a job profile (ADMIN or OFFICE_MANAGER)' })
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
+  @ApiOperation({ summary: 'Update a job profile' })
   @ApiResponse({ status: 200, description: 'Job profile updated successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiResponse({ status: 404, description: 'Job profile not found' })
@@ -329,5 +341,40 @@ export class JobProfilesController {
     @Request() req,
   ) {
     return this.jobProfilesService.updateRequirements(+id, dto, req.user);
+  }
+
+  // ─── Reviewer assignment & review ───────────────────────────────
+
+  @Post(':id/assign-reviewer')
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
+  @ApiOperation({
+    summary: 'Assign an OFFICE_MANAGER as reviewer for a job profile',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Reviewer assigned, notification sent',
+  })
+  assignReviewer(
+    @Param('id') id: string,
+    @Body() dto: AssignReviewerDto,
+    @Request() req,
+  ) {
+    return this.jobProfilesService.assignReviewer(
+      +id,
+      dto.reviewer_id,
+      req.user,
+    );
+  }
+
+  @Post(':id/review')
+  @Roles(UserRole.OFFICE_MANAGER)
+  @ApiOperation({ summary: 'Approve or reject a job profile (reviewer only)' })
+  @ApiResponse({ status: 200, description: 'Review action processed' })
+  reviewJobProfile(
+    @Param('id') id: string,
+    @Body() body: { action: 'approve' | 'reject' },
+    @Request() req,
+  ) {
+    return this.jobProfilesService.reviewJobProfile(+id, body.action, req.user);
   }
 }

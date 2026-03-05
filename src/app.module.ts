@@ -12,6 +12,7 @@ import { JobProfilesModule } from './job-profiles/job-profiles.module';
 import { CandidatesModule } from './candidates/candidates.module';
 import { InterviewsModule } from './interviews/interviews.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { BulkImportModule } from './bulk-import/bulk-import.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     CandidatesModule,
     InterviewsModule,
     NotificationsModule,
+    BulkImportModule,
   ],
   controllers: [AppController],
   providers: [AppService],

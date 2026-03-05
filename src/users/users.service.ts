@@ -66,6 +66,38 @@ export class UsersService {
     return this.usersRepository.findOneBy({ id });
   }
 
+  /** Find a user by ID without client gating (for own-profile use) */
+  async findOneById(id: number) {
+    const user = await this.usersRepository.findOne({
+      where: { id },
+      relations: ['client'],
+    });
+    if (!user) throw new NotFoundException('User not found');
+    return user;
+  }
+
+  /** Update only safe profile fields (self-service) */
+  async updateProfile(
+    id: number,
+    data: {
+      name?: string;
+      surname?: string;
+      email?: string;
+      phoneNumber?: string;
+      idNumber?: string;
+      signature?: string;
+    },
+  ) {
+    const user = await this.findOneById(id);
+    if (data.name !== undefined) user.name = data.name;
+    if (data.surname !== undefined) user.surname = data.surname;
+    if (data.email !== undefined) user.email = data.email;
+    if (data.phoneNumber !== undefined) user.phoneNumber = data.phoneNumber;
+    if (data.idNumber !== undefined) user.idNumber = data.idNumber;
+    if (data.signature !== undefined) user.signature = data.signature;
+    return this.usersRepository.save(user);
+  }
+
   remove(id: number) {
     return this.usersRepository.delete(id);
   }

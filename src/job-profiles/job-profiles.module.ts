@@ -10,6 +10,8 @@ import { JobProfileRequirement } from './entities/job-profile-requirement.entity
 import { JpCompetencyType } from './entities/jp-competency-type.entity';
 import { JpCompetencyCluster } from './entities/jp-competency-cluster.entity';
 import { JpCompetency } from './entities/jp-competency.entity';
+import { User } from '../users/entities/user.entity';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
   imports: [
@@ -22,7 +24,9 @@ import { JpCompetency } from './entities/jp-competency.entity';
       JpCompetencyType,
       JpCompetencyCluster,
       JpCompetency,
+      User,
     ]),
+    NotificationsModule,
   ],
   controllers: [JobProfilesController],
   providers: [JobProfilesService],

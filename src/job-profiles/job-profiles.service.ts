@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   ForbiddenException,
+  BadRequestException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
@@ -13,6 +14,9 @@ import { JobProfileRequirement } from './entities/job-profile-requirement.entity
 import { JpCompetencyType } from './entities/jp-competency-type.entity';
 import { JpCompetencyCluster } from './entities/jp-competency-cluster.entity';
 import { JpCompetency } from './entities/jp-competency.entity';
+import { User, UserRole, UserStatus } from '../users/entities/user.entity';
+import { NotificationsService } from '../notifications/notifications.service';
+import { NotificationType } from '../notifications/entities/notification.entity';
 import { CreateJobProfileDto } from './dto/create-job-profile.dto';
 import { UpdateJobProfileDto } from './dto/update-job-profile.dto';
 import { AddCompetencyDto } from './dto/add-competency.dto';
@@ -25,7 +29,6 @@ import { CreateJpCompetencyClusterDto } from './dto/jp-competency-cluster/create
 import { UpdateJpCompetencyClusterDto } from './dto/jp-competency-cluster/update-jp-competency-cluster.dto';
 import { CreateJpCompetencyDto } from './dto/jp-competency/create-jp-competency.dto';
 import { UpdateJpCompetencyDto } from './dto/jp-competency/update-jp-competency.dto';
-import { UserRole } from '../users/entities/user.entity';
 
 @Injectable()
 export class JobProfilesService {
@@ -46,15 +49,22 @@ export class JobProfilesService {
     private readonly jpClusterRepository: Repository<JpCompetencyCluster>,
     @InjectRepository(JpCompetency)
     private readonly jpCompetencyRepository: Repository<JpCompetency>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   // ─── Job Profile CRUD ───────────────────────────────────────────
 
   // Create job profile
   async create(dto: CreateJobProfileDto, user: any) {
-    if (user.role !== UserRole.ADMIN && user.role !== UserRole.OFFICE_MANAGER) {
+    if (
+      user.role !== UserRole.ADMIN &&
+      user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.OFFICE_USER
+    ) {
       throw new ForbiddenException(
-        'Only ADMIN and OFFICE_MANAGER can create job profiles',
+        'Only ADMIN, OFFICE_MANAGER, and OFFICE_USER can create job profiles',
       );
     }
 
@@ -75,7 +85,14 @@ export class JobProfilesService {
       whereClause.client_id = user.clientId;
     }
 
-    whereClause.status = In(['Draft', 'Active', 'Archived']);
+    whereClause.status = In([
+      'Draft',
+      'Awaiting Review',
+      'Approved',
+      'Rejected',
+      'Active',
+      'Archived',
+    ]);
 
     return this.jobProfileRepository.find({
       where: whereClause,
@@ -95,6 +112,7 @@ export class JobProfilesService {
         'skills',
         'deliverables',
         'requirements',
+        'reviewer',
       ],
     });
 
@@ -114,9 +132,13 @@ export class JobProfilesService {
 
   // Update job profile
   async update(id: number, dto: UpdateJobProfileDto, user: any) {
-    if (user.role !== UserRole.ADMIN && user.role !== UserRole.OFFICE_MANAGER) {
+    if (
+      user.role !== UserRole.ADMIN &&
+      user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.OFFICE_USER
+    ) {
       throw new ForbiddenException(
-        'Only ADMIN and OFFICE_MANAGER can update job profiles',
+        'Only ADMIN, OFFICE_MANAGER, and OFFICE_USER can update job profiles',
       );
     }
 
@@ -156,6 +178,111 @@ export class JobProfilesService {
 
     await this.jobProfileRepository.update(id, { status: 'Deleted' });
     return { message: 'Job Profile deleted successfully' };
+  }
+
+  // ─── Reviewer / Approval workflow ──────────────────────────────
+
+  /** Get list of OFFICE_MANAGER users that can be assigned as reviewers */
+  async getReviewerCandidates(user: any) {
+    const where: any = {
+      role: UserRole.OFFICE_MANAGER,
+      status: UserStatus.ACTIVE,
+    };
+    // Non-admin users only see managers in their own client
+    if (user.role !== UserRole.ADMIN) {
+      where.clientId = user.clientId;
+    }
+    const users = await this.userRepository.find({ where });
+    // Strip sensitive fields
+    return users.map((u) => ({
+      id: u.id,
+      name: u.name,
+      surname: u.surname,
+      email: u.email,
+      role: u.role,
+    }));
+  }
+
+  /** Assign an OFFICE_MANAGER as reviewer → sets status to 'Awaiting Review' + creates notification */
+  async assignReviewer(jobProfileId: number, reviewerId: number, user: any) {
+    const jp = await this.findOne(jobProfileId, user);
+
+    // Validate the reviewer is an active OFFICE_MANAGER
+    const reviewer = await this.userRepository.findOne({
+      where: { id: reviewerId },
+    });
+    if (!reviewer) {
+      throw new NotFoundException('Reviewer user not found');
+    }
+    if (reviewer.role !== UserRole.OFFICE_MANAGER) {
+      throw new BadRequestException('Reviewer must be an OFFICE_MANAGER');
+    }
+
+    // Update JP
+    jp.reviewer_id = reviewerId;
+    jp.status = 'Awaiting Review';
+    jp.reviewed_at = null as any;
+    await this.jobProfileRepository.save(jp);
+
+    // Create notification for the reviewer
+    await this.notificationsService.create({
+      user_id: reviewerId,
+      type: NotificationType.JOB_PROFILE_APPROVAL,
+      title: 'Job Profile Review Required',
+      message: `You have been assigned to review the job profile "${jp.job_title}". Please review and approve or reject it.`,
+      reference_type: 'job_profile',
+      reference_id: jobProfileId,
+      client_id: jp.client_id,
+    });
+
+    return this.findOne(jobProfileId, user);
+  }
+
+  /** Reviewer approves or rejects a job profile */
+  async reviewJobProfile(
+    jobProfileId: number,
+    action: 'approve' | 'reject',
+    user: any,
+  ) {
+    const jp = await this.findOne(jobProfileId, user);
+
+    if (jp.status !== 'Awaiting Review') {
+      throw new BadRequestException(
+        'Job profile is not in "Awaiting Review" status',
+      );
+    }
+
+    if (jp.reviewer_id !== user.userId) {
+      throw new ForbiddenException(
+        'Only the assigned reviewer can approve or reject this job profile',
+      );
+    }
+
+    jp.status = action === 'approve' ? 'Approved' : 'Draft';
+    jp.reviewed_at = new Date();
+    await this.jobProfileRepository.save(jp);
+
+    // Notify the creator
+    const creatorId = Number(jp.user_id);
+    if (creatorId) {
+      await this.notificationsService.create({
+        user_id: creatorId,
+        type: NotificationType.JOB_PROFILE_APPROVAL,
+        title:
+          action === 'approve'
+            ? 'Job Profile Approved'
+            : 'Job Profile Requires Changes',
+        message:
+          action === 'approve'
+            ? `Your job profile "${jp.job_title}" has been approved.`
+            : `Your job profile "${jp.job_title}" was not approved and has been returned to Draft for changes.`,
+        reference_type: 'job_profile',
+        reference_id: jobProfileId,
+        client_id: jp.client_id,
+      });
+    }
+
+    return this.findOne(jobProfileId, user);
   }
 
   // ─── Job Profile ↔ Competency linking ───────────────────────────

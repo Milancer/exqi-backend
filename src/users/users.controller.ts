@@ -37,6 +37,31 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @Get('me')
+  @ApiOperation({ summary: 'Get the current user profile' })
+  @ApiResponse({ status: 200, description: 'Current user profile' })
+  getMyProfile(@Request() req) {
+    return this.usersService.findOneById(req.user.userId);
+  }
+
+  @Patch('me')
+  @ApiOperation({ summary: 'Update the current user profile' })
+  @ApiResponse({ status: 200, description: 'Updated user profile' })
+  updateMyProfile(
+    @Request() req,
+    @Body()
+    data: {
+      name?: string;
+      surname?: string;
+      email?: string;
+      phoneNumber?: string;
+      idNumber?: string;
+      signature?: string;
+    },
+  ) {
+    return this.usersService.updateProfile(req.user.userId, data);
+  }
+
   @Get()
   @ApiOperation({ summary: 'Retrieve all visible users' })
   findAll(@Request() req) {

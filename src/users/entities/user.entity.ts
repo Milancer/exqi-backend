@@ -54,6 +54,10 @@ export class User {
   @Column({ nullable: true })
   profilePicture: string;
 
+  @ApiPropertyOptional({ description: 'Base64 data URL of the user signature' })
+  @Column({ type: 'text', nullable: true })
+  signature: string;
+
   @ApiProperty({ enum: UserRole })
   @Column({ type: 'enum', enum: UserRole, default: UserRole.OFFICE_USER })
   role: UserRole;

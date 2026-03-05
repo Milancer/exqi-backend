@@ -6,12 +6,25 @@ import {
   UpdateDateColumn,
   OneToMany,
   OneToOne,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { JobProfileCompetency } from './job-profile-competency.entity';
 import { JobProfileSkill } from './job-profile-skill.entity';
 import { JobProfileDeliverable } from './job-profile-deliverable.entity';
 import { JobProfileRequirement } from './job-profile-requirement.entity';
+import { User } from '../../users/entities/user.entity';
+
+export const JP_STATUSES = [
+  'Draft',
+  'Awaiting Review',
+  'Approved',
+  'Rejected',
+  'Active',
+  'Archived',
+  'Deleted',
+] as const;
 
 @Entity('job_profiles')
 export class JobProfile {
@@ -66,13 +79,27 @@ export class JobProfile {
   @Column({ nullable: true })
   reports_to: number;
 
-  @ApiProperty({ enum: ['Draft', 'Active', 'Archived', 'Deleted'] })
+  @ApiProperty({ enum: JP_STATUSES })
   @Column({
     type: 'enum',
-    enum: ['Draft', 'Active', 'Archived', 'Deleted'],
+    enum: JP_STATUSES,
     default: 'Draft',
   })
   status: string;
+
+  @ApiPropertyOptional({
+    description: 'Assigned reviewer (OFFICE_MANAGER) user ID',
+  })
+  @Column({ nullable: true })
+  reviewer_id: number;
+
+  @ManyToOne(() => User, { nullable: true, eager: false })
+  @JoinColumn({ name: 'reviewer_id' })
+  reviewer: User;
+
+  @ApiPropertyOptional({ description: 'When the review action was taken' })
+  @Column({ type: 'timestamp', nullable: true })
+  reviewed_at: Date;
 
   @ApiProperty()
   @CreateDateColumn()
