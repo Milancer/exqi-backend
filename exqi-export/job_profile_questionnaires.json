@@ -1,0 +1,66 @@
+[
+  {
+    "job_profile_questionnaire_id": 19,
+    "job_profile_id": null,
+    "questionnaire_name": "Test Michael",
+    "competencies": null,
+    "questions": [
+      3,
+      48,
+      107,
+      144,
+      12
+    ],
+    "competency_selections": [
+      {
+        "level": 3,
+        "competency_id": 1
+      },
+      {
+        "level": 3,
+        "competency_id": 10
+      },
+      {
+        "level": 2,
+        "competency_id": 22
+      },
+      {
+        "level": 4,
+        "competency_id": 29
+      },
+      {
+        "level": 2,
+        "competency_id": 3
+      }
+    ],
+    "competency_order": null,
+    "question_order": null
+  },
+  {
+    "job_profile_questionnaire_id": 20,
+    "job_profile_id": null,
+    "questionnaire_name": "qweqwe",
+    "competencies": null,
+    "questions": [
+      7,
+      13,
+      21
+    ],
+    "competency_selections": [
+      {
+        "level": 2,
+        "competency_id": 2
+      },
+      {
+        "level": 3,
+        "competency_id": 3
+      },
+      {
+        "level": 1,
+        "competency_id": 5
+      }
+    ],
+    "competency_order": null,
+    "question_order": null
+  }
+]

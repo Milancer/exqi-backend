@@ -15,6 +15,9 @@ import { JobProfileSkill } from './job-profile-skill.entity';
 import { JobProfileDeliverable } from './job-profile-deliverable.entity';
 import { JobProfileRequirement } from './job-profile-requirement.entity';
 import { User } from '../../users/entities/user.entity';
+import { Department } from '../../departments/entities/department.entity';
+import { JobGrade } from '../../job-grades/entities/job-grade.entity';
+import { WorkLevel } from '../../work-levels/entities/work-level.entity';
 
 export const JP_STATUSES = [
   'Draft',
@@ -96,6 +99,18 @@ export class JobProfile {
   @ManyToOne(() => User, { nullable: true, eager: false })
   @JoinColumn({ name: 'reviewer_id' })
   reviewer: User;
+
+  @ManyToOne(() => Department, { nullable: true, eager: false })
+  @JoinColumn({ name: 'department_id' })
+  department: Department;
+
+  @ManyToOne(() => JobGrade, { nullable: true, eager: false })
+  @JoinColumn({ name: 'job_grade_id' })
+  jobGrade: JobGrade;
+
+  @ManyToOne(() => WorkLevel, { nullable: true, eager: false })
+  @JoinColumn({ name: 'level_of_work' })
+  workLevel: WorkLevel;
 
   @ApiPropertyOptional({ description: 'When the review action was taken' })
   @Column({ type: 'timestamp', nullable: true })

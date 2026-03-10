@@ -1,0 +1,344 @@
+[
+  {
+    "permission_id": 1,
+    "permission_name": "read:dashboard",
+    "permission_description": "View dashboard",
+    "resource": "dashboard",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 2,
+    "permission_name": "read:users",
+    "permission_description": "View users",
+    "resource": "users",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 3,
+    "permission_name": "create:users",
+    "permission_description": "Create users",
+    "resource": "users",
+    "action": "create",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 4,
+    "permission_name": "update:users",
+    "permission_description": "Update users",
+    "resource": "users",
+    "action": "update",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 5,
+    "permission_name": "delete:users",
+    "permission_description": "Delete users",
+    "resource": "users",
+    "action": "delete",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 6,
+    "permission_name": "read:clients",
+    "permission_description": "View clients",
+    "resource": "clients",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 7,
+    "permission_name": "create:clients",
+    "permission_description": "Create clients",
+    "resource": "clients",
+    "action": "create",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 8,
+    "permission_name": "update:clients",
+    "permission_description": "Update clients",
+    "resource": "clients",
+    "action": "update",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 9,
+    "permission_name": "delete:clients",
+    "permission_description": "Delete clients",
+    "resource": "clients",
+    "action": "delete",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 10,
+    "permission_name": "read:job_profiles",
+    "permission_description": "View job profiles",
+    "resource": "job_profiles",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 11,
+    "permission_name": "create:job_profiles",
+    "permission_description": "Create job profiles",
+    "resource": "job_profiles",
+    "action": "create",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 12,
+    "permission_name": "update:job_profiles",
+    "permission_description": "Update job profiles",
+    "resource": "job_profiles",
+    "action": "update",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 13,
+    "permission_name": "delete:job_profiles",
+    "permission_description": "Delete job profiles",
+    "resource": "job_profiles",
+    "action": "delete",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 14,
+    "permission_name": "approve:job_profiles",
+    "permission_description": "Approve job profiles",
+    "resource": "job_profiles",
+    "action": "approve",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 15,
+    "permission_name": "read:competencies",
+    "permission_description": "View competencies",
+    "resource": "competencies",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 16,
+    "permission_name": "create:competencies",
+    "permission_description": "Create competencies",
+    "resource": "competencies",
+    "action": "create",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 17,
+    "permission_name": "update:competencies",
+    "permission_description": "Update competencies",
+    "resource": "competencies",
+    "action": "update",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 18,
+    "permission_name": "delete:competencies",
+    "permission_description": "Delete competencies",
+    "resource": "competencies",
+    "action": "delete",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 19,
+    "permission_name": "read:questions",
+    "permission_description": "View questions",
+    "resource": "questions",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 20,
+    "permission_name": "create:questions",
+    "permission_description": "Create questions",
+    "resource": "questions",
+    "action": "create",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 21,
+    "permission_name": "update:questions",
+    "permission_description": "Update questions",
+    "resource": "questions",
+    "action": "update",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 22,
+    "permission_name": "delete:questions",
+    "permission_description": "Delete questions",
+    "resource": "questions",
+    "action": "delete",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 23,
+    "permission_name": "read:questionnaires",
+    "permission_description": "View questionnaires",
+    "resource": "questionnaires",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 24,
+    "permission_name": "create:questionnaires",
+    "permission_description": "Create questionnaires",
+    "resource": "questionnaires",
+    "action": "create",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 25,
+    "permission_name": "update:questionnaires",
+    "permission_description": "Update questionnaires",
+    "resource": "questionnaires",
+    "action": "update",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 26,
+    "permission_name": "delete:questionnaires",
+    "permission_description": "Delete questionnaires",
+    "resource": "questionnaires",
+    "action": "delete",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 27,
+    "permission_name": "read:candidates",
+    "permission_description": "View candidates",
+    "resource": "candidates",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 28,
+    "permission_name": "create:candidates",
+    "permission_description": "Create candidates",
+    "resource": "candidates",
+    "action": "create",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 29,
+    "permission_name": "update:candidates",
+    "permission_description": "Update candidates",
+    "resource": "candidates",
+    "action": "update",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 30,
+    "permission_name": "delete:candidates",
+    "permission_description": "Delete candidates",
+    "resource": "candidates",
+    "action": "delete",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 31,
+    "permission_name": "read:interviews",
+    "permission_description": "View interviews",
+    "resource": "interviews",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 32,
+    "permission_name": "create:interviews",
+    "permission_description": "Create interviews",
+    "resource": "interviews",
+    "action": "create",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 33,
+    "permission_name": "update:interviews",
+    "permission_description": "Update interviews",
+    "resource": "interviews",
+    "action": "update",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 34,
+    "permission_name": "delete:interviews",
+    "permission_description": "Delete interviews",
+    "resource": "interviews",
+    "action": "delete",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 35,
+    "permission_name": "read:alignment",
+    "permission_description": "View business alignment",
+    "resource": "alignment",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 36,
+    "permission_name": "read:activate_assessment",
+    "permission_description": "View activate assessment",
+    "resource": "activate_assessment",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 37,
+    "permission_name": "read:actual_asssessment",
+    "permission_description": "View actual assessment",
+    "resource": "actual_asssessment",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  },
+  {
+    "permission_id": 38,
+    "permission_name": "read:reports",
+    "permission_description": "View reports",
+    "resource": "reports",
+    "action": "read",
+    "status": "Active",
+    "created_at": "2026-01-20T08:43:40.000Z"
+  }
+]

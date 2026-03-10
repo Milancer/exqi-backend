@@ -1,0 +1,56 @@
+[
+  {
+    "role_id": 1,
+    "role_name": "System Admin",
+    "role_description": "Full system access with all permissions",
+    "auth0_role_id": "rol_WR7ecbL6BxIJGw92",
+    "status": "Active",
+    "created_at": "2026-01-20T08:45:37.000Z",
+    "updated_at": "2026-01-20T08:45:37.000Z"
+  },
+  {
+    "role_id": 2,
+    "role_name": "System Manager",
+    "role_description": "System management access",
+    "auth0_role_id": "rol_xRbBl4AXTcJqS3EF",
+    "status": "Active",
+    "created_at": "2026-01-20T08:45:37.000Z",
+    "updated_at": "2026-01-20T08:45:37.000Z"
+  },
+  {
+    "role_id": 3,
+    "role_name": "Client Manager",
+    "role_description": "Client-level management access",
+    "auth0_role_id": "rol_taGsR1AtDDTC9ZxU",
+    "status": "Active",
+    "created_at": "2026-01-20T08:45:37.000Z",
+    "updated_at": "2026-01-20T08:45:37.000Z"
+  },
+  {
+    "role_id": 4,
+    "role_name": "Client User",
+    "role_description": "Standard client user access",
+    "auth0_role_id": "rol_LeEMFzh4iVKheC54",
+    "status": "Active",
+    "created_at": "2026-01-20T08:45:37.000Z",
+    "updated_at": "2026-01-20T08:45:37.000Z"
+  },
+  {
+    "role_id": 5,
+    "role_name": "Client Reviewer",
+    "role_description": "Review and approval access",
+    "auth0_role_id": "rol_Md7u8ub4FoiQjLiu",
+    "status": "Active",
+    "created_at": "2026-01-20T08:45:37.000Z",
+    "updated_at": "2026-01-20T08:45:37.000Z"
+  },
+  {
+    "role_id": 6,
+    "role_name": "Registered Psychologist",
+    "role_description": "Psychologist with specialized access",
+    "auth0_role_id": "rol_6kBywEtPashnEe4u",
+    "status": "Active",
+    "created_at": "2026-01-20T08:45:37.000Z",
+    "updated_at": "2026-01-20T08:45:37.000Z"
+  }
+]

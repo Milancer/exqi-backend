@@ -1,0 +1,882 @@
+[
+  {
+    "department_id": 2,
+    "department": "(Respective ) Province",
+    "status": "Active"
+  },
+  {
+    "department_id": 3,
+    "department": "According to Placement",
+    "status": "Active"
+  },
+  {
+    "department_id": 4,
+    "department": "ADM Mainframe Non-DOD",
+    "status": "Active"
+  },
+  {
+    "department_id": 5,
+    "department": "ADM: Apps Maintenance - DOD Unique",
+    "status": "Active"
+  },
+  {
+    "department_id": 6,
+    "department": "ADM: Apps Maintenance - ERP Solutions",
+    "status": "Active"
+  },
+  {
+    "department_id": 7,
+    "department": "ADM: Apps Maintenance - Mainframe Non-DOD",
+    "status": "Active"
+  },
+  {
+    "department_id": 8,
+    "department": "ADM: Apps Maintenance - Social",
+    "status": "Active"
+  },
+  {
+    "department_id": 9,
+    "department": "ADM: Technical Design",
+    "status": "Active"
+  },
+  {
+    "department_id": 10,
+    "department": "ADM:IFASS :IJS",
+    "status": "Active"
+  },
+  {
+    "department_id": 11,
+    "department": "ALL",
+    "status": "Active"
+  },
+  {
+    "department_id": 12,
+    "department": "Application Development",
+    "status": "Active"
+  },
+  {
+    "department_id": 13,
+    "department": "Application Development and Application Maintenance",
+    "status": "Active"
+  },
+  {
+    "department_id": 14,
+    "department": "Application Development and Application Maintenance - Social",
+    "status": "Active"
+  },
+  {
+    "department_id": 15,
+    "department": "Application Maintenance",
+    "status": "Active"
+  },
+  {
+    "department_id": 16,
+    "department": "Application Training",
+    "status": "Active"
+  },
+  {
+    "department_id": 17,
+    "department": "Applications, Development and Maintenance",
+    "status": "Active"
+  },
+  {
+    "department_id": 18,
+    "department": "Apps Dev",
+    "status": "Active"
+  },
+  {
+    "department_id": 19,
+    "department": "Apps Maintenance",
+    "status": "Active"
+  },
+  {
+    "department_id": 20,
+    "department": "Architecture and Governance Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 21,
+    "department": "Business Partnering & Shared Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 22,
+    "department": "Centre of Excellence",
+    "status": "Active"
+  },
+  {
+    "department_id": 23,
+    "department": "Chief Executive Office",
+    "status": "Active"
+  },
+  {
+    "department_id": 24,
+    "department": "Chief Information Officer",
+    "status": "Active"
+  },
+  {
+    "department_id": 25,
+    "department": "Cluster Business Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 26,
+    "department": "Commercial Audit Assurance Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 27,
+    "department": "Company Secretary",
+    "status": "Active"
+  },
+  {
+    "department_id": 28,
+    "department": "Contract Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 29,
+    "department": "Converged Communications",
+    "status": "Active"
+  },
+  {
+    "department_id": 30,
+    "department": "Corporate Affairs",
+    "status": "Active"
+  },
+  {
+    "department_id": 31,
+    "department": "Corporate Affairs and Stakeholder Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 32,
+    "department": "Corporate Affairs and Strategic Stakeholder Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 33,
+    "department": "Corporate and Digital Strategy",
+    "status": "Active"
+  },
+  {
+    "department_id": 34,
+    "department": "Corporate Communication & Marketing",
+    "status": "Active"
+  },
+  {
+    "department_id": 35,
+    "department": "Corporate Communication and Marketing  ",
+    "status": "Active"
+  },
+  {
+    "department_id": 36,
+    "department": "Corporate Performance Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 37,
+    "department": "Corporate Social Responsibility",
+    "status": "Active"
+  },
+  {
+    "department_id": 38,
+    "department": "Customer Advocacy",
+    "status": "Active"
+  },
+  {
+    "department_id": 39,
+    "department": "Customer Operations",
+    "status": "Active"
+  },
+  {
+    "department_id": 40,
+    "department": "Customer Service",
+    "status": "Active"
+  },
+  {
+    "department_id": 41,
+    "department": "Customer Service Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 42,
+    "department": "Demand Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 43,
+    "department": "DOD",
+    "status": "Active"
+  },
+  {
+    "department_id": 44,
+    "department": "DOD and National Network Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 45,
+    "department": "Eastern Cape Province",
+    "status": "Active"
+  },
+  {
+    "department_id": 46,
+    "department": "Employee Relations and Health Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 47,
+    "department": "Employees Relations and Wellness",
+    "status": "Active"
+  },
+  {
+    "department_id": 48,
+    "department": "End User Computing",
+    "status": "Active"
+  },
+  {
+    "department_id": 49,
+    "department": "Enterprise Architecture",
+    "status": "Active"
+  },
+  {
+    "department_id": 50,
+    "department": "Enterprise Architecture (EA)",
+    "status": "Active"
+  },
+  {
+    "department_id": 51,
+    "department": "Enterprise Portfolio Management Office (EPMO)",
+    "status": "Active"
+  },
+  {
+    "department_id": 52,
+    "department": "Enterprise Risk Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 53,
+    "department": "EPMO",
+    "status": "Active"
+  },
+  {
+    "department_id": 54,
+    "department": "ER & OD",
+    "status": "Active"
+  },
+  {
+    "department_id": 55,
+    "department": "ER & Wellness",
+    "status": "Active"
+  },
+  {
+    "department_id": 56,
+    "department": "Facilities & Physical Security",
+    "status": "Active"
+  },
+  {
+    "department_id": 57,
+    "department": "Facilities and Security",
+    "status": "Active"
+  },
+  {
+    "department_id": 58,
+    "department": "Facilities Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 59,
+    "department": "Facilities Management & Physical Security",
+    "status": "Active"
+  },
+  {
+    "department_id": 60,
+    "department": "Facilities Management and Physical Security",
+    "status": "Active"
+  },
+  {
+    "department_id": 61,
+    "department": "Facilities Management and Physical Security Department",
+    "status": "Active"
+  },
+  {
+    "department_id": 62,
+    "department": "Facilities, Infrastructure & Logistical Services (FILS)",
+    "status": "Active"
+  },
+  {
+    "department_id": 63,
+    "department": "Facilities, Infrastructure and Logistical Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 64,
+    "department": "Facilities, Infrastructure and Logistical Services.",
+    "status": "Active"
+  },
+  {
+    "department_id": 65,
+    "department": "FIN: Financial Accounting",
+    "status": "Active"
+  },
+  {
+    "department_id": 66,
+    "department": "Finance",
+    "status": "Active"
+  },
+  {
+    "department_id": 67,
+    "department": "Financial Accounting",
+    "status": "Active"
+  },
+  {
+    "department_id": 68,
+    "department": "Functional Support",
+    "status": "Active"
+  },
+  {
+    "department_id": 69,
+    "department": "Gauteng Province",
+    "status": "Active"
+  },
+  {
+    "department_id": 70,
+    "department": "Gov ERP, Cluster 1 & 2 Solutions",
+    "status": "Active"
+  },
+  {
+    "department_id": 71,
+    "department": "Governance and Business Support",
+    "status": "Active"
+  },
+  {
+    "department_id": 72,
+    "department": "Governance, Risk, Compliance & Ethics",
+    "status": "Active"
+  },
+  {
+    "department_id": 73,
+    "department": "Governemnt Information Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 74,
+    "department": "Government Information Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 75,
+    "department": "GRCI",
+    "status": "Active"
+  },
+  {
+    "department_id": 76,
+    "department": "HCM Business Engagement Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 77,
+    "department": "HCM CoE",
+    "status": "Active"
+  },
+  {
+    "department_id": 78,
+    "department": "HCM: Centre of Excellence: Total Rewards",
+    "status": "Active"
+  },
+  {
+    "department_id": 79,
+    "department": "HCM: Executive HCM & Facilities Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 80,
+    "department": "HCM: HOD HCM Business Partnering & Shared Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 81,
+    "department": "HCM: HOD HR Business Partnering",
+    "status": "Active"
+  },
+  {
+    "department_id": 82,
+    "department": "Hosting",
+    "status": "Active"
+  },
+  {
+    "department_id": 83,
+    "department": "Hosting, Storage & Printing & Cloud Programme",
+    "status": "Active"
+  },
+  {
+    "department_id": 84,
+    "department": "Hosting, Storage and Printing",
+    "status": "Active"
+  },
+  {
+    "department_id": 85,
+    "department": "Hosting, Storage, Printing & Cloud Programme (HSP&CP)",
+    "status": "Active"
+  },
+  {
+    "department_id": 86,
+    "department": "Hosting, Storage, Printing and Cloud Programme",
+    "status": "Active"
+  },
+  {
+    "department_id": 87,
+    "department": "Hosting, Storage, Printing and Cloud Programme (HSP&CP)",
+    "status": "Active"
+  },
+  {
+    "department_id": 88,
+    "department": "Hosting: Technology, Strategy and Security",
+    "status": "Active"
+  },
+  {
+    "department_id": 89,
+    "department": "Human Capital Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 90,
+    "department": "Human Capital Management sub-departments (Business Partnering, Talent Management, ER & Wellness",
+    "status": "Active"
+  },
+  {
+    "department_id": 91,
+    "department": "ICT Assurance",
+    "status": "Active"
+  },
+  {
+    "department_id": 92,
+    "department": "ICT Governance",
+    "status": "Active"
+  },
+  {
+    "department_id": 93,
+    "department": "IFASS",
+    "status": "Active"
+  },
+  {
+    "department_id": 94,
+    "department": "IFASS: Application Training",
+    "status": "Active"
+  },
+  {
+    "department_id": 95,
+    "department": "Implementation and Functional Application Support Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 96,
+    "department": "Information and Knowledge Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 97,
+    "department": "Information Security Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 98,
+    "department": "Information System Security",
+    "status": "Active"
+  },
+  {
+    "department_id": 99,
+    "department": "Information Systems Audit",
+    "status": "Active"
+  },
+  {
+    "department_id": 100,
+    "department": "Infrastructure Implementation",
+    "status": "Active"
+  },
+  {
+    "department_id": 101,
+    "department": "Infrastructure PMO",
+    "status": "Active"
+  },
+  {
+    "department_id": 102,
+    "department": "Infrastructure PMO, Network Services (National & DOD)",
+    "status": "Active"
+  },
+  {
+    "department_id": 103,
+    "department": "Infrastructure Support Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 104,
+    "department": "Innovation & Research",
+    "status": "Active"
+  },
+  {
+    "department_id": 105,
+    "department": "Innovation and Research",
+    "status": "Active"
+  },
+  {
+    "department_id": 106,
+    "department": "Integrated Operations Centre",
+    "status": "Active"
+  },
+  {
+    "department_id": 107,
+    "department": "Integrity Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 108,
+    "department": "Internal Audit",
+    "status": "Active"
+  },
+  {
+    "department_id": 109,
+    "department": "Internal Audit and Performance Assurance Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 110,
+    "department": "Internal IT",
+    "status": "Active"
+  },
+  {
+    "department_id": 111,
+    "department": "IT Infrastructure",
+    "status": "Active"
+  },
+  {
+    "department_id": 112,
+    "department": "IT Infrastructure PMO",
+    "status": "Active"
+  },
+  {
+    "department_id": 113,
+    "department": "IT Infrastructure Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 114,
+    "department": "ITI: Hosting",
+    "status": "Active"
+  },
+  {
+    "department_id": 115,
+    "department": "ITI: MF Hosting Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 116,
+    "department": "LAN & Desktop",
+    "status": "Active"
+  },
+  {
+    "department_id": 117,
+    "department": "LAN & Desktop Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 118,
+    "department": "LAN and Desktop",
+    "status": "Active"
+  },
+  {
+    "department_id": 119,
+    "department": "Legal Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 120,
+    "department": "Legislators, Senior Officials and Managers (111101)",
+    "status": "Active"
+  },
+  {
+    "department_id": 121,
+    "department": "Management Accounting",
+    "status": "Active"
+  },
+  {
+    "department_id": 122,
+    "department": "Marketing",
+    "status": "Active"
+  },
+  {
+    "department_id": 123,
+    "department": "MS: EUC",
+    "status": "Active"
+  },
+  {
+    "department_id": 124,
+    "department": "N.A.",
+    "status": "Active"
+  },
+  {
+    "department_id": 125,
+    "department": "National and DOD Network Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 126,
+    "department": "National Consulting",
+    "status": "Active"
+  },
+  {
+    "department_id": 127,
+    "department": "NC Prov: End User Computing",
+    "status": "Active"
+  },
+  {
+    "department_id": 128,
+    "department": "Network Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 129,
+    "department": "Network Services (National & DOD)",
+    "status": "Active"
+  },
+  {
+    "department_id": 130,
+    "department": "Network Services (SAPS)",
+    "status": "Active"
+  },
+  {
+    "department_id": 131,
+    "department": "Network Services DOD and National",
+    "status": "Active"
+  },
+  {
+    "department_id": 132,
+    "department": "Network Technology strategy and Security",
+    "status": "Active"
+  },
+  {
+    "department_id": 133,
+    "department": "Networks",
+    "status": "Active"
+  },
+  {
+    "department_id": 134,
+    "department": "Networks National & DOD",
+    "status": "Active"
+  },
+  {
+    "department_id": 135,
+    "department": "Norms, Standards & Quality",
+    "status": "Active"
+  },
+  {
+    "department_id": 136,
+    "department": "Norms, Standards and Quality",
+    "status": "Active"
+  },
+  {
+    "department_id": 137,
+    "department": "Northern Cape Province",
+    "status": "Active"
+  },
+  {
+    "department_id": 139,
+    "department": "Office of the CEO",
+    "status": "Active"
+  },
+  {
+    "department_id": 140,
+    "department": "Office of the IMD",
+    "status": "Active"
+  },
+  {
+    "department_id": 141,
+    "department": "Office of the Managing Director.",
+    "status": "Active"
+  },
+  {
+    "department_id": 142,
+    "department": "Operational Risk Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 143,
+    "department": "Organisation Development & Change Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 144,
+    "department": "Planning and Organisation",
+    "status": "Active"
+  },
+  {
+    "department_id": 145,
+    "department": "Procurement",
+    "status": "Active"
+  },
+  {
+    "department_id": 146,
+    "department": "Product Services and Customer Solutions (PSS)",
+    "status": "Active"
+  },
+  {
+    "department_id": 147,
+    "department": "Products Services and Customer Solutions (PSS)",
+    "status": "Active"
+  },
+  {
+    "department_id": 148,
+    "department": "Products, Services and and Customer Solutions (PSS)",
+    "status": "Active"
+  },
+  {
+    "department_id": 149,
+    "department": "Products, Services and Customer Solutions",
+    "status": "Active"
+  },
+  {
+    "department_id": 150,
+    "department": "Products, Services and Customer Solutions (PSS)",
+    "status": "Active"
+  },
+  {
+    "department_id": 151,
+    "department": "Products, Services and Solutions",
+    "status": "Active"
+  },
+  {
+    "department_id": 152,
+    "department": "Provincial and Local Consulting",
+    "status": "Active"
+  },
+  {
+    "department_id": 153,
+    "department": "Provincial GP: WAN & EUC SAPS",
+    "status": "Active"
+  },
+  {
+    "department_id": 154,
+    "department": "Provincial Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 155,
+    "department": "PSS: Commercial Design and Packaging",
+    "status": "Active"
+  },
+  {
+    "department_id": 156,
+    "department": "Research & Innovation",
+    "status": "Active"
+  },
+  {
+    "department_id": 157,
+    "department": "Respective Province",
+    "status": "Active"
+  },
+  {
+    "department_id": 158,
+    "department": "SAPS Network Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 159,
+    "department": "SAPS Network Services; National & DOD Network Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 160,
+    "department": "Service Delivery Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 161,
+    "department": "Service Delivery Management Architecture & Development",
+    "status": "Active"
+  },
+  {
+    "department_id": 162,
+    "department": "Service Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 163,
+    "department": "Service Management Centre",
+    "status": "Active"
+  },
+  {
+    "department_id": 164,
+    "department": "Service Management Enablement",
+    "status": "Active"
+  },
+  {
+    "department_id": 165,
+    "department": "Service Service Delivery Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 166,
+    "department": "Social and Ethics",
+    "status": "Active"
+  },
+  {
+    "department_id": 167,
+    "department": "Strategic Stakeholder Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 168,
+    "department": "Strategy and Corporate Performance",
+    "status": "Active"
+  },
+  {
+    "department_id": 169,
+    "department": "Strategy Office",
+    "status": "Active"
+  },
+  {
+    "department_id": 170,
+    "department": "System Management Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 171,
+    "department": "Talent Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 172,
+    "department": "Talent Managrment",
+    "status": "Active"
+  },
+  {
+    "department_id": 173,
+    "department": "Technical Consulting",
+    "status": "Active"
+  },
+  {
+    "department_id": 174,
+    "department": "Technical Consulting Services",
+    "status": "Active"
+  },
+  {
+    "department_id": 175,
+    "department": "Technology Lifecycle Management",
+    "status": "Active"
+  },
+  {
+    "department_id": 176,
+    "department": "Transversal Solutions, Cluter 1 & 2 and Education Cluster",
+    "status": "Active"
+  },
+  {
+    "department_id": 177,
+    "department": "Western Cape",
+    "status": "Active"
+  },
+  {
+    "department_id": 179,
+    "department": "Unknown",
+    "status": "Active"
+  }
+]

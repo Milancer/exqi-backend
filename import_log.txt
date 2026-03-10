@@ -1,0 +1,84 @@
+
+> nexus-backend@0.0.1 import
+> ts-node -r tsconfig-paths/register src/import/run-import.ts --client 2 --clear
+
+[32m[Nest] 5108  - [39m2026/03/10, 20:21:52 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 5108  - [39m2026/03/10, 20:21:52 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +16ms[39m
+[32m[Nest] 5108  - [39m2026/03/10, 20:21:52 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 5108  - [39m2026/03/10, 20:21:52 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5108  - [39m2026/03/10, 20:21:52 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 5108  - [39m2026/03/10, 20:21:52 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5108  - [39m2026/03/10, 20:21:52 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5108  - [39m2026/03/10, 20:21:52 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +40ms[39m
+[31m[Nest] 5108  - [39m2026/03/10, 20:22:15 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
+QueryFailedError: insert or update on table "job_profile_competencies" violates foreign key constraint "FK_0ce1111da7e6d9d8dbfa2fb7647"
+    at PostgresQueryRunner.query (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryRunner.executeQueries (C:\workspace\Nexus\nexus-backend\node_modules\src\query-runner\BaseQueryRunner.ts:681:13)
+    at async PostgresQueryRunner.createForeignKey (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2913:9)
+    at async PostgresQueryRunner.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2925:13)
+    at async RdbmsSchemaBuilder.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:1204:13)
+    at async RdbmsSchemaBuilder.executeSchemaSyncOperationsInProperOrder (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:234:9)
+    at async RdbmsSchemaBuilder.build (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:95:13)
+    at async DataSource.synchronize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:340:9)
+    at async DataSource.initialize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:278:43)
+[31m[Nest] 5108  - [39m2026/03/10, 20:22:33 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (2)...[39m
+QueryFailedError: insert or update on table "job_profile_competencies" violates foreign key constraint "FK_0ce1111da7e6d9d8dbfa2fb7647"
+    at PostgresQueryRunner.query (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryRunner.executeQueries (C:\workspace\Nexus\nexus-backend\node_modules\src\query-runner\BaseQueryRunner.ts:681:13)
+    at async PostgresQueryRunner.createForeignKey (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2913:9)
+    at async PostgresQueryRunner.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2925:13)
+    at async RdbmsSchemaBuilder.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:1204:13)
+    at async RdbmsSchemaBuilder.executeSchemaSyncOperationsInProperOrder (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:234:9)
+    at async RdbmsSchemaBuilder.build (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:95:13)
+    at async DataSource.synchronize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:340:9)
+    at async DataSource.initialize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:278:43)
+[31m[Nest] 5108  - [39m2026/03/10, 20:22:50 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (3)...[39m
+QueryFailedError: insert or update on table "job_profile_competencies" violates foreign key constraint "FK_0ce1111da7e6d9d8dbfa2fb7647"
+    at PostgresQueryRunner.query (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryRunner.executeQueries (C:\workspace\Nexus\nexus-backend\node_modules\src\query-runner\BaseQueryRunner.ts:681:13)
+    at async PostgresQueryRunner.createForeignKey (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2913:9)
+    at async PostgresQueryRunner.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2925:13)
+    at async RdbmsSchemaBuilder.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:1204:13)
+    at async RdbmsSchemaBuilder.executeSchemaSyncOperationsInProperOrder (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:234:9)
+    at async RdbmsSchemaBuilder.build (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:95:13)
+    at async DataSource.synchronize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:340:9)
+    at async DataSource.initialize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:278:43)
+[31m[Nest] 5108  - [39m2026/03/10, 20:23:09 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (4)...[39m
+QueryFailedError: insert or update on table "job_profile_competencies" violates foreign key constraint "FK_0ce1111da7e6d9d8dbfa2fb7647"
+    at PostgresQueryRunner.query (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryRunner.executeQueries (C:\workspace\Nexus\nexus-backend\node_modules\src\query-runner\BaseQueryRunner.ts:681:13)
+    at async PostgresQueryRunner.createForeignKey (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2913:9)
+    at async PostgresQueryRunner.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2925:13)
+    at async RdbmsSchemaBuilder.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:1204:13)
+    at async RdbmsSchemaBuilder.executeSchemaSyncOperationsInProperOrder (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:234:9)
+    at async RdbmsSchemaBuilder.build (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:95:13)
+    at async DataSource.synchronize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:340:9)
+    at async DataSource.initialize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:278:43)
+[31m[Nest] 5108  - [39m2026/03/10, 20:23:26 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (5)...[39m
+QueryFailedError: insert or update on table "job_profile_competencies" violates foreign key constraint "FK_0ce1111da7e6d9d8dbfa2fb7647"
+    at PostgresQueryRunner.query (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryRunner.executeQueries (C:\workspace\Nexus\nexus-backend\node_modules\src\query-runner\BaseQueryRunner.ts:681:13)
+    at async PostgresQueryRunner.createForeignKey (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2913:9)
+    at async PostgresQueryRunner.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2925:13)
+    at async RdbmsSchemaBuilder.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:1204:13)
+    at async RdbmsSchemaBuilder.executeSchemaSyncOperationsInProperOrder (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:234:9)
+    at async RdbmsSchemaBuilder.build (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:95:13)
+    at async DataSource.synchronize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:340:9)
+    at async DataSource.initialize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:278:43)
+[31m[Nest] 5108  - [39m2026/03/10, 20:23:44 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (6)...[39m
+QueryFailedError: insert or update on table "job_profile_competencies" violates foreign key constraint "FK_0ce1111da7e6d9d8dbfa2fb7647"
+    at PostgresQueryRunner.query (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryRunner.executeQueries (C:\workspace\Nexus\nexus-backend\node_modules\src\query-runner\BaseQueryRunner.ts:681:13)
+    at async PostgresQueryRunner.createForeignKey (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2913:9)
+    at async PostgresQueryRunner.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:2925:13)
+    at async RdbmsSchemaBuilder.createForeignKeys (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:1204:13)
+    at async RdbmsSchemaBuilder.executeSchemaSyncOperationsInProperOrder (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:234:9)
+    at async RdbmsSchemaBuilder.build (C:\workspace\Nexus\nexus-backend\node_modules\src\schema-builder\RdbmsSchemaBuilder.ts:95:13)
+    at async DataSource.synchronize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:340:9)
+    at async DataSource.initialize (C:\workspace\Nexus\nexus-backend\node_modules\src\data-source\DataSource.ts:278:43)

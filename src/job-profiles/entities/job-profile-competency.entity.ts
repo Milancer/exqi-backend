@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { JobProfile } from './job-profile.entity';
-import { JpCompetency } from './jp-competency.entity';
+import { Competency } from '../../competencies/entities/competency.entity';
 
 @Entity('job_profile_competencies')
 export class JobProfileCompetency {
@@ -21,7 +21,7 @@ export class JobProfileCompetency {
 
   @ApiProperty()
   @Column()
-  jp_competency_id: number;
+  competency_id: number;
 
   @ApiProperty({ example: 3, description: 'Required proficiency level (1-5)' })
   @Column()
@@ -42,7 +42,7 @@ export class JobProfileCompetency {
   @JoinColumn({ name: 'job_profile_id' })
   jobProfile: JobProfile;
 
-  @ManyToOne(() => JpCompetency)
-  @JoinColumn({ name: 'jp_competency_id' })
-  jpCompetency: JpCompetency;
+  @ManyToOne(() => Competency)
+  @JoinColumn({ name: 'competency_id' })
+  competency: Competency;
 }

@@ -295,7 +295,7 @@ export class JobProfilesService {
     const existing = await this.jobProfileCompetencyRepository.findOne({
       where: {
         job_profile_id: jobProfileId,
-        jp_competency_id: dto.jp_competency_id,
+        competency_id: dto.competency_id,
       },
     });
 
@@ -324,7 +324,7 @@ export class JobProfilesService {
     const competency = await this.jobProfileCompetencyRepository.findOne({
       where: {
         job_profile_id: jobProfileId,
-        jp_competency_id: competencyId,
+        competency_id: competencyId,
       },
     });
 

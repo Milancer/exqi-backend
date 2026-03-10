@@ -1,0 +1,836 @@
+[
+  {
+    "report_template_id": 1,
+    "client_id": 1,
+    "report_template_name": "JOB POSITION PROFILE",
+    "categories": {
+      "skills": false,
+      "description": true,
+      "competencies": true,
+      "deliverables": true,
+      "requirements": true
+    },
+    "fields": {
+      "description": {
+        "division": true,
+        "job_grade": true,
+        "job_title": true,
+        "department": true,
+        "job_family": true,
+        "reports_to": true,
+        "job_purpose": true,
+        "reportsfrom": true,
+        "job_location": true,
+        "level_of_work": true
+      },
+      "competencies": {
+        "level": true,
+        "competency": true
+      },
+      "deliverables": {
+        "kpa": true,
+        "responsibilities": true
+      },
+      "requirements": {
+        "knowledge": true,
+        "certification": true,
+        "work_experience": true,
+        "minimum_qualification": true,
+        "preferred_qualification": true,
+        "professional_body_registration": true
+      }
+    },
+    "field_order": {
+      "description": [
+        {
+          "id": "job_purpose",
+          "label": "Job Purpose"
+        },
+        {
+          "id": "job_title",
+          "label": "Job Title"
+        },
+        {
+          "id": "department",
+          "label": "Department"
+        },
+        {
+          "id": "division",
+          "label": "Division"
+        },
+        {
+          "id": "job_family",
+          "label": "Job Family"
+        },
+        {
+          "id": "job_location",
+          "label": "Job Location"
+        },
+        {
+          "id": "job_grade",
+          "label": "Job Grade"
+        },
+        {
+          "id": "level_of_work",
+          "label": "Level Of Work"
+        },
+        {
+          "id": "reports_to",
+          "label": "Reports To"
+        },
+        {
+          "id": "client",
+          "label": "Client"
+        },
+        {
+          "id": "created",
+          "label": "Created"
+        },
+        {
+          "id": "updated",
+          "label": "Updated"
+        }
+      ],
+      "competencies": [
+        {
+          "id": "competency",
+          "label": "Competency"
+        },
+        {
+          "id": "competency_type",
+          "label": "Competency Type"
+        },
+        {
+          "id": "core",
+          "label": "Core"
+        },
+        {
+          "id": "critical",
+          "label": "Critical"
+        },
+        {
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "id": "indicators",
+          "label": "Indicators"
+        },
+        {
+          "id": "level",
+          "label": "Level"
+        }
+      ],
+      "deliverables": [
+        {
+          "id": "kpa",
+          "label": "Kpa"
+        },
+        {
+          "id": "kpis",
+          "label": "Kpis"
+        },
+        {
+          "id": "responsibilities",
+          "label": "Responsibilities"
+        },
+        {
+          "id": "weight",
+          "label": "Weight"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "minimum_qualification",
+          "label": "Minimum Qualification"
+        },
+        {
+          "id": "preferred_qualification",
+          "label": "Preferred Qualification"
+        },
+        {
+          "id": "certification",
+          "label": "Certification"
+        },
+        {
+          "id": "professional_body_registration",
+          "label": "Professional Body Registration"
+        },
+        {
+          "id": "work_experience",
+          "label": "Work Experience"
+        },
+        {
+          "id": "knowledge",
+          "label": "Knowledge"
+        }
+      ]
+    },
+    "category_order": [
+      "description",
+      "requirements",
+      "competencies",
+      "skills",
+      "deliverables",
+      "approvals"
+    ],
+    "logo_url": "https://storage.googleapis.com/exqi/uploads/logos/1739986926_sita.png"
+  },
+  {
+    "report_template_id": 2,
+    "client_id": 1,
+    "report_template_name": "All Fields Report",
+    "categories": {
+      "skills": true,
+      "approvals": true,
+      "description": true,
+      "competencies": true,
+      "deliverables": true,
+      "requirements": true
+    },
+    "fields": {
+      "approvals": {
+        "reviewer": true,
+        "date_approved": true,
+        "date_reviewed": true
+      },
+      "description": {
+        "client": true,
+        "created": true,
+        "updated": true,
+        "division": true,
+        "job_grade": true,
+        "job_title": true,
+        "department": true,
+        "job_family": true,
+        "reports_to": true,
+        "job_purpose": true,
+        "reportsfrom": true,
+        "job_location": true,
+        "level_of_work": true
+      },
+      "competencies": {
+        "core": true,
+        "level": true,
+        "critical": true,
+        "competency": true,
+        "indicators": true,
+        "description": true,
+        "competency_type": true
+      },
+      "deliverables": {
+        "kpa": true,
+        "kpis": true,
+        "weight": true,
+        "responsibilities": true
+      },
+      "requirements": {
+        "knowledge": true,
+        "certification": true,
+        "work_experience": true,
+        "minimum_qualification": true,
+        "preferred_qualification": true,
+        "professional_body_registration": true
+      }
+    },
+    "field_order": {
+      "skills": [
+        {
+          "id": "skill",
+          "label": "Skill"
+        },
+        {
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "id": "indicators",
+          "label": "Indicators"
+        },
+        {
+          "id": "level",
+          "label": "Level"
+        }
+      ],
+      "approvals": [
+        {
+          "id": "reviewer",
+          "label": "Reviewer"
+        },
+        {
+          "id": "date_reviewed",
+          "label": "Date Reviewed"
+        },
+        {
+          "id": "date_approved",
+          "label": "Date Approved"
+        }
+      ],
+      "description": [
+        {
+          "id": "client",
+          "label": "Client"
+        },
+        {
+          "id": "job_purpose",
+          "label": "Job Purpose"
+        },
+        {
+          "id": "job_title",
+          "label": "Job Title"
+        },
+        {
+          "id": "department",
+          "label": "Department"
+        },
+        {
+          "id": "division",
+          "label": "Division"
+        },
+        {
+          "id": "job_family",
+          "label": "Job Family"
+        },
+        {
+          "id": "job_location",
+          "label": "Job Location"
+        },
+        {
+          "id": "job_grade",
+          "label": "Job Grade"
+        },
+        {
+          "id": "level_of_work",
+          "label": "Level Of Work"
+        },
+        {
+          "id": "reports_to",
+          "label": "Reports To"
+        },
+        {
+          "id": "created",
+          "label": "Created"
+        },
+        {
+          "id": "updated",
+          "label": "Updated"
+        }
+      ],
+      "competencies": [
+        {
+          "id": "competency_type",
+          "label": "Competency Type"
+        },
+        {
+          "id": "competency",
+          "label": "Competency"
+        },
+        {
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "id": "indicators",
+          "label": "Indicators"
+        },
+        {
+          "id": "core",
+          "label": "Core"
+        },
+        {
+          "id": "critical",
+          "label": "Critical"
+        },
+        {
+          "id": "level",
+          "label": "Level"
+        }
+      ],
+      "deliverables": [
+        {
+          "id": "kpa",
+          "label": "Kpa"
+        },
+        {
+          "id": "kpis",
+          "label": "Kpis"
+        },
+        {
+          "id": "responsibilities",
+          "label": "Responsibilities"
+        },
+        {
+          "id": "weight",
+          "label": "Weight"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "minimum_qualification",
+          "label": "Minimum Qualification"
+        },
+        {
+          "id": "preferred_qualification",
+          "label": "Preferred Qualification"
+        },
+        {
+          "id": "certification",
+          "label": "Certification"
+        },
+        {
+          "id": "professional_body_registration",
+          "label": "Professional Body Registration"
+        },
+        {
+          "id": "work_experience",
+          "label": "Work Experience"
+        },
+        {
+          "id": "knowledge",
+          "label": "Knowledge"
+        }
+      ]
+    },
+    "category_order": [
+      "description",
+      "requirements",
+      "competencies",
+      "skills",
+      "deliverables",
+      "approvals"
+    ],
+    "logo_url": "https://storage.googleapis.com/exqi-bucket/uploads/logos/1/6790a6a9e3eb4588aab10ac6_logo-1.jpg"
+  },
+  {
+    "report_template_id": 10,
+    "client_id": 1,
+    "report_template_name": "All Fields",
+    "categories": {
+      "skills": true,
+      "approvals": true,
+      "description": true,
+      "competencies": true,
+      "deliverables": true,
+      "requirements": true
+    },
+    "fields": {
+      "approvals": {
+        "reviewer": true,
+        "date_approved": true,
+        "date_reviewed": true
+      },
+      "description": {
+        "client": true,
+        "created": true,
+        "updated": true,
+        "division": true,
+        "job_grade": true,
+        "job_title": true,
+        "department": true,
+        "job_family": true,
+        "reports_to": true,
+        "job_purpose": true,
+        "job_location": true,
+        "level_of_work": true
+      },
+      "competencies": {
+        "core": true,
+        "level": true,
+        "critical": true,
+        "competency": true,
+        "indicators": true,
+        "description": true,
+        "competency_type": true
+      },
+      "deliverables": {
+        "kpa": true,
+        "kpis": true,
+        "weight": true,
+        "responsibilities": true
+      },
+      "requirements": {
+        "knowledge": true,
+        "certification": true,
+        "work_experience": true,
+        "minimum_qualification": true,
+        "preferred_qualification": true,
+        "professional_body_registration": true
+      }
+    },
+    "field_order": {
+      "skills": [],
+      "approvals": [
+        {
+          "id": "date_approved",
+          "label": "Date Approved"
+        },
+        {
+          "id": "date_reviewed",
+          "label": "Date Reviewed"
+        },
+        {
+          "id": "reviewer",
+          "label": "Reviewer"
+        }
+      ],
+      "description": [
+        {
+          "id": "client",
+          "label": "Client"
+        },
+        {
+          "id": "created",
+          "label": "Created"
+        },
+        {
+          "id": "department",
+          "label": "Department"
+        },
+        {
+          "id": "division",
+          "label": "Division"
+        },
+        {
+          "id": "job_family",
+          "label": "Job Family"
+        },
+        {
+          "id": "job_grade",
+          "label": "Job Grade"
+        },
+        {
+          "id": "job_location",
+          "label": "Job Location"
+        },
+        {
+          "id": "job_purpose",
+          "label": "Job Purpose"
+        },
+        {
+          "id": "job_title",
+          "label": "Job Title"
+        },
+        {
+          "id": "level_of_work",
+          "label": "Level Of Work"
+        },
+        {
+          "id": "reports_to",
+          "label": "Reports To"
+        },
+        {
+          "id": "updated",
+          "label": "Updated"
+        }
+      ],
+      "competencies": [
+        {
+          "id": "competency",
+          "label": "Competency"
+        },
+        {
+          "id": "competency_type",
+          "label": "Competency Type"
+        },
+        {
+          "id": "core",
+          "label": "Core"
+        },
+        {
+          "id": "critical",
+          "label": "Critical"
+        },
+        {
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "id": "indicators",
+          "label": "Indicators"
+        },
+        {
+          "id": "level",
+          "label": "Level"
+        }
+      ],
+      "deliverables": [
+        {
+          "id": "kpa",
+          "label": "Kpa"
+        },
+        {
+          "id": "kpis",
+          "label": "Kpis"
+        },
+        {
+          "id": "responsibilities",
+          "label": "Responsibilities"
+        },
+        {
+          "id": "weight",
+          "label": "Weight"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "certification",
+          "label": "Certification"
+        },
+        {
+          "id": "knowledge",
+          "label": "Knowledge"
+        },
+        {
+          "id": "minimum_qualification",
+          "label": "Minimum Qualification"
+        },
+        {
+          "id": "preferred_qualification",
+          "label": "Preferred Qualification"
+        },
+        {
+          "id": "professional_body_registration",
+          "label": "Professional Body Registration"
+        },
+        {
+          "id": "work_experience",
+          "label": "Work Experience"
+        }
+      ]
+    },
+    "category_order": [
+      "description",
+      "requirements",
+      "competencies",
+      "skills",
+      "deliverables",
+      "approvals"
+    ],
+    "logo_url": "https://storage.googleapis.com/exqi-bucket/uploads/logos/2/690b0212ae058f8a7c5bfbb7_logo-1.png"
+  },
+  {
+    "report_template_id": 13,
+    "client_id": 2,
+    "report_template_name": "All Fields Report",
+    "categories": {
+      "skills": true,
+      "approvals": true,
+      "description": true,
+      "competencies": true,
+      "deliverables": true,
+      "requirements": true
+    },
+    "fields": {
+      "approvals": {
+        "reviewer": true,
+        "date_approved": true,
+        "date_reviewed": true
+      },
+      "description": {
+        "client": true,
+        "created": true,
+        "updated": true,
+        "division": true,
+        "job_grade": true,
+        "job_title": true,
+        "department": true,
+        "job_family": true,
+        "reports_to": true,
+        "job_purpose": true,
+        "reportsfrom": true,
+        "job_location": true,
+        "level_of_work": true
+      },
+      "competencies": {
+        "core": true,
+        "level": true,
+        "critical": true,
+        "competency": true,
+        "indicators": true,
+        "description": true,
+        "competency_type": true
+      },
+      "deliverables": {
+        "kpa": true,
+        "kpis": true,
+        "weight": true,
+        "responsibilities": true
+      },
+      "requirements": {
+        "knowledge": true,
+        "certification": true,
+        "work_experience": true,
+        "minimum_qualification": true,
+        "preferred_qualification": true,
+        "professional_body_registration": true
+      }
+    },
+    "field_order": {
+      "skills": [
+        {
+          "id": "skill",
+          "label": "Skill"
+        },
+        {
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "id": "indicators",
+          "label": "Indicators"
+        },
+        {
+          "id": "level",
+          "label": "Level"
+        }
+      ],
+      "approvals": [
+        {
+          "id": "reviewer",
+          "label": "Reviewer"
+        },
+        {
+          "id": "date_reviewed",
+          "label": "Date Reviewed"
+        },
+        {
+          "id": "date_approved",
+          "label": "Date Approved"
+        }
+      ],
+      "description": [
+        {
+          "id": "client",
+          "label": "Client"
+        },
+        {
+          "id": "job_purpose",
+          "label": "Job Purpose"
+        },
+        {
+          "id": "job_title",
+          "label": "Job Title"
+        },
+        {
+          "id": "department",
+          "label": "Department"
+        },
+        {
+          "id": "division",
+          "label": "Division"
+        },
+        {
+          "id": "job_family",
+          "label": "Job Family"
+        },
+        {
+          "id": "job_location",
+          "label": "Job Location"
+        },
+        {
+          "id": "job_grade",
+          "label": "Job Grade"
+        },
+        {
+          "id": "level_of_work",
+          "label": "Level Of Work"
+        },
+        {
+          "id": "reports_to",
+          "label": "Reports To"
+        },
+        {
+          "id": "created",
+          "label": "Created"
+        },
+        {
+          "id": "updated",
+          "label": "Updated"
+        }
+      ],
+      "competencies": [
+        {
+          "id": "competency_type",
+          "label": "Competency Type"
+        },
+        {
+          "id": "competency",
+          "label": "Competency"
+        },
+        {
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "id": "indicators",
+          "label": "Indicators"
+        },
+        {
+          "id": "core",
+          "label": "Core"
+        },
+        {
+          "id": "critical",
+          "label": "Critical"
+        },
+        {
+          "id": "level",
+          "label": "Level"
+        }
+      ],
+      "deliverables": [
+        {
+          "id": "kpa",
+          "label": "Kpa"
+        },
+        {
+          "id": "kpis",
+          "label": "Kpis"
+        },
+        {
+          "id": "responsibilities",
+          "label": "Responsibilities"
+        },
+        {
+          "id": "weight",
+          "label": "Weight"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "minimum_qualification",
+          "label": "Minimum Qualification"
+        },
+        {
+          "id": "preferred_qualification",
+          "label": "Preferred Qualification"
+        },
+        {
+          "id": "certification",
+          "label": "Certification"
+        },
+        {
+          "id": "professional_body_registration",
+          "label": "Professional Body Registration"
+        },
+        {
+          "id": "work_experience",
+          "label": "Work Experience"
+        },
+        {
+          "id": "knowledge",
+          "label": "Knowledge"
+        }
+      ]
+    },
+    "category_order": [
+      "description",
+      "requirements",
+      "competencies",
+      "skills",
+      "deliverables",
+      "approvals"
+    ],
+    "logo_url": "https://storage.googleapis.com/exqi-bucket/uploads/logos/1/6790a6a9e3eb4588aab10ac6_logo-1.jpg"
+  }
+]

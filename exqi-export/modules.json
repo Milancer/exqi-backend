@@ -1,0 +1,10 @@
+[
+  {
+    "module_id": 1,
+    "module_name": "job_profiles"
+  },
+  {
+    "module_id": 2,
+    "module_name": "competency_based_interviews"
+  }
+]

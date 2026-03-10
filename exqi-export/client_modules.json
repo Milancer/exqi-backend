@@ -1,0 +1,32 @@
+[
+  {
+    "client_module_id": 9,
+    "client_id": 1,
+    "module_id": 1,
+    "status": "Active"
+  },
+  {
+    "client_module_id": 10,
+    "client_id": 1,
+    "module_id": 2,
+    "status": "Active"
+  },
+  {
+    "client_module_id": 11,
+    "client_id": 2,
+    "module_id": 1,
+    "status": "Active"
+  },
+  {
+    "client_module_id": 17,
+    "client_id": 11,
+    "module_id": 1,
+    "status": "Active"
+  },
+  {
+    "client_module_id": 18,
+    "client_id": 11,
+    "module_id": 2,
+    "status": "Active"
+  }
+]

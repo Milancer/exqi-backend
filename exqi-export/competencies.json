@@ -1,0 +1,659 @@
+[
+  {
+    "competency_id": 1,
+    "competency_type_id": 1,
+    "competency_cluster_id": null,
+    "competency": "Accountability",
+    "description": "Holds self and others accountable for measurable high-quality, timely and cost-effective results.",
+    "indicators": "[\"Admits to and accepts responsibility for mistakes\", \"Makes no excuses\", \"Takes full responsibility for own actions and results of the business\", \"Can be counted on to do what he/she says is going to be done\", \"Follows up personally and monitors progress to ensure that things stay on track\", \"Holds self and others accountable for keeping commitments\"]",
+    "status": "Active"
+  },
+  {
+    "competency_id": 2,
+    "competency_type_id": 1,
+    "competency_cluster_id": null,
+    "competency": "Innovative and Creative",
+    "description": "The ability to generate innovative and creative solutions in work situations",
+    "indicators": "[\"Trying different and novel ways to deal with work problems and opportunities\", \"Challenge traditional paradigms and thinks expansively\", \"Consider diverse resources and evaluates possible solutions\", \"Ensures relevance in solutions to address meaningful work issues\"]",
+    "status": "Active"
+  },
+  {
+    "competency_id": 3,
+    "competency_type_id": 1,
+    "competency_cluster_id": null,
+    "competency": "Initiative",
+    "description": "The ability to seize opportunities and act upon them, actively influence events, foresee problems and deal with them proactively, and to take spontaneous action without having to be urged on. ",
+    "indicators": "[\"Be a self-starter\", \"Spontaneously initiate action without needing to be urged to do so\", \"Spontaneously originate ideas, impacting on the business\", \"Anticipate problems & proactively deal with them.\"]",
+    "status": "Active"
+  },
+  {
+    "competency_id": 4,
+    "competency_type_id": 1,
+    "competency_cluster_id": null,
+    "competency": "Self motivation and Perseverance",
+    "description": "Displays an innate ability to satisfy goals and expectations without being influenced to do so by another person despite circumstances or challenges faced.",
+    "indicators": "[\"Maintains consistent levels of effort and hard work over long periods of time\", \"Displays high levels of energy and perseverance to accomplish difficult tasks\", \"Displays perseverance in the clear and thorough expression of ideas\", \"Displays a positive attitude towards others and work\"]",
+    "status": "Active"
+  },
+  {
+    "competency_id": 5,
+    "competency_type_id": 1,
+    "competency_cluster_id": null,
+    "competency": "Assertiveness",
+    "description": "The ability to command attention & respect with confidence and tact. ",
+    "indicators": "[\"Radiates confidence\", \"Expresses ideas with impact in any situation, despite pressure or opposition\", \"Handles oppositions or criticisms tactfully without becoming  aggressive or withdrawn\"]",
+    "status": "Active"
+  },
+  {
+    "competency_id": 6,
+    "competency_type_id": 1,
+    "competency_cluster_id": null,
+    "competency": "Team player",
+    "description": "Demonstrates ability to work constructively within a team to accomplish  organizational goals; taking actions that respect the needs and contributions of others.",
+    "indicators": "[\"Builds and fosters supportive relationships\", \"Takes and accepts action in respect of the needs and contributions of others\", \"Shares workload and pulls own weight\", \"Shows participation and willing cooperation towards achievement of mutual goals\", \"Promotes and encourages cooperation and participation among team members\"]",
+    "status": "Active"
+  },
+  {
+    "competency_id": 7,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Application Development",
+    "description": "The specification and design of software to meet defined requirements by following agreed design standards and principles. The definition of software, components, interfaces and related characteristics. The identification of concepts and patterns and the translation into a design which provides a basis for software construction and verification. The evaluation of alternative solutions and trade-offs. The facilitation of design decisions within the constraints of systems designs, design standards, quality, feasibility, extensibility and maintainability. The development and iteration of prototypes/simulations to enable informed decision-making. The adoption and adaptation of software design models, tools and techniques based on the context of the work and selecting appropriately from predictive (plan-driven) approaches or adaptive (iterative/agile) approaches.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 8,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Application Maintenance and Support",
+    "description": "The provision of application maintenance and support services, either directly to users of the systems or to service delivery functions. Support typically includes investigation and resolution of issues and may also include performance monitoring. Issues may be resolved by providing advice or training to users, by devising corrections (permanent or temporary) for faults, making general or site-specific modifications, updating documentation, manipulating data, or defining enhancements Support often involves close collaboration with the system's developers and/or with colleagues specialising in different areas, such as Database administration or Network support.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 9,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Architecture",
+    "description": "The creation, iteration, and maintenance of structures such as enterprise and business architectures embodying the key principles, methods and models that describe the organisation's future state, and that enable its evolution. This typically involves the interpretation of business goals and drivers; the translation of business strategy and objectives into an \"operating model\"; the strategic assessment of current capabilities; the identification of required changes in capabilities; and the description of inter-relationships between people, organisation, service, process, data, information, technology and the external environment. The architecture development process supports the formation of the constraints, standards and guiding principles necessary to define, assure and govern the required evolution; this facilitates change in the organisation's structure, business processes, systems and infrastructure in order to achieve predictable transition to the intended state. Enterprise, Data, Technical, Solution, Business Architecture included",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 10,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Business Analysis",
+    "description": "The methodical investigation, analysis, review and documentation of all or part of a business in terms of business goals, objectives, functions and processes, the information used and the data on which the information is based. The definition of requirements for improving processes and systems, reducing their costs, enhancing their sustainability, and the quantification of potential business benefits. The collaborative creation and iteration of viable specifications and acceptance criteria in preparation for the deployment of information and communication systems. The adoption and adaptation of business analysis approaches based on the context of the work and selecting appropriately from predictive (plan-driven) approaches or adaptive (iterative/agile) approaches.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 11,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Business Continuity",
+    "description": "The provision of service continuity planning and support, as part of, or in close cooperation with, the function which plans business continuity for the whole organisation. The identification of information systems which support critical business processes. The assessment of risks to critical systems availability, integrity and confidentiality. The co-ordination of planning, designing, testing and maintenance procedures and contingency plans to address exposures and maintain agreed levels of continuity.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 12,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Business Development",
+    "description": "Sales management, Strategic Selling",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 13,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Business Intelligence & Analytics",
+    "description": "The application of mathematics, statistics, predictive modeling and machine-learning techniques to discover meaningful patterns and knowledge in recorded data. Analysis of data with high volumes, velocities and variety (numbers, symbols, text, sound and image). Development of forward-looking, predictive, real-time, model-based insights to create value and drive effective decision-making. The identification, validation and exploitation of internal and external data sets generated from a diverse range of processes.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 14,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Business Writing",
+    "description": "Conveys written information and business reports in a detailed and effective manner to individuals or groups to ensure that they understand the message.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 15,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Corporate Governance",
+    "description": "Company Secretary, Legal, Internal Audit, Risk management",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 16,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Customer Advocacy Management (Consultancy)",
+    "description": "The provision of advice and recommendations, based on expertise and experience, to address client needs. May deal with one specialist subject area, or can be wide ranging and address strategic business issues. May also include support for the implementation of any agreed solutions.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 17,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Customer Relationship Management",
+    "description": "The systematic identification, analysis, management, monitoring and improvement of stakeholder relationships in order to target and improve mutually beneficial outcomes. Gains commitment to action through consultation and consideration of impacts. Design the relationship management approach to be taken; including roles and responsibilities, governance, policies, processes, and tools, and support mechanisms. Creatively combines formal and informal communication channels in order to achieve the desired result. CRM & Client Contract Management",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 18,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Database Administration",
+    "description": "The installation, configuration, upgrade, administration, monitoring and maintenance of databases. Providing support for operational databases in production use and for internal or interim purposes such as iterative developments and testing. Improving the performance of databases and the tools and processes for database administration (including automation).",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 19,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Database Management",
+    "description": "The manipulation and control of data to meet necessary conditions throughout the entire data lifecycle.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 20,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Enterprise ICT Governance (Policies & Legislation)",
+    "description": "The establishment and oversight of an organisation's approach to the use of Information systems and digital services, and associated technology, in line with the needs of the principal stakeholders of the organisation and overall organisational corporate governance requirements. The determination and accountability for evaluation of current and future needs; directing the planning for both supply and demand of these services; the quality, characteristics, and level of IT services; and for monitoring the conformance to obligations (including regulatory, legislation, control, and other standards) to ensure positive contribution of IT to the organisation's goals and objectives.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 21,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Facilities Management",
+    "description": "A range of disciplines and services to ensure the functionality, comfort, safety and efficiency of a built environment - kitchens, buildings and grounds, infrastructure and real estate.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 22,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Financial Accounting",
+    "description": "The process of recording, summarizing, and reporting the myriad of transactions resulting from business operations over a period of time.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 23,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "General Administration",
+    "description": "Providing support for all SITA employees in administrative duties which include the tasks and activities that are part of the daily operations of the business.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 24,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Hosting Management",
+    "description": "Data Centre, Cloud",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 25,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Human Capital Management",
+    "description": "The set of practices related to people resource management. These practices are focused on the organizational need to provide specific competencies and are implemented in three categories: workforce acquisition, workforce management and workforce optimization.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 26,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Implementation Management",
+    "description": "The definition and management of the process for deploying and integrating new digital capabilities into the business in a way that is sensitive to and fully compatible with business operations.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 27,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Information Management",
+    "description": "The overall governance of how all types of information, structured and unstructured, whether produced internally or externally, are used to support decision-making, business processes and digital services. Encompasses development and promotion of the strategy and policies covering the design of information structures and taxonomies, the setting of policies for the sourcing and maintenance of the data content, and the development of policies, procedures, working practices and training to promote compliance with legislation regulating all aspects of holding, use and disclosure of data.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 28,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Information Security and Application Protection",
+    "description": "The selection, design, justification, implementation and operation of controls and management strategies to maintain the security, confidentiality, integrity, availability, accountability and relevant compliance of information systems with legislation, regulation and relevant standards.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 29,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "IT Project Management",
+    "description": "The management of IT projects/programmes, typically (but not exclusively) involving the development and implementation of business processes to meet identified business needs, acquiring and utilising the necessary resources and skills, within agreed parameters of cost, timescales, and quality. The adoption and adaptation of project management methodologies based on the context of the project and selecting appropriately from predictive (plan-driven) approaches or adaptive (iterative/agile) approaches.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 30,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "IT Risk Management",
+    "description": "The planning and implementation of organisation-wide processes and procedures for the management of risk to the success or integrity of the business, especially those arising from the use of information technology, reduction or non-availability of energy supply or inappropriate disposal of materials, hardware or data.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 31,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "IT Service Management",
+    "description": "The planning, implementation, control, review and audit of service provision, to meet customer business requirements. This includes negotiation, implementation and monitoring of service level agreements, and the ongoing management of operational facilities to provide the agreed levels of service, seeking continually and proactively to improve service delivery and sustainability targets.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 32,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Knowledge Management",
+    "description": "The systematic management of vital knowledge to create value for the organisation by capturing, sharing, developing and exploiting the collective knowledge of the organisation to improve performance, support decision making and mitigate risks. The development of a supportive and collaborative knowledge sharing culture to drive the successful adoption of technology solutions for knowledge management. Providing access to informal, tacit knowledge as well as formal, documented, explicit knowledge by facilitating internal and external collaboration and communications.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 33,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Management Accounting",
+    "description": "The process of recording, summarizing, and reporting the myriad of transactions resulting from business operations over a period of time.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 34,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Network/Infrastructure Management",
+    "description": "The operation and control of the IT infrastructure (comprising physical or virtual hardware, software, network services and data storage) either on-premises or provisioned as cloud services) that is required to deliver and support the information systems needs of a business. Includes preparation for new or changed services, operation of the change process, the maintenance of regulatory, legal and professional standards, the building and management of systems and components in virtualised and cloud computing environments and the monitoring of performance of systems and services in relation to their contribution to business performance, their security and their sustainability. The application of infrastructure management tools to automate the provisioning, testing, deployment and monitoring of infrastructure components.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 35,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Product & Service Lifecycle Management",
+    "description": "The active management of products or services throughout their lifecycle (inception through to retirement) in order to address market opportunities and customer/user needs and generate the greatest possible value for the business. The adoption and adaptation of product development models based on the context of the work and selecting appropriately from predictive (plan-driven) approaches or adaptive (iterative/agile) approaches.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 36,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Project/Programme Management",
+    "description": "The management of projects/programmes, typically (but not exclusively) involving the development and implementation of business processes to meet identified business needs, acquiring and utilising the necessary resources and skills, within agreed parameters of cost, timescales, and quality. The adoption and adaptation of project management methodologies based on the context of the project and selecting appropriately from predictive (plan-driven) approaches or adaptive (iterative/agile) approaches.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 37,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Research & Innovation",
+    "description": "The systematic creation of new knowledge by data gathering, innovation, experimentation, evaluation and dissemination. The determination of research goals and the method by which the research will be conducted. The active participation in a community of researchers; communicating formally and informally through digital media, conferences, journals, books and seminars.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 38,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Software Quality Management",
+    "description": "Quality management establishes within an organisation a culture of quality and a system of processes and working practices to deliver the organisation's quality objectives. This involves the application of techniques for the monitoring and improvement of the quality of any aspect of a function, processes, products, services or data. The achievement of, and maintenance of compliance to, national and international standards, as appropriate, and to internal policies, including those relating to quality, service, sustainability and security.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 39,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Supply Chain Management",
+    "description": "The supply chain conceptually covers the entire physical process from ordering and obtaining the raw materials through all process steps until the finished product reaches the end consumer.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 40,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "System Development",
+    "description": "The planning, estimating and execution of programmes of systems development work to time, budget and quality targets. The identification of the resources needed for systems development and how this will be met with an effective supply capacity. The alignment of systems development activity and deliverables with agreed architectures and standards. The development of roadmaps to communicate future systems development plans. The adoption and adaptation of systems development lifecycle models based on the context of the work and selecting appropriately from predictive (plan-driven) approaches or adaptive (iterative/agile) approaches.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 41,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "System Maintenance & Support",
+    "description": "The provision of system maintenance and support services. Support may be provided both to users of the systems and to service delivery functions. Support typically takes the form of investigating and resolving problems and providing information about the systems. It may also include monitoring their performance. Problems may be resolved by providing advice or training to users about the system's functionality, correct operation or constraints, by devising work-arounds, correcting faults, or making general or site-specific modifications.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 42,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Systems Administration",
+    "description": "The management of one or more hardware or software systems.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 43,
+    "competency_type_id": 2,
+    "competency_cluster_id": null,
+    "competency": "Vendor/Supplier Management",
+    "description": "The alignment of an organisation's supplier performance objectives and activities with sourcing strategies and plans, balancing costs, efficiencies and service quality. The establishment of working relationships based on collaboration, trust, and open communication in order to encourage co-innovation and service improvement with suppliers. The proactive engagement of suppliers for mutual benefit to resolve operational incidents, problems, poor performance and other sources of conflict. The use of clear escalation paths for discussing and resolving issues. The management of performance and risks across multiple suppliers (internal and external) using a set of agreed metrics.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 44,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Active listening",
+    "description": "The ability to fully concentrate on what is being said rather than just passively 'hearing' the message of the speaker.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 45,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Analytical thinking",
+    "description": "Identifies issues; obtains relevant information, relates and compares data from different sources, and identifies alternative solutions.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 46,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Attention to Detail",
+    "description": "The ability to ensures information is complete and accurate.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 47,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Continuous Learning",
+    "description": "The ability to constantly expand one's skill set.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 48,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Disciplined",
+    "description": "Showing a controlled form of behaviour or way of working, diligently.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 49,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Empathy",
+    "description": "The ability to understand and share the feelings of another.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 50,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Inclusivity",
+    "description": "The practice or policy of including people who might otherwise be excluded or marginalized, such as those who have physical or mental disabilities and members of minority groups.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 51,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Resilience",
+    "description": "The ability to effectively handle disappointment, rejection and set-backs while still working well and meeting deadlines.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 52,
+    "competency_type_id": 3,
+    "competency_cluster_id": null,
+    "competency": "Stress Management",
+    "description": "The ability to keep functioning effectively when under pressure and maintain self control in the adversity.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 53,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Bimodal IT Practice",
+    "description": "The practice of managing two separate, coherent modes of IT delivery in the digital transformation context, one focused on stability and the other on agility.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 54,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Collaboration",
+    "description": "Initiating, developing and maintaining cooperative relationships with individuals and groups within a particular business/ industry/ region. Relates to relationships with colleagues, customers, suppliers and shareholders",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 55,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Communicating and Influencing",
+    "description": "Exchanging information and ideas, both verbally and in writing, in a clear and concise manner appropriate for the audience in order to explain, persuade, convince and influence others to achieve the desired outcomes",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 56,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Creative Problem Solving",
+    "description": "Ability to identify problems, their root causes, interrelations between problems and find creative solutions to them",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 57,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Customer Experience",
+    "description": "Providing service excellence to internal and/or external clients by conducting a unified digital transformation of the customer experience.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 58,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Decision-making",
+    "description": "Ability to apply own judgement and make bold decisions in the context of varied levels of risk and ambiguity",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 59,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Honesty, Integrity and Fairness",
+    "description": "Demonstrating and supporting ethics and values.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 60,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Innovation",
+    "description": "Generating viable, new approaches and digital solutions.",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 61,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Managing People and Driving Performance",
+    "description": "Ability to create an environment that is enabling and empowering others to contribute successfully to the organisation",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 62,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Outcomes driven",
+    "description": "Setting and striving towards outcomes for self and/or others, measuring and communicating performance and taking corrective action without hesitation when not reaching desired results",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 63,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Planning and Organising",
+    "description": "Developing, implementing, evaluating and adjusting plans to reach goals, while ensuring the optimal use of resources",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 64,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Responding to Change and Pressure",
+    "description": "Is flexible and adapts positively, to sustain performance when the situation changes, workload increases, tensions rise or priorities shift",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 65,
+    "competency_type_id": 5,
+    "competency_cluster_id": null,
+    "competency": "Strategic Thinking",
+    "description": "Understands and processes complex information and exercises sound judgment, considering the situation, the issues, the key players, and levels of hierarchy involved. Proposes course of action that further the objectives, priorities and vision of the organisation",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 66,
+    "competency_type_id": 4,
+    "competency_cluster_id": null,
+    "competency": "Time Management",
+    "description": "Management of project time, through the management of planning and scheduling activities, relates to the activities associated with the development, analysis, monitoring and control of project schedules. Meeting project objectives within the identified time frame is a critical factor in determining project success along with capability, cost and quality.",
+    "indicators": "",
+    "status": "Active"
+  },
+  {
+    "competency_id": 67,
+    "competency_type_id": 6,
+    "competency_cluster_id": null,
+    "competency": "Empathy",
+    "description": "We lead with compassion and understanding",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 68,
+    "competency_type_id": 6,
+    "competency_cluster_id": null,
+    "competency": "Integrity",
+    "description": "We are honest, ethical, and transparent",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 69,
+    "competency_type_id": 6,
+    "competency_cluster_id": null,
+    "competency": "Collaboration",
+    "description": "We work together to achieve shared goals",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 70,
+    "competency_type_id": 6,
+    "competency_cluster_id": null,
+    "competency": "Customer Centricity",
+    "description": "We put our customers at the heart of everything we do",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 71,
+    "competency_type_id": 6,
+    "competency_cluster_id": null,
+    "competency": "Innovation",
+    "description": "We embrace creativity to solve challenges and add value",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 72,
+    "competency_type_id": 6,
+    "competency_cluster_id": null,
+    "competency": "Agility",
+    "description": "We adapt quickly and effectively to change",
+    "indicators": null,
+    "status": "Active"
+  },
+  {
+    "competency_id": 999,
+    "competency_type_id": 99,
+    "competency_cluster_id": null,
+    "competency": "Work History",
+    "description": "Work History",
+    "indicators": null,
+    "status": "Active"
+  }
+]

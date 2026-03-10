@@ -1,0 +1,42 @@
+[
+  {
+    "work_level_id": 1,
+    "level_of_work": "Direct Work (Operational Level)",
+    "scope": "Hours to days.",
+    "focus": "Execution of specific tasks with clear guidelines.",
+    "judgement": "Concrete role strongly guided by rules and procedures",
+    "status": "Active"
+  },
+  {
+    "work_level_id": 2,
+    "level_of_work": "Supervisory Work (Team Coordination)",
+    "scope": "Days to weeks.",
+    "focus": "Coordination and oversight of multiple operational tasks.",
+    "judgement": "Accumulates relevant information, then applies discretion and informed judgement guided by theory",
+    "status": "Active"
+  },
+  {
+    "work_level_id": 3,
+    "level_of_work": "Managerial Work",
+    "scope": "Months to 1–2 years.",
+    "focus": "Managing and optimizing processes to achieve organizational\nobjectives.",
+    "judgement": "Tactical, focused on how processes, systems, etc. can be optimised or aligned",
+    "status": "Active"
+  },
+  {
+    "work_level_id": 4,
+    "level_of_work": "Strategic Work (Organisational Leadership)",
+    "scope": "2–5 years.",
+    "focus": "Setting long-term strategies and aligning teams with organizational\ngoals.",
+    "judgement": "Uses independent judgement to co-ordinate and integrate many related tasks/projects",
+    "status": "Active"
+  },
+  {
+    "work_level_id": 5,
+    "level_of_work": "Visionary Work (Enterprise Leadership)",
+    "scope": "5 - 10 years+",
+    "focus": "Creating and driving the organization&#39;s long-term vision and societal\nimpact.",
+    "judgement": "Decisions affect the entire organisation and its positioning within national / global context",
+    "status": "Active"
+  }
+]

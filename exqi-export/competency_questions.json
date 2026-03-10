@@ -1,0 +1,3134 @@
+[
+  {
+    "competency_question_id": 1,
+    "competency_id": 1,
+    "level": 1,
+    "question": "Can you describe a time when you were responsible for a task or project? How did you ensure it was completed on time and to the required standard?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 2,
+    "competency_id": 1,
+    "level": 2,
+    "question": "Tell me about a time when you made a mistake at work. How did you take accountability for it, and what did you learn from the experience?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 3,
+    "competency_id": 1,
+    "level": 3,
+    "question": "Describe a situation where you held a team member accountable for their actions. How did you approach the situation, and what was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 4,
+    "competency_id": 1,
+    "level": 4,
+    "question": "How do you ensure accountability across a team or department? Can you provide an example of a system or process you implemented to achieve this?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 5,
+    "competency_id": 1,
+    "level": 5,
+    "question": "Share an example of a high-stakes project where you were ultimately accountable for the results. How did you manage risks and ensure success?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 6,
+    "competency_id": 2,
+    "level": 1,
+    "question": "Can you describe a time when you came up with a new idea to improve a process or solve a problem?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 7,
+    "competency_id": 2,
+    "level": 2,
+    "question": "Tell me about a situation where you had to think creatively to overcome a challenge. What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 8,
+    "competency_id": 2,
+    "level": 3,
+    "question": "How do you foster creativity within a team? Can you provide an example of a time when you encouraged others to think outside the box?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 9,
+    "competency_id": 2,
+    "level": 4,
+    "question": "Describe a time when you implemented an innovative solution that had a significant impact on your organization. What steps did you take to ensure its success?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 10,
+    "competency_id": 2,
+    "level": 5,
+    "question": "How do you balance innovation with risk management? Can you share an example of a time when you took a calculated risk to drive innovation?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 11,
+    "competency_id": 3,
+    "level": 1,
+    "question": "Can you describe a time when you took the initiative to complete a task without being asked?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 12,
+    "competency_id": 3,
+    "level": 2,
+    "question": "Tell me about a situation where you identified a problem and took action to resolve it before it escalated.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 13,
+    "competency_id": 3,
+    "level": 3,
+    "question": "How do you proactively identify opportunities for improvement in your work or team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 14,
+    "competency_id": 3,
+    "level": 4,
+    "question": "Describe a time when you initiated a project or process that had a significant impact on your organization. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 15,
+    "competency_id": 3,
+    "level": 5,
+    "question": "How do you encourage a culture of initiative within your team or organization? Can you share an example of how you’ve done this?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 16,
+    "competency_id": 4,
+    "level": 1,
+    "question": "Can you describe a time when you worked on a task or project independently? How did you stay motivated?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 17,
+    "competency_id": 4,
+    "level": 2,
+    "question": "Tell me about a time when you faced a challenge at work. How did you stay motivated to overcome it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 18,
+    "competency_id": 4,
+    "level": 3,
+    "question": "Describe a situation where you had to persevere through a difficult project or task. What kept you going?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 19,
+    "competency_id": 4,
+    "level": 4,
+    "question": "How do you maintain motivation during long-term projects or when facing setbacks? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 20,
+    "competency_id": 4,
+    "level": 5,
+    "question": "Share an example of a time when your perseverance led to a significant achievement for your team or organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 21,
+    "competency_id": 5,
+    "level": 1,
+    "question": "Can you describe a time when you had to express your opinion or stand up for yourself at work?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 22,
+    "competency_id": 5,
+    "level": 2,
+    "question": "Tell me about a situation where you had to assert yourself to get a point across. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 23,
+    "competency_id": 5,
+    "level": 3,
+    "question": "Describe a time when you had to assert your authority or influence to achieve a goal. What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 24,
+    "competency_id": 5,
+    "level": 4,
+    "question": "How do you balance assertiveness with collaboration in a team setting? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 25,
+    "competency_id": 5,
+    "level": 5,
+    "question": "Share an example of a time when your assertiveness led to a significant change or improvement in your organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 26,
+    "competency_id": 6,
+    "level": 1,
+    "question": "Can you describe a time when you worked as part of a team to achieve a goal?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 27,
+    "competency_id": 6,
+    "level": 2,
+    "question": "Tell me about a situation where you had to resolve a conflict within a team. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 28,
+    "competency_id": 6,
+    "level": 3,
+    "question": "How do you contribute to a positive team dynamic? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 29,
+    "competency_id": 6,
+    "level": 4,
+    "question": "Describe a time when you led a team to achieve a challenging goal. What was your approach?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 30,
+    "competency_id": 6,
+    "level": 5,
+    "question": "How do you foster collaboration and teamwork across departments or organizations? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 31,
+    "competency_id": 7,
+    "level": 1,
+    "question": "Can you describe a project where you developed an application? What tools and technologies did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 32,
+    "competency_id": 7,
+    "level": 2,
+    "question": "Tell me about a time when you had to debug or troubleshoot an application. How did you resolve the issue?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 33,
+    "competency_id": 7,
+    "level": 3,
+    "question": "How do you ensure the quality of your code during application development? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 34,
+    "competency_id": 7,
+    "level": 4,
+    "question": "Describe a time when you led a team in developing a complex application. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 35,
+    "competency_id": 7,
+    "level": 5,
+    "question": "How do you stay updated with the latest trends and technologies in application development? Can you share an example of how you’ve applied this knowledge?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 36,
+    "competency_id": 8,
+    "level": 1,
+    "question": "Can you describe a time when you provided support for an application? What steps did you take to resolve the issue?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 37,
+    "competency_id": 8,
+    "level": 2,
+    "question": "Tell me about a situation where you had to prioritize multiple support requests. How did you manage your time?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 38,
+    "competency_id": 8,
+    "level": 3,
+    "question": "How do you ensure the reliability and performance of applications you support? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 39,
+    "competency_id": 8,
+    "level": 4,
+    "question": "Describe a time when you implemented a process to improve application maintenance and support. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 40,
+    "competency_id": 8,
+    "level": 5,
+    "question": "How do you manage the transition from application development to maintenance and support? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 41,
+    "competency_id": 9,
+    "level": 1,
+    "question": "Can you describe a project where you contributed to the design of a system or software architecture?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 42,
+    "competency_id": 9,
+    "level": 2,
+    "question": "Tell me about a time when you had to make a critical decision about system architecture. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 43,
+    "competency_id": 9,
+    "level": 3,
+    "question": "How do you ensure that architectural designs align with business goals? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 44,
+    "competency_id": 9,
+    "level": 4,
+    "question": "Describe a time when you led the development of a complex architecture. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 45,
+    "competency_id": 9,
+    "level": 5,
+    "question": "How do you stay updated with the latest architectural trends and best practices? Can you share an example of how you’ve applied this knowledge?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 46,
+    "competency_id": 10,
+    "level": 1,
+    "question": "Can you describe a time when you gathered requirements for a project? What methods did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 47,
+    "competency_id": 10,
+    "level": 2,
+    "question": "Tell me about a situation where you identified a gap between business needs and existing processes. How did you address it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 48,
+    "competency_id": 10,
+    "level": 3,
+    "question": "How do you ensure that business requirements are accurately translated into technical solutions? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 49,
+    "competency_id": 10,
+    "level": 4,
+    "question": "Describe a time when you led a business analysis effort for a large project. What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 50,
+    "competency_id": 10,
+    "level": 5,
+    "question": "How do you balance the needs of stakeholders with technical constraints during business analysis? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 51,
+    "competency_id": 11,
+    "level": 1,
+    "question": "Can you describe a time when you participated in a business continuity planning exercise? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 52,
+    "competency_id": 11,
+    "level": 2,
+    "question": "Tell me about a situation where you had to respond to a disruption in business operations. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 53,
+    "competency_id": 11,
+    "level": 3,
+    "question": "How do you ensure that business continuity plans are up-to-date and effective? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 54,
+    "competency_id": 11,
+    "level": 4,
+    "question": "Describe a time when you led the development or implementation of a business continuity plan. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 55,
+    "competency_id": 11,
+    "level": 5,
+    "question": "How do you integrate business continuity planning with risk management and organizational strategy? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 56,
+    "competency_id": 12,
+    "level": 1,
+    "question": "Can you describe a time when you identified a new business opportunity? How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 57,
+    "competency_id": 12,
+    "level": 2,
+    "question": "Tell me about a situation where you had to negotiate a deal or contract. What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 58,
+    "competency_id": 12,
+    "level": 3,
+    "question": "How do you build and maintain relationships with clients or partners? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 59,
+    "competency_id": 12,
+    "level": 4,
+    "question": "Describe a time when you led a business development initiative that resulted in significant growth. What was your strategy?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 60,
+    "competency_id": 12,
+    "level": 5,
+    "question": "How do you align business development efforts with organizational goals and market trends? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 61,
+    "competency_id": 13,
+    "level": 1,
+    "question": "Can you describe a time when you analyzed data to support a business decision? What tools did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 62,
+    "competency_id": 13,
+    "level": 2,
+    "question": "Tell me about a situation where you identified a trend or insight from data analysis. How did you communicate it to stakeholders?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 63,
+    "competency_id": 13,
+    "level": 3,
+    "question": "How do you ensure the accuracy and reliability of data used for business intelligence? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 64,
+    "competency_id": 13,
+    "level": 4,
+    "question": "Describe a time when you led a business intelligence project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 65,
+    "competency_id": 13,
+    "level": 5,
+    "question": "How do you integrate business intelligence with strategic decision-making? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 66,
+    "competency_id": 14,
+    "level": 1,
+    "question": "Can you describe a time when you wrote a report or document for work? What was the purpose, and how did you ensure clarity?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 67,
+    "competency_id": 14,
+    "level": 2,
+    "question": "Tell me about a situation where you had to tailor your writing style for a specific audience. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 68,
+    "competency_id": 14,
+    "level": 3,
+    "question": "How do you ensure that your written communication is effective and professional? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 69,
+    "competency_id": 14,
+    "level": 4,
+    "question": "Describe a time when your written communication had a significant impact on a project or decision. What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 70,
+    "competency_id": 14,
+    "level": 5,
+    "question": "How do you train or mentor others in effective business writing? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 71,
+    "competency_id": 15,
+    "level": 1,
+    "question": "Can you describe a time when you followed organizational policies or procedures? Why was it important?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 72,
+    "competency_id": 15,
+    "level": 2,
+    "question": "Tell me about a situation where you had to ensure compliance with regulations or standards. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 73,
+    "competency_id": 15,
+    "level": 3,
+    "question": "How do you promote a culture of ethical behavior and compliance within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 74,
+    "competency_id": 15,
+    "level": 4,
+    "question": "Describe a time when you led an initiative to improve corporate governance. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 75,
+    "competency_id": 15,
+    "level": 5,
+    "question": "How do you align corporate governance practices with organizational strategy and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 76,
+    "competency_id": 16,
+    "level": 1,
+    "question": "Can you describe a time when you provided advice or recommendations to a client? What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 77,
+    "competency_id": 16,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address a client’s concern or complaint. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 78,
+    "competency_id": 16,
+    "level": 3,
+    "question": "How do you build trust and credibility with clients? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 79,
+    "competency_id": 16,
+    "level": 4,
+    "question": "Describe a time when you led a consultancy project that resulted in significant value for the client. What was your approach?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 80,
+    "competency_id": 16,
+    "level": 5,
+    "question": "How do you ensure that consultancy services align with client needs and organizational goals? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 81,
+    "competency_id": 17,
+    "level": 1,
+    "question": "Can you describe a time when you interacted with a customer to address their needs? How did you ensure their satisfaction?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 82,
+    "competency_id": 17,
+    "level": 2,
+    "question": "Tell me about a situation where you had to manage a difficult customer. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 83,
+    "competency_id": 17,
+    "level": 3,
+    "question": "How do you build and maintain long-term relationships with customers? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 84,
+    "competency_id": 17,
+    "level": 4,
+    "question": "Describe a time when you implemented a customer relationship management strategy. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 85,
+    "competency_id": 17,
+    "level": 5,
+    "question": "How do you align customer relationship management with organizational goals and market trends? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 86,
+    "competency_id": 18,
+    "level": 1,
+    "question": "Can you describe a time when you performed routine maintenance on a database? What tools did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 87,
+    "competency_id": 18,
+    "level": 2,
+    "question": "Tell me about a situation where you had to troubleshoot a database issue. How did you resolve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 88,
+    "competency_id": 18,
+    "level": 3,
+    "question": "How do you ensure the security and performance of databases you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 89,
+    "competency_id": 18,
+    "level": 4,
+    "question": "Describe a time when you led a database migration or upgrade project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 90,
+    "competency_id": 18,
+    "level": 5,
+    "question": "How do you stay updated with the latest database technologies and best practices? Can you share an example of how you’ve applied this knowledge?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 91,
+    "competency_id": 19,
+    "level": 1,
+    "question": "Can you describe a time when you managed data for a project? What tools or techniques did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 92,
+    "competency_id": 19,
+    "level": 2,
+    "question": "Tell me about a situation where you had to clean or organize a large dataset. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 93,
+    "competency_id": 19,
+    "level": 3,
+    "question": "How do you ensure data integrity and accuracy in your work? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 94,
+    "competency_id": 19,
+    "level": 4,
+    "question": "Describe a time when you implemented a data management strategy. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 95,
+    "competency_id": 19,
+    "level": 5,
+    "question": "How do you align data management practices with organizational goals and compliance requirements? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 96,
+    "competency_id": 20,
+    "level": 1,
+    "question": "Can you describe a time when you followed ICT policies or procedures? Why was it important?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 97,
+    "competency_id": 20,
+    "level": 2,
+    "question": "Tell me about a situation where you had to ensure compliance with ICT regulations or standards. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 98,
+    "competency_id": 20,
+    "level": 3,
+    "question": "How do you promote a culture of compliance within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 99,
+    "competency_id": 20,
+    "level": 4,
+    "question": "Describe a time when you led an initiative to improve ICT governance. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 100,
+    "competency_id": 20,
+    "level": 5,
+    "question": "How do you align ICT governance practices with organizational strategy and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 101,
+    "competency_id": 21,
+    "level": 1,
+    "question": "Can you describe a time when you managed a facility or workspace? What responsibilities did you have?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 102,
+    "competency_id": 21,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address a facilities-related issue. How did you resolve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 103,
+    "competency_id": 21,
+    "level": 3,
+    "question": "How do you ensure the safety and efficiency of facilities you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 104,
+    "competency_id": 21,
+    "level": 4,
+    "question": "Describe a time when you implemented a facilities management strategy. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 105,
+    "competency_id": 21,
+    "level": 5,
+    "question": "How do you align facilities management with organizational goals and sustainability initiatives? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 106,
+    "competency_id": 22,
+    "level": 1,
+    "question": "Can you describe a time when you prepared financial statements or reports? What tools did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 107,
+    "competency_id": 22,
+    "level": 2,
+    "question": "Tell me about a situation where you had to reconcile financial data. How did you ensure accuracy?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 108,
+    "competency_id": 22,
+    "level": 3,
+    "question": "How do you ensure compliance with financial regulations and standards? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 109,
+    "competency_id": 22,
+    "level": 4,
+    "question": "Describe a time when you led a financial accounting project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 110,
+    "competency_id": 22,
+    "level": 5,
+    "question": "How do you align financial accounting practices with organizational strategy and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 111,
+    "competency_id": 23,
+    "level": 1,
+    "question": "Can you describe a time when you provided administrative support for a team or project? What tasks did you perform?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 112,
+    "competency_id": 23,
+    "level": 2,
+    "question": "Tell me about a situation where you had to manage multiple administrative tasks simultaneously. How did you prioritize?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 113,
+    "competency_id": 23,
+    "level": 3,
+    "question": "How do you ensure efficiency and accuracy in your administrative work? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 114,
+    "competency_id": 23,
+    "level": 4,
+    "question": "Describe a time when you implemented a process to improve administrative efficiency. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 115,
+    "competency_id": 23,
+    "level": 5,
+    "question": "How do you align administrative practices with organizational goals and compliance requirements? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 116,
+    "competency_id": 24,
+    "level": 1,
+    "question": "Can you describe a time when you managed a hosting environment? What responsibilities did you have?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 117,
+    "competency_id": 24,
+    "level": 2,
+    "question": "Tell me about a situation where you had to troubleshoot a hosting issue. How did you resolve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 118,
+    "competency_id": 24,
+    "level": 3,
+    "question": "How do you ensure the security and performance of hosting environments you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 119,
+    "competency_id": 24,
+    "level": 4,
+    "question": "Describe a time when you led a hosting migration or upgrade project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 120,
+    "competency_id": 24,
+    "level": 5,
+    "question": "How do you stay updated with the latest hosting technologies and best practices? Can you share an example of how you’ve applied this knowledge?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 121,
+    "competency_id": 25,
+    "level": 1,
+    "question": "Can you describe a time when you supported HR processes, such as recruitment or onboarding? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 122,
+    "competency_id": 25,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address an employee concern or issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 123,
+    "competency_id": 25,
+    "level": 3,
+    "question": "How do you promote employee engagement and development within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 124,
+    "competency_id": 25,
+    "level": 4,
+    "question": "Describe a time when you led an HR initiative that had a significant impact on the organization. What was your approach?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 125,
+    "competency_id": 25,
+    "level": 5,
+    "question": "How do you align human capital management practices with organizational goals and strategy? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 126,
+    "competency_id": 26,
+    "level": 1,
+    "question": "Can you describe a time when you participated in the implementation of a project or system? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 127,
+    "competency_id": 26,
+    "level": 2,
+    "question": "Tell me about a situation where you had to manage a project implementation timeline. How did you ensure success?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 128,
+    "competency_id": 26,
+    "level": 3,
+    "question": "How do you ensure that project implementations meet business requirements? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 129,
+    "competency_id": 26,
+    "level": 4,
+    "question": "Describe a time when you led a complex implementation project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 130,
+    "competency_id": 26,
+    "level": 5,
+    "question": "How do you align implementation management practices with organizational goals and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 131,
+    "competency_id": 27,
+    "level": 1,
+    "question": "Can you describe a time when you managed information or data for a project? What tools did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 132,
+    "competency_id": 27,
+    "level": 2,
+    "question": "Tell me about a situation where you had to ensure the accuracy and security of information. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 133,
+    "competency_id": 27,
+    "level": 3,
+    "question": "How do you promote effective information management practices within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 134,
+    "competency_id": 27,
+    "level": 4,
+    "question": "Describe a time when you led an information management initiative. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 135,
+    "competency_id": 27,
+    "level": 5,
+    "question": "How do you align information management practices with organizational goals and compliance requirements? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 136,
+    "competency_id": 28,
+    "level": 1,
+    "question": "Can you describe a time when you followed security protocols to protect information or applications? Why was it important?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 137,
+    "competency_id": 28,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address a security vulnerability. How did you resolve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 138,
+    "competency_id": 28,
+    "level": 3,
+    "question": "How do you ensure the security of applications and data you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 139,
+    "competency_id": 28,
+    "level": 4,
+    "question": "Describe a time when you led an information security initiative. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 140,
+    "competency_id": 28,
+    "level": 5,
+    "question": "How do you align information security practices with organizational goals and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 141,
+    "competency_id": 29,
+    "level": 1,
+    "question": "Can you describe a time when you participated in an IT project? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 142,
+    "competency_id": 29,
+    "level": 2,
+    "question": "Tell me about a situation where you had to manage a project timeline or budget. How did you ensure success?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 143,
+    "competency_id": 29,
+    "level": 3,
+    "question": "How do you ensure that IT projects meet business requirements? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 144,
+    "competency_id": 29,
+    "level": 4,
+    "question": "Describe a time when you led a complex IT project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 145,
+    "competency_id": 29,
+    "level": 5,
+    "question": "How do you align IT project management practices with organizational goals and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 146,
+    "competency_id": 30,
+    "level": 1,
+    "question": "Can you describe a time when you identified a risk in an IT project or system? How did you address it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 147,
+    "competency_id": 30,
+    "level": 2,
+    "question": "Tell me about a situation where you had to mitigate an IT risk. What steps did you take?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 148,
+    "competency_id": 30,
+    "level": 3,
+    "question": "How do you ensure that IT risks are effectively managed within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 149,
+    "competency_id": 30,
+    "level": 4,
+    "question": "Describe a time when you led an IT risk management initiative. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 150,
+    "competency_id": 30,
+    "level": 5,
+    "question": "How do you align IT risk management practices with organizational goals and strategy? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 151,
+    "competency_id": 31,
+    "level": 1,
+    "question": "Can you describe a time when you provided IT support or service? What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 152,
+    "competency_id": 31,
+    "level": 2,
+    "question": "Tell me about a situation where you had to resolve a service issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 153,
+    "competency_id": 31,
+    "level": 3,
+    "question": "How do you ensure the quality and efficiency of IT services you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 154,
+    "competency_id": 31,
+    "level": 4,
+    "question": "Describe a time when you led an IT service management initiative. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 155,
+    "competency_id": 31,
+    "level": 5,
+    "question": "How do you align IT service management practices with organizational goals and customer needs? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 156,
+    "competency_id": 32,
+    "level": 1,
+    "question": "Can you describe a time when you shared knowledge or information with your team? Why was it important?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 157,
+    "competency_id": 32,
+    "level": 2,
+    "question": "Tell me about a situation where you had to organize or document knowledge for a project. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 158,
+    "competency_id": 32,
+    "level": 3,
+    "question": "How do you promote knowledge sharing within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 159,
+    "competency_id": 32,
+    "level": 4,
+    "question": "Describe a time when you led a knowledge management initiative. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 160,
+    "competency_id": 32,
+    "level": 5,
+    "question": "How do you align knowledge management practices with organizational goals and strategy? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 161,
+    "competency_id": 33,
+    "level": 1,
+    "question": "Can you describe a time when you prepared management reports or analyses? What tools did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 162,
+    "competency_id": 33,
+    "level": 2,
+    "question": "Tell me about a situation where you had to analyze financial data to support a decision. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 163,
+    "competency_id": 33,
+    "level": 3,
+    "question": "How do you ensure the accuracy and relevance of management accounting information? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 164,
+    "competency_id": 33,
+    "level": 4,
+    "question": "Describe a time when you led a management accounting project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 165,
+    "competency_id": 33,
+    "level": 5,
+    "question": "How do you align management accounting practices with organizational goals and strategy? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 166,
+    "competency_id": 34,
+    "level": 1,
+    "question": "Can you describe a time when you managed a network or IT infrastructure? What responsibilities did you have?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 167,
+    "competency_id": 34,
+    "level": 2,
+    "question": "Tell me about a situation where you had to troubleshoot a network issue. How did you resolve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 168,
+    "competency_id": 34,
+    "level": 3,
+    "question": "How do you ensure the security and performance of networks you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 169,
+    "competency_id": 34,
+    "level": 4,
+    "question": "Describe a time when you led a network or infrastructure upgrade project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 170,
+    "competency_id": 34,
+    "level": 5,
+    "question": "How do you stay updated with the latest network technologies and best practices? Can you share an example of how you’ve applied this knowledge?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 171,
+    "competency_id": 35,
+    "level": 1,
+    "question": "Can you describe a time when you supported the development or management of a product or service? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 172,
+    "competency_id": 35,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address a product or service issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 173,
+    "competency_id": 35,
+    "level": 3,
+    "question": "How do you ensure the quality and success of products or services you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 174,
+    "competency_id": 35,
+    "level": 4,
+    "question": "Describe a time when you led a product or service lifecycle management initiative. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 175,
+    "competency_id": 35,
+    "level": 5,
+    "question": "How do you align product and service lifecycle management practices with organizational goals and market trends? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 176,
+    "competency_id": 36,
+    "level": 1,
+    "question": "Can you describe a time when you participated in a project or programme? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 177,
+    "competency_id": 36,
+    "level": 2,
+    "question": "Tell me about a situation where you had to manage a project timeline or budget. How did you ensure success?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 178,
+    "competency_id": 36,
+    "level": 3,
+    "question": "How do you ensure that projects meet business requirements? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 179,
+    "competency_id": 36,
+    "level": 4,
+    "question": "Describe a time when you led a complex project or programme. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 180,
+    "competency_id": 36,
+    "level": 5,
+    "question": "How do you align project and programme management practices with organizational goals and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 181,
+    "competency_id": 37,
+    "level": 1,
+    "question": "Can you describe a time when you conducted research or contributed to an innovation project? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 182,
+    "competency_id": 37,
+    "level": 2,
+    "question": "Tell me about a situation where you had to analyze data or information to support research or innovation. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 183,
+    "competency_id": 37,
+    "level": 3,
+    "question": "How do you promote a culture of research and innovation within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 184,
+    "competency_id": 37,
+    "level": 4,
+    "question": "Describe a time when you led a research or innovation initiative. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 185,
+    "competency_id": 37,
+    "level": 5,
+    "question": "How do you align research and innovation practices with organizational goals and strategy? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 186,
+    "competency_id": 38,
+    "level": 1,
+    "question": "Can you describe a time when you tested software for quality assurance? What tools did you use?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 187,
+    "competency_id": 38,
+    "level": 2,
+    "question": "Tell me about a situation where you identified a software defect. How did you resolve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 188,
+    "competency_id": 38,
+    "level": 3,
+    "question": "How do you ensure the quality of software you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 189,
+    "competency_id": 38,
+    "level": 4,
+    "question": "Describe a time when you led a software quality management initiative. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 190,
+    "competency_id": 38,
+    "level": 5,
+    "question": "How do you align software quality management practices with organizational goals and customer needs? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 191,
+    "competency_id": 39,
+    "level": 1,
+    "question": "Can you describe a time when you supported supply chain operations? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 192,
+    "competency_id": 39,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address a supply chain issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 193,
+    "competency_id": 39,
+    "level": 3,
+    "question": "How do you ensure the efficiency and reliability of supply chains you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 194,
+    "competency_id": 39,
+    "level": 4,
+    "question": "Describe a time when you led a supply chain management initiative. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 195,
+    "competency_id": 39,
+    "level": 5,
+    "question": "How do you align supply chain management practices with organizational goals and market trends? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 196,
+    "competency_id": 40,
+    "level": 1,
+    "question": "Can you describe a time when you participated in the development of a system? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 197,
+    "competency_id": 40,
+    "level": 2,
+    "question": "Tell me about a situation where you had to troubleshoot a system issue. How did you resolve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 198,
+    "competency_id": 40,
+    "level": 3,
+    "question": "How do you ensure the quality and performance of systems you develop? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 199,
+    "competency_id": 40,
+    "level": 4,
+    "question": "Describe a time when you led a system development project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 200,
+    "competency_id": 40,
+    "level": 5,
+    "question": "How do you align system development practices with organizational goals and customer needs? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 201,
+    "competency_id": 41,
+    "level": 1,
+    "question": "Can you describe a time when you provided maintenance or support for a system? What tasks did you perform?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 202,
+    "competency_id": 41,
+    "level": 2,
+    "question": "Tell me about a situation where you had to resolve a system issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 203,
+    "competency_id": 41,
+    "level": 3,
+    "question": "How do you ensure the reliability and performance of systems you support? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 204,
+    "competency_id": 41,
+    "level": 4,
+    "question": "Describe a time when you led a system maintenance or support initiative. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 205,
+    "competency_id": 41,
+    "level": 5,
+    "question": "How do you align system maintenance and support practices with organizational goals and customer needs? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 206,
+    "competency_id": 42,
+    "level": 1,
+    "question": "Can you describe a time when you managed a system or server? What responsibilities did you have?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 207,
+    "competency_id": 42,
+    "level": 2,
+    "question": "Tell me about a situation where you had to troubleshoot a system issue. How did you resolve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 208,
+    "competency_id": 42,
+    "level": 3,
+    "question": "How do you ensure the security and performance of systems you manage? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 209,
+    "competency_id": 42,
+    "level": 4,
+    "question": "Describe a time when you led a system administration project. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 210,
+    "competency_id": 42,
+    "level": 5,
+    "question": "How do you stay updated with the latest system administration technologies and best practices? Can you share an example of how you’ve applied this knowledge?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 211,
+    "competency_id": 43,
+    "level": 1,
+    "question": "Can you describe a time when you worked with a vendor or supplier? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 212,
+    "competency_id": 43,
+    "level": 2,
+    "question": "Tell me about a situation where you had to resolve an issue with a vendor or supplier. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 213,
+    "competency_id": 43,
+    "level": 3,
+    "question": "How do you ensure the quality and reliability of vendors or suppliers you work with? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 214,
+    "competency_id": 43,
+    "level": 4,
+    "question": "Describe a time when you led a vendor or supplier management initiative. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 215,
+    "competency_id": 43,
+    "level": 5,
+    "question": "How do you align vendor or supplier management practices with organizational goals and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 216,
+    "competency_id": 44,
+    "level": 1,
+    "question": "Can you describe a time when you had to listen carefully to understand a problem or request?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 217,
+    "competency_id": 44,
+    "level": 2,
+    "question": "Tell me about a situation where active listening helped you resolve a conflict or misunderstanding.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 218,
+    "competency_id": 44,
+    "level": 3,
+    "question": "How do you ensure you fully understand others’ perspectives in a team setting? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 219,
+    "competency_id": 44,
+    "level": 4,
+    "question": "Describe a time when your active listening skills led to a significant improvement in a project or process.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 220,
+    "competency_id": 44,
+    "level": 5,
+    "question": "How do you train or encourage others to practice active listening? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 221,
+    "competency_id": 45,
+    "level": 1,
+    "question": "Can you describe a time when you analyzed data or information to solve a problem?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 222,
+    "competency_id": 45,
+    "level": 2,
+    "question": "Tell me about a situation where you had to make a decision based on incomplete information. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 223,
+    "competency_id": 45,
+    "level": 3,
+    "question": "How do you use analytical thinking to improve processes or systems? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 224,
+    "competency_id": 45,
+    "level": 4,
+    "question": "Describe a time when your analytical skills led to a significant business decision. What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 225,
+    "competency_id": 45,
+    "level": 5,
+    "question": "How do you foster a culture of analytical thinking within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 226,
+    "competency_id": 46,
+    "level": 1,
+    "question": "Can you describe a time when you paid close attention to detail in your work? Why was it important?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 227,
+    "competency_id": 46,
+    "level": 2,
+    "question": "Tell me about a situation where your attention to detail prevented an error or issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 228,
+    "competency_id": 46,
+    "level": 3,
+    "question": "How do you ensure accuracy and precision in your work? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 229,
+    "competency_id": 46,
+    "level": 4,
+    "question": "Describe a time when your attention to detail led to a significant improvement in a project or process.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 230,
+    "competency_id": 46,
+    "level": 5,
+    "question": "How do you promote a culture of attention to detail within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 231,
+    "competency_id": 47,
+    "level": 1,
+    "question": "Can you describe a time when you learned a new skill or improved an existing one? How did you apply it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 232,
+    "competency_id": 47,
+    "level": 2,
+    "question": "Tell me about a situation where you had to quickly learn something new to complete a task. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 233,
+    "competency_id": 47,
+    "level": 3,
+    "question": "How do you stay updated with industry trends and best practices? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 234,
+    "competency_id": 47,
+    "level": 4,
+    "question": "Describe a time when your commitment to continuous learning led to a significant achievement. What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 235,
+    "competency_id": 47,
+    "level": 5,
+    "question": "How do you encourage a culture of continuous learning within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 236,
+    "competency_id": 48,
+    "level": 1,
+    "question": "Can you describe a time when you followed a structured approach to complete a task? Why was it important?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 237,
+    "competency_id": 48,
+    "level": 2,
+    "question": "Tell me about a situation where you had to maintain focus and discipline to meet a deadline. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 238,
+    "competency_id": 48,
+    "level": 3,
+    "question": "How do you ensure consistency and reliability in your work? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 239,
+    "competency_id": 48,
+    "level": 4,
+    "question": "Describe a time when your discipline led to a significant improvement in a project or process.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 240,
+    "competency_id": 48,
+    "level": 5,
+    "question": "How do you promote a culture of discipline within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 241,
+    "competency_id": 49,
+    "level": 1,
+    "question": "Can you describe a time when you showed empathy towards a colleague or customer? How did it impact the situation?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 242,
+    "competency_id": 49,
+    "level": 2,
+    "question": "Tell me about a situation where you had to understand and address someone’s concerns. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 243,
+    "competency_id": 49,
+    "level": 3,
+    "question": "How do you ensure that empathy is part of your interactions with others? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 244,
+    "competency_id": 49,
+    "level": 4,
+    "question": "Describe a time when your empathy led to a significant improvement in a team or customer relationship.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 245,
+    "competency_id": 49,
+    "level": 5,
+    "question": "How do you promote a culture of empathy within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 246,
+    "competency_id": 50,
+    "level": 1,
+    "question": "Can you describe a time when you worked with a diverse group of people? How did you ensure everyone felt included?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 247,
+    "competency_id": 50,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address an inclusivity issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 248,
+    "competency_id": 50,
+    "level": 3,
+    "question": "How do you promote inclusivity within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 249,
+    "competency_id": 50,
+    "level": 4,
+    "question": "Describe a time when your efforts to promote inclusivity led to a significant improvement in team dynamics.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 250,
+    "competency_id": 50,
+    "level": 5,
+    "question": "How do you align inclusivity practices with organizational goals and values? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 251,
+    "competency_id": 51,
+    "level": 1,
+    "question": "Can you describe a time when you faced a challenge at work? How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 252,
+    "competency_id": 51,
+    "level": 2,
+    "question": "Tell me about a situation where you had to persevere through a difficult project or task. What kept you going?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 253,
+    "competency_id": 51,
+    "level": 3,
+    "question": "How do you maintain motivation during long-term projects or when facing setbacks? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 254,
+    "competency_id": 51,
+    "level": 4,
+    "question": "Describe a time when your resilience led to a significant achievement for your team or organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 255,
+    "competency_id": 51,
+    "level": 5,
+    "question": "How do you promote a culture of resilience within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 256,
+    "competency_id": 52,
+    "level": 1,
+    "question": "Can you describe a time when you worked under pressure? How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 257,
+    "competency_id": 52,
+    "level": 2,
+    "question": "Tell me about a situation where you had to manage stress to meet a deadline. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 258,
+    "competency_id": 52,
+    "level": 3,
+    "question": "How do you ensure that stress does not impact your performance? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 259,
+    "competency_id": 52,
+    "level": 4,
+    "question": "Describe a time when your stress management skills led to a significant improvement in a project or process.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 260,
+    "competency_id": 52,
+    "level": 5,
+    "question": "How do you promote a culture of stress management within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 261,
+    "competency_id": 53,
+    "level": 1,
+    "question": "Can you describe a time when you worked on a project that required both stability and agility? How did you balance the two?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 262,
+    "competency_id": 53,
+    "level": 2,
+    "question": "Tell me about a situation where you had to manage competing priorities in an IT project. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 263,
+    "competency_id": 53,
+    "level": 3,
+    "question": "How do you ensure that IT practices align with both operational stability and innovation? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 264,
+    "competency_id": 53,
+    "level": 4,
+    "question": "Describe a time when you led a bimodal IT initiative. What challenges did you face, and how did you overcome them?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 265,
+    "competency_id": 53,
+    "level": 5,
+    "question": "How do you align bimodal IT practices with organizational goals and digital transformation? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 266,
+    "competency_id": 54,
+    "level": 1,
+    "question": "Can you describe a time when you worked with others to achieve a goal? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 267,
+    "competency_id": 54,
+    "level": 2,
+    "question": "Tell me about a situation where you had to resolve a conflict within a team. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 268,
+    "competency_id": 54,
+    "level": 3,
+    "question": "How do you build and maintain collaborative relationships with stakeholders? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 269,
+    "competency_id": 54,
+    "level": 4,
+    "question": "Describe a time when your collaboration skills led to a significant achievement for your team or organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 270,
+    "competency_id": 54,
+    "level": 5,
+    "question": "How do you promote a culture of collaboration within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 271,
+    "competency_id": 55,
+    "level": 1,
+    "question": "Can you describe a time when you had to communicate a complex idea to others? How did you ensure understanding?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 272,
+    "competency_id": 55,
+    "level": 2,
+    "question": "Tell me about a situation where you had to persuade others to adopt your idea or approach. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 273,
+    "competency_id": 55,
+    "level": 3,
+    "question": "How do you tailor your communication style to different audiences? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 274,
+    "competency_id": 55,
+    "level": 4,
+    "question": "Describe a time when your communication skills led to a significant change or improvement in your organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 275,
+    "competency_id": 55,
+    "level": 5,
+    "question": "How do you promote effective communication and influencing skills within your team or organization? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 276,
+    "competency_id": 56,
+    "level": 1,
+    "question": "Can you describe a time when you came up with a creative solution to a problem? What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 277,
+    "competency_id": 56,
+    "level": 2,
+    "question": "Tell me about a situation where you had to think outside the box to overcome a challenge. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 278,
+    "competency_id": 56,
+    "level": 3,
+    "question": "How do you encourage creative problem-solving within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 279,
+    "competency_id": 56,
+    "level": 4,
+    "question": "Describe a time when your creative problem-solving skills led to a significant improvement in a project or process.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 280,
+    "competency_id": 56,
+    "level": 5,
+    "question": "How do you align creative problem-solving practices with organizational goals and innovation? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 281,
+    "competency_id": 57,
+    "level": 1,
+    "question": "Can you describe a time when you interacted with a customer to address their needs? How did you ensure their satisfaction?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 282,
+    "competency_id": 57,
+    "level": 2,
+    "question": "Tell me about a situation where you had to manage a difficult customer. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 283,
+    "competency_id": 57,
+    "level": 3,
+    "question": "How do you ensure that customer experience is a priority in your work? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 284,
+    "competency_id": 57,
+    "level": 4,
+    "question": "Describe a time when your efforts to improve customer experience led to a significant achievement.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 285,
+    "competency_id": 57,
+    "level": 5,
+    "question": "How do you align customer experience practices with organizational goals and digital transformation? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 286,
+    "competency_id": 58,
+    "level": 1,
+    "question": "Can you describe a time when you had to make a quick decision? What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 287,
+    "competency_id": 58,
+    "level": 2,
+    "question": "Tell me about a situation where you had to make a difficult decision with limited information. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 288,
+    "competency_id": 58,
+    "level": 3,
+    "question": "How do you involve others in your decision-making process? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 289,
+    "competency_id": 58,
+    "level": 4,
+    "question": "Describe a time when your decision had a significant impact on your team or organization. What was the result?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 290,
+    "competency_id": 58,
+    "level": 5,
+    "question": "How do you balance data-driven decision-making with intuition and experience? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 291,
+    "competency_id": 59,
+    "level": 1,
+    "question": "Can you describe a time when you had to make an ethical decision at work? How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 292,
+    "competency_id": 59,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address an ethical issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 293,
+    "competency_id": 59,
+    "level": 3,
+    "question": "How do you promote a culture of honesty and integrity within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 294,
+    "competency_id": 59,
+    "level": 4,
+    "question": "Describe a time when your commitment to fairness led to a significant improvement in team dynamics.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 295,
+    "competency_id": 59,
+    "level": 5,
+    "question": "How do you align ethical practices with organizational goals and values? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 296,
+    "competency_id": 60,
+    "level": 1,
+    "question": "Can you describe a time when you came up with a new idea to improve a process or solve a problem?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 297,
+    "competency_id": 60,
+    "level": 2,
+    "question": "Tell me about a situation where you had to think creatively to overcome a challenge. What was the outcome?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 298,
+    "competency_id": 60,
+    "level": 3,
+    "question": "How do you foster innovation within your team? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 299,
+    "competency_id": 60,
+    "level": 4,
+    "question": "Describe a time when your innovative approach led to a significant achievement for your team or organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 300,
+    "competency_id": 60,
+    "level": 5,
+    "question": "How do you align innovation practices with organizational goals and digital transformation? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 301,
+    "competency_id": 61,
+    "level": 1,
+    "question": "Can you describe a time when you provided feedback to a team member? How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 302,
+    "competency_id": 61,
+    "level": 2,
+    "question": "Tell me about a situation where you had to address a performance issue. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 303,
+    "competency_id": 61,
+    "level": 3,
+    "question": "How do you ensure that your team meets performance goals? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 304,
+    "competency_id": 61,
+    "level": 4,
+    "question": "Describe a time when your leadership led to a significant improvement in team performance.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 305,
+    "competency_id": 61,
+    "level": 5,
+    "question": "How do you align people management practices with organizational goals and strategy? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 306,
+    "competency_id": 62,
+    "level": 1,
+    "question": "Can you describe a time when you set a goal for yourself or your team? How did you achieve it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 307,
+    "competency_id": 62,
+    "level": 2,
+    "question": "Tell me about a situation where you had to adjust your approach to meet a goal. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 308,
+    "competency_id": 62,
+    "level": 3,
+    "question": "How do you ensure that your work aligns with organizational goals? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 309,
+    "competency_id": 62,
+    "level": 4,
+    "question": "Describe a time when your focus on outcomes led to a significant achievement for your team or organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 310,
+    "competency_id": 62,
+    "level": 5,
+    "question": "How do you align outcome-driven practices with organizational strategy and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 311,
+    "competency_id": 63,
+    "level": 1,
+    "question": "Can you describe a time when you planned a project or task? How did you ensure its success?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 312,
+    "competency_id": 63,
+    "level": 2,
+    "question": "Tell me about a situation where you had to adjust your plans due to unexpected changes. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 313,
+    "competency_id": 63,
+    "level": 3,
+    "question": "How do you ensure that your plans align with organizational goals? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 314,
+    "competency_id": 63,
+    "level": 4,
+    "question": "Describe a time when your planning and organizing skills led to a significant achievement for your team or organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 315,
+    "competency_id": 63,
+    "level": 5,
+    "question": "How do you align planning and organizing practices with organizational strategy and risk management? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 316,
+    "competency_id": 64,
+    "level": 1,
+    "question": "Can you describe a time when you had to adapt to a change at work? How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 317,
+    "competency_id": 64,
+    "level": 2,
+    "question": "Tell me about a situation where you had to work under pressure. How did you manage it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 318,
+    "competency_id": 64,
+    "level": 3,
+    "question": "How do you ensure that your team remains productive during times of change or pressure? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 319,
+    "competency_id": 64,
+    "level": 4,
+    "question": "Describe a time when your ability to respond to change or pressure led to a significant achievement for your team or organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 320,
+    "competency_id": 64,
+    "level": 5,
+    "question": "How do you align change management practices with organizational goals and strategy? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 321,
+    "competency_id": 65,
+    "level": 1,
+    "question": "Can you describe a time when you contributed to a strategic plan? What was your role?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 322,
+    "competency_id": 65,
+    "level": 2,
+    "question": "Tell me about a situation where you had to align your work with organizational goals. How did you approach it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 323,
+    "competency_id": 65,
+    "level": 3,
+    "question": "How do you ensure that your work contributes to long-term organizational success? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 324,
+    "competency_id": 65,
+    "level": 4,
+    "question": "Describe a time when your strategic thinking led to a significant achievement for your team or organization.",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 325,
+    "competency_id": 65,
+    "level": 5,
+    "question": "How do you align strategic thinking practices with organizational goals and digital transformation? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 326,
+    "competency_id": 66,
+    "level": 1,
+    "question": "Can you describe a time when you had to manage multiple tasks or deadlines? How did you prioritize?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 327,
+    "competency_id": 66,
+    "level": 2,
+    "question": "Tell me about a situation where you had to adjust your schedule to meet a tight deadline. How did you handle it?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 328,
+    "competency_id": 66,
+    "level": 3,
+    "question": "How do you ensure your team meets project deadlines? Can you provide an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 329,
+    "competency_id": 66,
+    "level": 4,
+    "question": "Describe a time when you implemented a time management system or process. What was the impact?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 330,
+    "competency_id": 66,
+    "level": 5,
+    "question": "How do you manage time across multiple projects or teams? Can you share an example?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 331,
+    "competency_id": 999,
+    "level": 0,
+    "question": "Please confirm your current job and your key responsibilities:",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 332,
+    "competency_id": 999,
+    "level": 0,
+    "question": "For how long have you performed this job?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 333,
+    "competency_id": 999,
+    "level": 0,
+    "question": "What do you like most about the job and what the least?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 334,
+    "competency_id": 999,
+    "level": 0,
+    "question": "Do you think it is time for change, and if so, what alternative jobs would you be interested in?",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 335,
+    "competency_id": 999,
+    "level": 0,
+    "question": "Briefly share with us your previous work history (key positions and time periods)",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 336,
+    "competency_id": 999,
+    "level": 0,
+    "question": "Kindly also confirm your key qualifications",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 339,
+    "competency_id": 7,
+    "level": 5,
+    "question": "Wat is die vraag?",
+    "score": 5,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 340,
+    "competency_id": 37,
+    "level": 3,
+    "question": "What should the question be?",
+    "score": 2,
+    "status": "Active",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 351,
+    "competency_id": 1,
+    "level": 1,
+    "question": "This is a test questions for demo",
+    "score": 1,
+    "status": "Deleted",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 352,
+    "competency_id": 1,
+    "level": 1,
+    "question": "qweqweqweqweqweqwewq",
+    "score": 1,
+    "status": "Deleted",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 353,
+    "competency_id": 1,
+    "level": 1,
+    "question": "testing another question demo",
+    "score": 1,
+    "status": "Deleted",
+    "client_id": 11
+  },
+  {
+    "competency_question_id": 354,
+    "competency_id": 1,
+    "level": 1,
+    "question": "questionqweqweqweqwewqeqw",
+    "score": 1,
+    "status": "Active",
+    "client_id": 11
+  },
+  {
+    "competency_question_id": 355,
+    "competency_id": 44,
+    "level": 4,
+    "question": "rdytuhjkljuktdkutd",
+    "score": 1,
+    "status": "Deleted",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 356,
+    "competency_id": 1003,
+    "level": 1,
+    "question": "test question.........",
+    "score": 1,
+    "status": "Deleted",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 357,
+    "competency_id": 1004,
+    "level": 1,
+    "question": "123455123123123",
+    "score": 1,
+    "status": "Deleted",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 358,
+    "competency_id": 1004,
+    "level": 1,
+    "question": "qwerqwerqewrqwerwer",
+    "score": 1,
+    "status": "Deleted",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 359,
+    "competency_id": 1005,
+    "level": 1,
+    "question": "quwqweqweqw",
+    "score": 1,
+    "status": "Deleted",
+    "client_id": 1
+  },
+  {
+    "competency_question_id": 360,
+    "competency_id": 1,
+    "level": 2,
+    "question": "new question",
+    "score": 1,
+    "status": "Active",
+    "client_id": 1
+  }
+]

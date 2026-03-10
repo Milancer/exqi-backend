@@ -1,0 +1,37 @@
+[
+  {
+    "competency_type_id": 1,
+    "competency_type": "Core",
+    "status": "Active"
+  },
+  {
+    "competency_type_id": 2,
+    "competency_type": "Technical",
+    "status": "Active"
+  },
+  {
+    "competency_type_id": 3,
+    "competency_type": "Behavioural",
+    "status": "Active"
+  },
+  {
+    "competency_type_id": 4,
+    "competency_type": "Functional",
+    "status": "Active"
+  },
+  {
+    "competency_type_id": 5,
+    "competency_type": "Leadership",
+    "status": "Active"
+  },
+  {
+    "competency_type_id": 6,
+    "competency_type": "Value",
+    "status": "Active"
+  },
+  {
+    "competency_type_id": 99,
+    "competency_type": "Work History",
+    "status": "Active"
+  }
+]

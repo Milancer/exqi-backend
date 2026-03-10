@@ -1,0 +1,162 @@
+[
+  {
+    "job_grade_id": 1,
+    "job_grade": "Not Applicable (N/A)",
+    "status": "Active"
+  },
+  {
+    "job_grade_id": 2,
+    "job_grade": "A1",
+    "status": null
+  },
+  {
+    "job_grade_id": 3,
+    "job_grade": "A2",
+    "status": null
+  },
+  {
+    "job_grade_id": 4,
+    "job_grade": "A3",
+    "status": null
+  },
+  {
+    "job_grade_id": 5,
+    "job_grade": "A4",
+    "status": null
+  },
+  {
+    "job_grade_id": 6,
+    "job_grade": "A5",
+    "status": null
+  },
+  {
+    "job_grade_id": 7,
+    "job_grade": "B1",
+    "status": null
+  },
+  {
+    "job_grade_id": 8,
+    "job_grade": "B2",
+    "status": null
+  },
+  {
+    "job_grade_id": 9,
+    "job_grade": "B3",
+    "status": null
+  },
+  {
+    "job_grade_id": 10,
+    "job_grade": "B4",
+    "status": null
+  },
+  {
+    "job_grade_id": 11,
+    "job_grade": "B5",
+    "status": null
+  },
+  {
+    "job_grade_id": 12,
+    "job_grade": "C1",
+    "status": null
+  },
+  {
+    "job_grade_id": 13,
+    "job_grade": "C2",
+    "status": null
+  },
+  {
+    "job_grade_id": 14,
+    "job_grade": "C3",
+    "status": null
+  },
+  {
+    "job_grade_id": 15,
+    "job_grade": "C4",
+    "status": null
+  },
+  {
+    "job_grade_id": 16,
+    "job_grade": "C5",
+    "status": null
+  },
+  {
+    "job_grade_id": 17,
+    "job_grade": "D1",
+    "status": null
+  },
+  {
+    "job_grade_id": 18,
+    "job_grade": "D2",
+    "status": null
+  },
+  {
+    "job_grade_id": 19,
+    "job_grade": "D3",
+    "status": null
+  },
+  {
+    "job_grade_id": 20,
+    "job_grade": "D4",
+    "status": null
+  },
+  {
+    "job_grade_id": 21,
+    "job_grade": "D5",
+    "status": null
+  },
+  {
+    "job_grade_id": 22,
+    "job_grade": "E1",
+    "status": null
+  },
+  {
+    "job_grade_id": 23,
+    "job_grade": "E2",
+    "status": null
+  },
+  {
+    "job_grade_id": 24,
+    "job_grade": "E3",
+    "status": null
+  },
+  {
+    "job_grade_id": 25,
+    "job_grade": "E4",
+    "status": null
+  },
+  {
+    "job_grade_id": 26,
+    "job_grade": "E5",
+    "status": null
+  },
+  {
+    "job_grade_id": 27,
+    "job_grade": "F1",
+    "status": null
+  },
+  {
+    "job_grade_id": 28,
+    "job_grade": "F2",
+    "status": null
+  },
+  {
+    "job_grade_id": 29,
+    "job_grade": "F3",
+    "status": null
+  },
+  {
+    "job_grade_id": 30,
+    "job_grade": "F4",
+    "status": null
+  },
+  {
+    "job_grade_id": 31,
+    "job_grade": "F5",
+    "status": null
+  },
+  {
+    "job_grade_id": 101,
+    "job_grade": "To be determined by JE",
+    "status": "Active"
+  }
+]

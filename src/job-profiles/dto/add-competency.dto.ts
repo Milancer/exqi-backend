@@ -2,9 +2,9 @@ import { IsNumber, IsBoolean, IsOptional, Min, Max } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class AddCompetencyDto {
-  @ApiProperty({ example: 1, description: 'ID of the JP competency' })
+  @ApiProperty({ example: 1, description: 'ID of the competency' })
   @IsNumber()
-  jp_competency_id: number;
+  competency_id: number;
 
   @ApiProperty({ example: 3, description: 'Required proficiency level (1-5)' })
   @IsNumber()

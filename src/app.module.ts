@@ -13,6 +13,10 @@ import { CandidatesModule } from './candidates/candidates.module';
 import { InterviewsModule } from './interviews/interviews.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { BulkImportModule } from './bulk-import/bulk-import.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { JobGradesModule } from './job-grades/job-grades.module';
+import { WorkLevelsModule } from './work-levels/work-levels.module';
+import { SkillsModule } from './skills/skills.module';
 
 @Module({
   imports: [
@@ -44,6 +48,10 @@ import { BulkImportModule } from './bulk-import/bulk-import.module';
     InterviewsModule,
     NotificationsModule,
     BulkImportModule,
+    DepartmentsModule,
+    JobGradesModule,
+    WorkLevelsModule,
+    SkillsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,156 @@
+[
+  {
+    "user_role_id": 3,
+    "user_id": "auth0|690df0b6a247155f001b1887",
+    "role_id": 1,
+    "assigned_at": "2026-01-20T14:11:12.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 8,
+    "user_id": "auth0|6823018700841643da65efc5",
+    "role_id": 3,
+    "assigned_at": "2026-01-21T04:52:19.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 10,
+    "user_id": "auth0|685e68e668043b6e2d1c480a",
+    "role_id": 3,
+    "assigned_at": "2026-01-21T04:53:12.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 11,
+    "user_id": "auth0|6790a6a9e3eb4588aab10ac6",
+    "role_id": 1,
+    "assigned_at": "2026-01-21T04:56:30.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 12,
+    "user_id": "auth0|6822f2740fc13a739baee7fe",
+    "role_id": 3,
+    "assigned_at": "2026-01-21T04:59:55.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 13,
+    "user_id": "auth0|68d24814008fe82ee7306220",
+    "role_id": 5,
+    "assigned_at": "2026-01-21T05:00:49.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 19,
+    "user_id": "auth0|684813226e58c146fc29e919",
+    "role_id": 4,
+    "assigned_at": "2026-01-21T05:03:33.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 20,
+    "user_id": "auth0|68f5e2c4cee6153fdce57199",
+    "role_id": 4,
+    "assigned_at": "2026-01-21T05:04:04.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 21,
+    "user_id": "auth0|68f9ef68a24e68670c602919",
+    "role_id": 4,
+    "assigned_at": "2026-01-21T05:04:29.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 22,
+    "user_id": "auth0|69425c9fac57a9cd7e2ecc8d",
+    "role_id": 4,
+    "assigned_at": "2026-01-21T05:04:48.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 24,
+    "user_id": "auth0|687f18d19a6a95972f8772b6",
+    "role_id": 6,
+    "assigned_at": "2026-01-21T05:06:10.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 25,
+    "user_id": "auth0|6822f2f8d0d9405aceb24ac2",
+    "role_id": 2,
+    "assigned_at": "2026-01-21T05:06:59.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 26,
+    "user_id": "auth0|687ddc9afd5b6784913969bd",
+    "role_id": 2,
+    "assigned_at": "2026-01-21T05:07:13.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 27,
+    "user_id": "auth0|687f1949f3467d2758266602",
+    "role_id": 2,
+    "assigned_at": "2026-01-21T05:07:28.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 28,
+    "user_id": "auth0|6846cfca9fd36bd4d0b5e3e0",
+    "role_id": 3,
+    "assigned_at": "2026-01-21T05:07:41.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 29,
+    "user_id": "auth0|68480de9a9238dbf9c2e7681",
+    "role_id": 4,
+    "assigned_at": "2026-01-23T04:07:44.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 30,
+    "user_id": "auth0|68480fc533a62ec0037936cb",
+    "role_id": 4,
+    "assigned_at": "2026-01-23T04:08:00.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 31,
+    "user_id": "auth0|68480e836e58c146fc29e28f",
+    "role_id": 4,
+    "assigned_at": "2026-01-23T04:08:09.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 32,
+    "user_id": "auth0|6822effc1c07bcebeab058f1",
+    "role_id": 3,
+    "assigned_at": "2026-01-23T08:52:15.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 44,
+    "user_id": "auth0|1771239443336955386",
+    "role_id": 3,
+    "assigned_at": "2026-02-17T05:14:56.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 45,
+    "user_id": "auth0|1771390577810491611",
+    "role_id": 3,
+    "assigned_at": "2026-02-18T02:56:17.000Z",
+    "assigned_by": null
+  },
+  {
+    "user_role_id": 47,
+    "user_id": "auth0|1771921822299640946",
+    "role_id": 3,
+    "assigned_at": "2026-02-24T06:30:41.000Z",
+    "assigned_by": null
+  }
+]

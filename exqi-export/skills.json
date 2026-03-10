@@ -1,0 +1,63 @@
+[
+  {
+    "skill_id": 1,
+    "skill": "Computer Skills",
+    "description": "Stong computer skills is required in applicable software packages to create marketing material ",
+    "indicators": [
+      "Advanced Microsoft Skills Suite (Excel, Powerpoint, Outlook, INternet and Word) and",
+      "Working knowledge and Skills in Coral Draw, Photo Shop and rakted software products"
+    ],
+    "status": "Active"
+  },
+  {
+    "skill_id": 2,
+    "skill": "Administration Skills",
+    "description": "Performs and facilitates execution of administrative activities and procedures for the effective execution of own role",
+    "indicators": [
+      "Prepares and/or updates reports, correspondence and other documents timeously",
+      "Manages correspondence effectively",
+      "Communicates appropriate information to appropriate parties timeously",
+      "Effectively manages scheduling in accordance to priorities"
+    ],
+    "status": "Active"
+  },
+  {
+    "skill_id": 3,
+    "skill": "Written and Verbal Communication Skills",
+    "description": "Exellent ability to communicate effectively withmanager other team members as well as external customers and suppliers and marketing company.",
+    "indicators": [
+      "Draws from network for advice to achieve goals",
+      "Demonstrates excellent written and verbal communciation skills to ensure clear reporting.",
+      "Presents and communicates new information and ideas clearly in order to obtain buy-in and commitment from all stakeholders.",
+      "Listens well and ensures understanding.",
+      "Provides effective and relevant feedback to appropriate stakeholders"
+    ],
+    "status": "Active"
+  },
+  {
+    "skill_id": 4,
+    "skill": "Networking, Influencing and Communication Skills ",
+    "description": "Ability to create trust and build a network of relationships with other team members as well as external customers and suppliers and marketing company.",
+    "indicators": [
+      "Proven ability to influence and create a network of contacts throughout the business and outside",
+      "Draws from network for advice, to achieve goals and to benchmark practices",
+      "Demonstrates excellent written and verbal communciation skills to penetrate two levels of management horizontally and vertically",
+      "Presents and communicates new information and ideas clearly in order to obtain buy-in and commitment from all stakeholders",
+      "Listens well and ensures understanding",
+      "Conducts effective team meetings",
+      "Provides effective and relevant feedback to appropriate stakeholders"
+    ],
+    "status": "Active"
+  },
+  {
+    "skill_id": 5,
+    "skill": "Financial Skills ",
+    "description": "Understands and utilises tools required for financial planning, budgeting, decision making and measuring financial performance. ",
+    "indicators": [
+      "Accurately interprets financial data to identify key business issues and opportunities",
+      "Accurately discerns the impact thereof within own business unit.",
+      "Demonstrates apporpriate financial ethics in reporting of financial transactions."
+    ],
+    "status": "Active"
+  }
+]
