@@ -237,6 +237,13 @@ export class JobProfilesController {
     return this.jobProfilesService.getDivisions(req.user);
   }
 
+  @Get('dropdown-options')
+  @ApiOperation({ summary: 'Get lightweight job profile list for dropdowns (id + title only)' })
+  @ApiResponse({ status: 200, description: 'List of job profile options' })
+  getDropdownOptions(@Request() req) {
+    return this.jobProfilesService.getDropdownOptions(req.user);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get job profile by ID' })
   @ApiResponse({ status: 200, description: 'Return job profile' })

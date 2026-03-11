@@ -157,6 +157,24 @@ export class JobProfilesService {
     return results.map((r) => r.division).sort();
   }
 
+  // Get lightweight job profile options for dropdowns (Reports To, etc.)
+  async getDropdownOptions(user: any): Promise<{ value: number; label: string }[]> {
+    const query = this.jobProfileRepository
+      .createQueryBuilder('jp')
+      .select(['jp.job_profile_id', 'jp.job_title'])
+      .where('jp.status != :deleted', { deleted: 'Deleted' });
+
+    if (user.role !== UserRole.ADMIN) {
+      query.andWhere('jp.client_id = :clientId', { clientId: user.clientId });
+    }
+
+    const profiles = await query.orderBy('jp.job_title', 'ASC').getMany();
+    return profiles.map((p) => ({
+      value: p.job_profile_id,
+      label: p.job_title,
+    }));
+  }
+
   // Get single job profile
   async findOne(id: number, user: any) {
     const jobProfile = await this.jobProfileRepository.findOne({
