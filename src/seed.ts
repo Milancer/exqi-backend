@@ -57,7 +57,34 @@ async function seed() {
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 2. Create Admin Users
+  // 2. Create SITA Client
+  // ═══════════════════════════════════════════════════════════════
+  let sitaClient = await clientRepo.findOne({ where: { name: 'SITA' } });
+
+  if (!sitaClient) {
+    sitaClient = clientRepo.create({
+      name: 'SITA',
+      industry: 'Government',
+      division: 'Procurement',
+      contactName: 'Lerato',
+      contactSurname: 'Sita',
+      position: 'CEO',
+      contactPhoneNumber: '27987722',
+      contactEmail: 'ceo@sita.gov.za',
+      hrContactName: 'Henry',
+      hrContactSurname: 'Rollins',
+      hrContactPhoneNumber: '921112131',
+      hrContactEmail: 'hr@sita.gov.za',
+      modules: [ClientModule.JOB_PROFILE],
+    });
+    sitaClient = await clientRepo.save(sitaClient);
+    console.log('Client created: SITA (id:', sitaClient.id, ')');
+  } else {
+    console.log('Client already exists: SITA (id:', sitaClient.id, ')');
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 3. Create Admin Users
   // ═══════════════════════════════════════════════════════════════
   const usersToCreate: UserSeedData[] = [
     {
