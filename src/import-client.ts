@@ -267,20 +267,25 @@ async function importClient(clientName: string) {
     });
     console.log(`   ${jpMap.size} job profiles\n`);
 
-    // 9. Deliverables
+    // 9. Deliverables (check existing to avoid duplicates)
     console.log('9. Deliverables...');
+    const existDeliverables = await ds.query(`SELECT job_profile_id, deliverable FROM job_profile_deliverables`);
+    const existDelKeys = new Set(existDeliverables.map((d: any) => `${d.job_profile_id}-${d.deliverable?.substring(0, 100)}`));
     const delRecs = jpDeliverables
       .filter(d => jpIds.has(d.job_profile_id) && jpMap.has(d.job_profile_id))
       .map(d => ({
         job_profile_id: jpMap.get(d.job_profile_id),
         deliverable: ([d.kpa, d.kpis, d.responsibilities].filter(Boolean).join(' | ') || d.deliverable || '').substring(0, 5000),
         sequence: d.weight || d.sequence || 1, status: 'Active',
-      }));
+      }))
+      .filter(d => !existDelKeys.has(`${d.job_profile_id}-${d.deliverable?.substring(0, 100)}`));
     if (delRecs.length > 0) await batchInsert(ds, 'job_profile_deliverables', ['job_profile_id', 'deliverable', 'sequence', 'status'], delRecs);
-    console.log(`   ${delRecs.length} deliverables\n`);
+    console.log(`   ${delRecs.length} deliverables (skipped existing)\n`);
 
-    // 10. JP Competencies
+    // 10. JP Competencies (check existing to avoid duplicates)
     console.log('10. JP Competencies...');
+    const existJpComps = await ds.query(`SELECT job_profile_id, jp_competency_id FROM job_profile_competencies`);
+    const existJpCompKeys = new Set(existJpComps.map((c: any) => `${c.job_profile_id}-${c.jp_competency_id}`));
     const jpcRecs = jpCompetencies
       .filter(jpc => jpIds.has(jpc.job_profile_id) && jpMap.has(jpc.job_profile_id) && compMap.has(jpc.competency_id || jpc.jp_competency_id))
       .map(jpc => ({
@@ -288,9 +293,10 @@ async function importClient(clientName: string) {
         jp_competency_id: compMap.get(jpc.competency_id || jpc.jp_competency_id),
         level: jpc.level || 1, is_critical: jpc.critical === 1 || jpc.is_critical || false,
         is_differentiating: jpc.core === 1 || jpc.is_differentiating || false,
-      }));
+      }))
+      .filter(jpc => !existJpCompKeys.has(`${jpc.job_profile_id}-${jpc.jp_competency_id}`));
     if (jpcRecs.length > 0) await batchInsert(ds, 'job_profile_competencies', ['job_profile_id', 'jp_competency_id', 'level', 'is_critical', 'is_differentiating'], jpcRecs);
-    console.log(`   ${jpcRecs.length} jp competencies\n`);
+    console.log(`   ${jpcRecs.length} jp competencies (skipped existing)\n`);
 
     // 11. JP Skills (check existing to avoid duplicates)
     console.log('11. JP Skills...');
