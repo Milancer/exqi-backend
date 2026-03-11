@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -52,7 +52,7 @@ export class UsersService {
 
   findOneByEmail(email: string) {
     return this.usersRepository.findOne({
-      where: { email },
+      where: { email: ILike(email) },
       relations: ['client'],
     });
   }
