@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npx nest build --help:*)",
       "Bash(npm run build:*)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(npm run import:sita:*)"
     ]
   }
 }

@@ -23,6 +23,10 @@ export class JobProfileSkill {
   @Column({ nullable: true })
   skill_id: number;
 
+  @ApiProperty({ example: 'JavaScript', description: 'Skill name (direct entry)' })
+  @Column({ nullable: true })
+  skill_name: string;
+
   @ApiProperty({ example: 3, description: 'Required proficiency level (1-5)' })
   @Column()
   level: number;

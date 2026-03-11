@@ -167,6 +167,7 @@ export class JobProfilesService {
         'competencies.jpCompetency.competencyType',
         'competencies.jpCompetency.competencyCluster',
         'skills',
+        'skills.skill',
         'deliverables',
         'requirements',
         'reviewer',
