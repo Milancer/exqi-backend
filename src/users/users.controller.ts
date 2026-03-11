@@ -22,19 +22,30 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { UserRole } from './entities/user.entity';
+import { EmailService } from '../email/email.service';
 
 @ApiTags('users')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly emailService: EmailService,
+  ) {}
 
   @Post()
   @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
   @ApiOperation({ summary: 'Create a new user' })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    const { user, resetToken } = await this.usersService.create(createUserDto);
+
+    // Send welcome email if user needs to set password
+    if (resetToken) {
+      await this.emailService.sendWelcomeEmail(user.email, user.name, resetToken);
+    }
+
+    return user;
   }
 
   @Get('me')

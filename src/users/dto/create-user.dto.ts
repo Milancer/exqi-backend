@@ -35,10 +35,10 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Optional - if not provided, user will receive email to set password' })
   @IsString()
-  @IsNotEmpty()
-  password: string;
+  @IsOptional()
+  password?: string;
 
   @ApiProperty({ enum: UserRole })
   @IsEnum(UserRole)

@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import * as crypto from 'crypto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserRole } from './entities/user.entity';
@@ -13,15 +14,32 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<{ user: User; resetToken?: string }> {
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(createUserDto.password, salt);
+
+    // If no password provided, generate a random one and create reset token
+    const needsPasswordSetup = !createUserDto.password;
+    const password = createUserDto.password || crypto.randomBytes(16).toString('hex');
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    let resetToken: string | undefined;
+    let resetTokenExpiry: Date | undefined;
+
+    if (needsPasswordSetup) {
+      resetToken = crypto.randomBytes(32).toString('hex');
+      resetTokenExpiry = new Date();
+      resetTokenExpiry.setHours(resetTokenExpiry.getHours() + 24); // 24 hours
+    }
 
     const user = this.usersRepository.create({
       ...createUserDto,
       password: hashedPassword,
+      resetToken,
+      resetTokenExpiry,
     });
-    return this.usersRepository.save(user);
+
+    const savedUser = await this.usersRepository.save(user);
+    return { user: savedUser, resetToken };
   }
 
   async findAll(currentUser: any) {
