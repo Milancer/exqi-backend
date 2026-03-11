@@ -12,6 +12,7 @@ import { JpCompetencyCluster } from './entities/jp-competency-cluster.entity';
 import { JpCompetency } from './entities/jp-competency.entity';
 import { User } from '../users/entities/user.entity';
 import { NotificationsModule } from '../notifications/notifications.module';
+import { EmailModule } from '../email/email.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { NotificationsModule } from '../notifications/notifications.module';
       User,
     ]),
     NotificationsModule,
+    EmailModule,
   ],
   controllers: [JobProfilesController],
   providers: [JobProfilesService],

@@ -75,6 +75,61 @@ export class EmailService {
     );
   }
 
+  async sendReviewerAssignmentEmail(
+    email: string,
+    reviewerName: string,
+    jobTitle: string,
+    jobProfileId: number,
+  ): Promise<boolean> {
+    const reviewUrl = `${this.frontendUrl}/job-profiles/${jobProfileId}`;
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: #1a365d; color: white; padding: 20px; text-align: center; }
+          .content { padding: 30px; background: #f9f9f9; }
+          .button { display: inline-block; background: #3182ce; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+          .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+          .highlight { background: #e2e8f0; padding: 15px; border-radius: 5px; margin: 15px 0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>Job Profile Review Required</h1>
+          </div>
+          <div class="content">
+            <p>Hi ${reviewerName},</p>
+            <p>You have been assigned to review a job profile that is awaiting your approval.</p>
+            <div class="highlight">
+              <strong>Job Profile:</strong> ${jobTitle}
+            </div>
+            <p>Please review the job profile and either approve or reject it.</p>
+            <p style="text-align: center;">
+              <a href="${reviewUrl}" class="button">Review Job Profile</a>
+            </p>
+            <p>Or copy and paste this link into your browser:</p>
+            <p style="word-break: break-all; color: #3182ce;">${reviewUrl}</p>
+          </div>
+          <div class="footer">
+            <p>&copy; ${new Date().getFullYear()} EXQi - Experttech. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    return this.sendEmail(
+      email,
+      `EXQi - Job Profile Review Required: ${jobTitle}`,
+      html,
+    );
+  }
+
   async sendPasswordResetEmail(
     email: string,
     name: string,

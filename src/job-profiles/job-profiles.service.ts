@@ -17,6 +17,7 @@ import { JpCompetency } from './entities/jp-competency.entity';
 import { User, UserRole, UserStatus } from '../users/entities/user.entity';
 import { NotificationsService } from '../notifications/notifications.service';
 import { NotificationType } from '../notifications/entities/notification.entity';
+import { EmailService } from '../email/email.service';
 import { CreateJobProfileDto } from './dto/create-job-profile.dto';
 import { UpdateJobProfileDto } from './dto/update-job-profile.dto';
 import { AddCompetencyDto } from './dto/add-competency.dto';
@@ -52,6 +53,7 @@ export class JobProfilesService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly notificationsService: NotificationsService,
+    private readonly emailService: EmailService,
   ) {}
 
   // ─── Job Profile CRUD ───────────────────────────────────────────
@@ -289,6 +291,14 @@ export class JobProfilesService {
       reference_id: jobProfileId,
       client_id: jp.client_id,
     });
+
+    // Send email notification to the reviewer
+    await this.emailService.sendReviewerAssignmentEmail(
+      reviewer.email,
+      reviewer.name,
+      jp.job_title,
+      jobProfileId,
+    );
 
     return this.findOne(jobProfileId, user);
   }
