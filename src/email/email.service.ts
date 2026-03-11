@@ -1,11 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as SparkPost from 'sparkpost';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const SparkPost = require('sparkpost');
 
 @Injectable()
 export class EmailService {
   private readonly logger = new Logger(EmailService.name);
-  private client: SparkPost;
+  private client: any;
   private fromEmail: string;
   private frontendUrl: string;
 
