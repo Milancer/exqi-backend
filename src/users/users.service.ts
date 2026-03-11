@@ -101,4 +101,34 @@ export class UsersService {
   remove(id: number) {
     return this.usersRepository.delete(id);
   }
+
+  // Update reset token and expiry
+  async updateResetToken(userId: number, token: string, expiry: Date) {
+    return this.usersRepository.update(userId, {
+      resetToken: token,
+      resetTokenExpiry: expiry,
+    });
+  }
+
+  // Find user by reset token
+  async findByResetToken(token: string) {
+    return this.usersRepository.findOne({
+      where: { resetToken: token },
+    });
+  }
+
+  // Update password
+  async updatePassword(userId: number, hashedPassword: string) {
+    return this.usersRepository.update(userId, {
+      password: hashedPassword,
+    });
+  }
+
+  // Clear reset token after use
+  async clearResetToken(userId: number) {
+    return this.usersRepository.update(userId, {
+      resetToken: null as any,
+      resetTokenExpiry: null as any,
+    });
+  }
 }

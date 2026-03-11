@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx nest build --help:*)"
+      "Bash(npx nest build --help:*)",
+      "Bash(npm run build:*)",
+      "Bash(pnpm add:*)"
     ]
   }
 }

@@ -54,7 +54,7 @@ export class CompetenciesService {
     // Admins can see all competencies
     if (currentUser.role === UserRole.ADMIN) {
       return this.repository.find({
-        relations: ['competencyType', 'competencyCluster'],
+        relations: ['competencyType'],
         where: { status: 'Active' },
       });
     }
@@ -62,7 +62,7 @@ export class CompetenciesService {
     // Regular users can only see global competencies (Client 1)
     // Note: Competencies are global resources, not multi-tenant
     return this.repository.find({
-      relations: ['competencyType', 'competencyCluster'],
+      relations: ['competencyType'],
       where: { status: 'Active' },
     });
   }
@@ -73,7 +73,7 @@ export class CompetenciesService {
   async findOne(id: number, currentUser: any) {
     const competency = await this.repository.findOne({
       where: { competency_id: id },
-      relations: ['competencyType', 'competencyCluster'],
+      relations: ['competencyType'],
     });
 
     if (!competency) {
@@ -103,7 +103,7 @@ export class CompetenciesService {
     await this.repository.update(id, updateCompetencyDto);
     return this.repository.findOne({
       where: { competency_id: id },
-      relations: ['competencyType', 'competencyCluster'],
+      relations: ['competencyType'],
     });
   }
 

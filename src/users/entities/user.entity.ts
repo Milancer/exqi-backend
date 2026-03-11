@@ -74,6 +74,14 @@ export class User {
   @JoinColumn({ name: 'clientId' })
   client: Client;
 
+  @ApiPropertyOptional({ description: 'Password reset token' })
+  @Column({ nullable: true })
+  resetToken: string;
+
+  @ApiPropertyOptional({ description: 'Password reset token expiry' })
+  @Column({ type: 'timestamp', nullable: true })
+  resetTokenExpiry: Date;
+
   @ApiProperty()
   @CreateDateColumn()
   created_at: Date;

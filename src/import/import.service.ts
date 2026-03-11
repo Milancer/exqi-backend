@@ -397,7 +397,7 @@ export class ImportService {
     const competencies = filtered.map((jpc) =>
       this.jpCompetencyRepo.create({
         job_profile_id: jpc.job_profile_id,
-        competency_id: jpc.competency_id,
+        jp_competency_id: jpc.jp_competency_id || jpc.competency_id,
         level: jpc.level,
         is_critical: jpc.critical === 1,
         is_differentiating: jpc.core === 1,
