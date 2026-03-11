@@ -292,17 +292,20 @@ async function importClient(clientName: string) {
     if (jpcRecs.length > 0) await batchInsert(ds, 'job_profile_competencies', ['job_profile_id', 'jp_competency_id', 'level', 'is_critical', 'is_differentiating'], jpcRecs);
     console.log(`   ${jpcRecs.length} jp competencies\n`);
 
-    // 11. JP Skills
+    // 11. JP Skills (check existing to avoid duplicates)
     console.log('11. JP Skills...');
+    const existJpSkills = await ds.query(`SELECT job_profile_id, skill_id FROM job_profile_skills`);
+    const existJpSkillKeys = new Set(existJpSkills.map((s: any) => `${s.job_profile_id}-${s.skill_id}`));
     const jpsRecs = jpSkills
       .filter(jps => jpIds.has(jps.job_profile_id) && jpMap.has(jps.job_profile_id))
       .map(jps => ({
         job_profile_id: jpMap.get(jps.job_profile_id),
         skill_id: skillMap.get(jps.skill_id) || null,
         level: jps.level || 1, is_critical: jps.is_critical || false, status: 'Active',
-      }));
+      }))
+      .filter(jps => !existJpSkillKeys.has(`${jps.job_profile_id}-${jps.skill_id}`));
     if (jpsRecs.length > 0) await batchInsert(ds, 'job_profile_skills', ['job_profile_id', 'skill_id', 'level', 'is_critical', 'status'], jpsRecs);
-    console.log(`   ${jpsRecs.length} jp skills\n`);
+    console.log(`   ${jpsRecs.length} jp skills (skipped existing)\n`);
 
     // 12. JP Requirements (one per job profile - check existing)
     console.log('12. JP Requirements...');
