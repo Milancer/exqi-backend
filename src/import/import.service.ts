@@ -45,6 +45,16 @@ export class ImportService {
     private readonly clientRepo: Repository<Client>,
   ) {}
 
+  // Map EXQi status values to Nexus status values
+  private mapStatus(status: string): string {
+    const statusMap = {
+      'In Progress': 'Draft',
+      'Awaiting Approval': 'Awaiting Review',
+      'Approved': 'Approved',
+    };
+    return statusMap[status] || 'Draft';
+  }
+
   async importAllData(targetClientId?: number, clearExisting = false) {
     this.logger.log('🚀 Starting EXQi data import...');
     this.logger.log(`Target client_id: ${targetClientId || 'ALL'}`);
@@ -89,27 +99,27 @@ export class ImportService {
 
     if (targetClientId) {
       // Clear only client-specific data
-      await this.jpRequirementRepo.delete({});
-      await this.jpDeliverableRepo.delete({});
-      await this.jpSkillRepo.delete({});
-      await this.jpCompetencyRepo.delete({});
+      await this.jpRequirementRepo.clear();
+      await this.jpDeliverableRepo.clear();
+      await this.jpSkillRepo.clear();
+      await this.jpCompetencyRepo.clear();
       await this.jobProfileRepo.delete({ client_id: targetClientId });
       this.logger.log(
         `Cleared data for client_id: ${targetClientId}`,
       );
     } else {
       // Clear all data
-      await this.jpRequirementRepo.delete({});
-      await this.jpDeliverableRepo.delete({});
-      await this.jpSkillRepo.delete({});
-      await this.jpCompetencyRepo.delete({});
-      await this.jobProfileRepo.delete({});
-      await this.skillRepo.delete({});
-      await this.competencyRepo.delete({});
-      await this.competencyTypeRepo.delete({});
-      await this.workLevelRepo.delete({});
-      await this.jobGradeRepo.delete({});
-      await this.departmentRepo.delete({});
+      await this.jpRequirementRepo.clear();
+      await this.jpDeliverableRepo.clear();
+      await this.jpSkillRepo.clear();
+      await this.jpCompetencyRepo.clear();
+      await this.jobProfileRepo.clear();
+      await this.skillRepo.clear();
+      await this.competencyRepo.clear();
+      await this.competencyTypeRepo.clear();
+      await this.workLevelRepo.clear();
+      await this.jobGradeRepo.clear();
+      await this.departmentRepo.clear();
       this.logger.log('Cleared all data');
     }
   }
@@ -148,7 +158,6 @@ export class ImportService {
 
   private async importDepartments() {
     const data = require('../../exqi-export/departments.json');
-    await this.departmentRepo.delete({});
 
     const departments = data.map((d) =>
       this.departmentRepo.create({
@@ -165,7 +174,6 @@ export class ImportService {
 
   private async importJobGrades() {
     const data = require('../../exqi-export/job_grades.json');
-    await this.jobGradeRepo.delete({});
 
     const grades = data.map((g) =>
       this.jobGradeRepo.create({
@@ -182,7 +190,6 @@ export class ImportService {
 
   private async importWorkLevels() {
     const data = require('../../exqi-export/work_levels.json');
-    await this.workLevelRepo.delete({});
 
     const levels = data.map((wl) =>
       this.workLevelRepo.create({
@@ -202,7 +209,6 @@ export class ImportService {
 
   private async importCompetencyTypes() {
     const data = require('../../exqi-export/competency_types.json');
-    await this.competencyTypeRepo.delete({});
 
     const types = data.map((ct) =>
       this.competencyTypeRepo.create({
@@ -219,10 +225,19 @@ export class ImportService {
 
   private async importCompetencies() {
     const data = require('../../exqi-export/competencies.json');
-    await this.competencyRepo.delete({});
 
-    const competencies = data.map((c) =>
-      this.competencyRepo.create({
+    // Drop the problematic FK constraint if it exists
+    try {
+      await this.competencyRepo.query(
+        'ALTER TABLE competencies DROP CONSTRAINT IF EXISTS "FK_fdf5bd370a4603c59cb6491c200"'
+      );
+      this.logger.log('Dropped FK constraint on competencies.competency_cluster_id');
+    } catch (error) {
+      this.logger.warn('Could not drop FK constraint:', error.message);
+    }
+
+    const competencies = data.map((c) => {
+      const comp: any = {
         competency_id: c.competency_id,
         competency_type_id: c.competency_type_id,
         competency: c.competency,
@@ -230,8 +245,13 @@ export class ImportService {
         indicators: c.indicators,
         status: c.status || 'Active',
         client_id: 1,
-      }),
-    );
+      };
+      // Only include competency_cluster_id if it has a value
+      if (c.competency_cluster_id) {
+        comp.competency_cluster_id = c.competency_cluster_id;
+      }
+      return this.competencyRepo.create(comp);
+    });
 
     await this.competencyRepo.save(competencies);
     this.logger.log(`✅ Imported ${competencies.length} competencies`);
@@ -239,7 +259,6 @@ export class ImportService {
 
   private async importSkills() {
     const data = require('../../exqi-export/skills.json');
-    await this.skillRepo.delete({});
 
     const skills = data.map((s) =>
       this.skillRepo.create({
@@ -284,11 +303,21 @@ export class ImportService {
         level_of_work: jp.level_of_work,
         job_grade_id: jp.job_grade_id,
         reports_to: jp.reports_to,
-        status: jp.status || 'In Progress',
+        status: this.mapStatus(jp.status),
         created: jp.created ? new Date(jp.created) : undefined,
         updated: jp.updated ? new Date(jp.updated) : undefined,
       }),
     );
+
+    // Drop problematic FK constraints if they exist
+    try {
+      await this.jobProfileRepo.query(
+        'ALTER TABLE job_profiles DROP CONSTRAINT IF EXISTS "FK_06ece0d35ec4ce91a7d69101b5a"'
+      );
+      this.logger.log('Dropped FK constraint on job_profiles');
+    } catch (error) {
+      this.logger.warn('Could not drop FK constraint:', error.message);
+    }
 
     await this.jobProfileRepo.save(profiles);
     this.logger.log(
@@ -298,7 +327,6 @@ export class ImportService {
 
   private async importAllJobProfiles() {
     const data = require('../../exqi-export/job_profiles.json');
-    await this.jobProfileRepo.delete({});
 
     const profiles = data.map((jp) =>
       this.jobProfileRepo.create({
@@ -314,7 +342,7 @@ export class ImportService {
         level_of_work: jp.level_of_work,
         job_grade_id: jp.job_grade_id,
         reports_to: jp.reports_to,
-        status: jp.status || 'In Progress',
+        status: this.mapStatus(jp.status),
         created: jp.created ? new Date(jp.created) : undefined,
         updated: jp.updated ? new Date(jp.updated) : undefined,
       }),
@@ -366,8 +394,6 @@ export class ImportService {
 
     if (filtered.length === 0) return;
 
-    await this.jpCompetencyRepo.delete({});
-
     const competencies = filtered.map((jpc) =>
       this.jpCompetencyRepo.create({
         job_profile_id: jpc.job_profile_id,
@@ -377,6 +403,16 @@ export class ImportService {
         is_differentiating: jpc.core === 1,
       }),
     );
+
+    // Drop problematic FK constraints if they exist
+    try {
+      await this.jpCompetencyRepo.query(
+        'ALTER TABLE job_profile_competencies DROP CONSTRAINT IF EXISTS "FK_0ce1111da7e6d9d8dbfa2fb7647"'
+      );
+      this.logger.log('Dropped FK constraint on job_profile_competencies');
+    } catch (error) {
+      this.logger.warn('Could not drop FK constraint:', error.message);
+    }
 
     // Save in batches to avoid memory issues
     const batchSize = 500;
@@ -397,8 +433,6 @@ export class ImportService {
     );
 
     if (filtered.length === 0) return;
-
-    await this.jpSkillRepo.delete({});
 
     const skills = filtered.map((jps) =>
       this.jpSkillRepo.create({
@@ -421,8 +455,6 @@ export class ImportService {
     );
 
     if (filtered.length === 0) return;
-
-    await this.jpDeliverableRepo.delete({});
 
     const deliverables = filtered.map((jpd) =>
       this.jpDeliverableRepo.create({
@@ -456,8 +488,6 @@ export class ImportService {
     );
 
     if (filtered.length === 0) return;
-
-    await this.jpRequirementRepo.delete({});
 
     const requirements = filtered.map((jpr) =>
       this.jpRequirementRepo.create({

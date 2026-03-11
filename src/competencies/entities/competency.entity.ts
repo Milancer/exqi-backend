@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { CompetencyType } from './competency-type.entity';
-import { CompetencyCluster } from './competency-cluster.entity';
+// import { CompetencyCluster } from './competency-cluster.entity';
 
 @Entity('competencies')
 export class Competency {
@@ -18,7 +18,7 @@ export class Competency {
   @Column()
   competency_type_id: number;
 
-  @Column()
+  @Column({ nullable: true })
   competency_cluster_id: number;
 
   @Column({ type: 'varchar', length: 255 })
@@ -50,7 +50,7 @@ export class Competency {
   @JoinColumn({ name: 'competency_type_id' })
   competencyType: CompetencyType;
 
-  @ManyToOne(() => CompetencyCluster)
-  @JoinColumn({ name: 'competency_cluster_id' })
-  competencyCluster: CompetencyCluster;
+  // @ManyToOne(() => CompetencyCluster, { nullable: true })
+  // @JoinColumn({ name: 'competency_cluster_id' })
+  // competencyCluster: CompetencyCluster;
 }

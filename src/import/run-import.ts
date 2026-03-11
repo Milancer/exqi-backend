@@ -21,6 +21,12 @@ async function bootstrap() {
   }
 
   console.log('\n🚀 EXQi Data Import Tool\n');
+  console.log(`📊 Database Connection:`);
+  console.log(`   Host: ${process.env.DB_HOST}`);
+  console.log(`   Port: ${process.env.DB_PORT}`);
+  console.log(`   Database: ${process.env.DB_NAME}`);
+  console.log(`   User: ${process.env.DB_USER}`);
+  console.log(`   NODE_ENV: ${process.env.NODE_ENV}\n`);
   console.log(`Client ID: ${clientId || 'ALL'}`);
   console.log(`Clear existing: ${clearExisting ? 'Yes' : 'No'}\n`);
 

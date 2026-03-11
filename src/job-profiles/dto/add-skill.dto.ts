@@ -9,9 +9,9 @@ import {
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class AddSkillDto {
-  @ApiProperty({ example: 'JavaScript' })
-  @IsString()
-  skill_name: string;
+  @ApiProperty({ example: 1, description: 'ID of the skill' })
+  @IsNumber()
+  skill_id: number;
 
   @ApiProperty({ example: 3, description: 'Required proficiency level (1-5)' })
   @IsNumber()

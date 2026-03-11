@@ -1,0 +1,83 @@
+
+> nexus-backend@0.0.1 import
+> ts-node -r tsconfig-paths/register src/import/run-import.ts --client 2 --clear
+
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:53 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:53 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +20ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:53 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:53 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:53 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:53 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:53 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:53 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +31ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +1770ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mImportModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mClientsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCompetenciesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCbiModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mNotificationsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCandidatesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBulkImportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDepartmentsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJobGradesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mWorkLevelsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSkillsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJobProfilesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInterviewsModule dependencies initialized[39m[38;5;3m +0ms[39m
+
+🚀 EXQi Data Import Tool
+
+📊 Database Connection:
+   Host: hopper.proxy.rlwy.net
+   Port: 59578
+   Database: railway
+   User: postgres
+   NODE_ENV: production
+
+Client ID: 2
+Clear existing: Yes
+
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m🚀 Starting EXQi data import...[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[ImportService] [39m[32mTarget client_id: 2[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:55 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m🗑️  Clearing existing data...[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:56 [32m    LOG[39m [38;5;3m[ImportService] [39m[32mCleared data for client_id: 2[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:56 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m📦 Importing global reference data...[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:56 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m✅ Imported 3 clients[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:57 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m✅ Imported 176 departments[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:58 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m✅ Imported 32 job grades[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:58 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m✅ Imported 5 work levels[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:25:59 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m✅ Imported 7 competency types[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:26:00 [32m    LOG[39m [38;5;3m[ImportService] [39m[32mDropped FK constraint on competencies.competency_cluster_id[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:26:01 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m✅ Imported 73 competencies[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:26:01 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m✅ Imported 5 skills[39m
+[32m[Nest] 24864  - [39m2026/03/10, 23:26:01 [32m    LOG[39m [38;5;3m[ImportService] [39m[32m📦 Importing data for client_id: 2...[39m
+[31m[Nest] 24864  - [39m2026/03/10, 23:26:04 [31m  ERROR[39m [38;5;3m[ImportService] [39m[31m❌ Import failed:[39m
+insert or update on table "job_profiles" violates foreign key constraint "FK_06ece0d35ec4ce91a7d69101b5a"
+
+❌ Import failed: insert or update on table "job_profiles" violates foreign key constraint "FK_06ece0d35ec4ce91a7d69101b5a"
+QueryFailedError: insert or update on table "job_profiles" violates foreign key constraint "FK_06ece0d35ec4ce91a7d69101b5a"
+    at PostgresQueryRunner.query (C:\workspace\Nexus\nexus-backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InsertQueryBuilder.execute (C:\workspace\Nexus\nexus-backend\node_modules\src\query-builder\InsertQueryBuilder.ts:164:33)
+    at async SubjectExecutor.executeInsertOperations (C:\workspace\Nexus\nexus-backend\node_modules\src\persistence\SubjectExecutor.ts:435:42)
+    at async SubjectExecutor.execute (C:\workspace\Nexus\nexus-backend\node_modules\src\persistence\SubjectExecutor.ts:137:9)
+    at async EntityPersistExecutor.execute (C:\workspace\Nexus\nexus-backend\node_modules\src\persistence\EntityPersistExecutor.ts:182:21)
+    at async ImportService.importJobProfilesForClient (C:\workspace\Nexus\nexus-backend\src\import\import.service.ts:312:5)
+    at async ImportService.importAllData (C:\workspace\Nexus\nexus-backend\src\import\import.service.ts:82:9)
+    at async bootstrap (C:\workspace\Nexus\nexus-backend\src\import\run-import.ts:34:5)
