@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Request,
+  Query,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -210,10 +211,30 @@ export class JobProfilesController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all job profiles' })
-  @ApiResponse({ status: 200, description: 'Return all job profiles' })
-  findAll(@Request() req) {
-    return this.jobProfilesService.findAll(req.user);
+  @ApiOperation({ summary: 'Get all job profiles with pagination and search' })
+  @ApiResponse({ status: 200, description: 'Return paginated job profiles' })
+  findAll(
+    @Request() req,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+    @Query('search') search?: string,
+    @Query('status') status?: string,
+    @Query('division') division?: string,
+  ) {
+    return this.jobProfilesService.findAll(req.user, {
+      page: page ? parseInt(page, 10) : 1,
+      limit: limit ? parseInt(limit, 10) : 20,
+      search,
+      status,
+      division,
+    });
+  }
+
+  @Get('divisions')
+  @ApiOperation({ summary: 'Get all distinct divisions for filter dropdown' })
+  @ApiResponse({ status: 200, description: 'List of divisions' })
+  getDivisions(@Request() req) {
+    return this.jobProfilesService.getDivisions(req.user);
   }
 
   @Get(':id')

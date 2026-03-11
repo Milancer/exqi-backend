@@ -5,7 +5,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In } from 'typeorm';
+import { Repository, In, ILike } from 'typeorm';
 import { JobProfile } from './entities/job-profile.entity';
 import { JobProfileCompetency } from './entities/job-profile-competency.entity';
 import { JobProfileSkill } from './entities/job-profile-skill.entity';
@@ -77,27 +77,82 @@ export class JobProfilesService {
     return this.jobProfileRepository.save(jobProfile);
   }
 
-  // Get all job profiles with multi-tenancy
-  async findAll(user: any) {
+  // Get all job profiles with multi-tenancy, pagination and search
+  async findAll(
+    user: any,
+    options?: {
+      page?: number;
+      limit?: number;
+      search?: string;
+      status?: string;
+      division?: string;
+    },
+  ) {
+    const page = options?.page || 1;
+    const limit = options?.limit || 20;
+    const skip = (page - 1) * limit;
+
     const whereClause: any = {};
 
     if (user.role !== UserRole.ADMIN) {
       whereClause.client_id = user.clientId;
     }
 
-    whereClause.status = In([
-      'Draft',
-      'Awaiting Review',
-      'Approved',
-      'Rejected',
-      'Active',
-      'Archived',
-    ]);
+    // Filter by status (single status or default list)
+    if (options?.status) {
+      whereClause.status = options.status;
+    } else {
+      whereClause.status = In([
+        'Draft',
+        'Awaiting Review',
+        'Approved',
+        'Rejected',
+        'Active',
+        'Archived',
+      ]);
+    }
 
-    return this.jobProfileRepository.find({
+    // Filter by division
+    if (options?.division) {
+      whereClause.division = options.division;
+    }
+
+    // Filter by search (job_title)
+    if (options?.search) {
+      whereClause.job_title = ILike(`%${options.search}%`);
+    }
+
+    const [data, total] = await this.jobProfileRepository.findAndCount({
       where: whereClause,
       relations: ['competencies', 'competencies.jpCompetency'],
+      skip,
+      take: limit,
+      order: { job_profile_id: 'DESC' },
     });
+
+    return {
+      data,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
+  }
+
+  // Get all distinct divisions for the current client (for filter dropdown)
+  async getDivisions(user: any): Promise<string[]> {
+    const query = this.jobProfileRepository
+      .createQueryBuilder('jp')
+      .select('DISTINCT jp.division', 'division')
+      .where('jp.division IS NOT NULL')
+      .andWhere('jp.division != :empty', { empty: '' });
+
+    if (user.role !== UserRole.ADMIN) {
+      query.andWhere('jp.client_id = :clientId', { clientId: user.clientId });
+    }
+
+    const results = await query.getRawMany();
+    return results.map((r) => r.division).sort();
   }
 
   // Get single job profile

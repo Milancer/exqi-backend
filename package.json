@@ -20,8 +20,9 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "seed": "ts-node -r tsconfig-paths/register src/seed.ts",
     "seed:prod": "node dist/seed.js",
-    "import": "ts-node -r tsconfig-paths/register src/import/run-import.ts",
-    "import:cita": "ts-node -r tsconfig-paths/register src/import/import-cita.ts"
+    "import:client": "ts-node -r tsconfig-paths/register src/import-client.ts",
+    "import:sita": "ts-node -r tsconfig-paths/register src/import-client.ts sita",
+    "import:experttech": "ts-node -r tsconfig-paths/register src/import-client.ts experttech"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
