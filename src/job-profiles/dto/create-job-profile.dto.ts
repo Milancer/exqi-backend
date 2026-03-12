@@ -46,24 +46,10 @@ export class CreateJobProfileDto {
   reports_to?: number;
 
   @ApiPropertyOptional({
-    enum: [
-      'Draft',
-      'Awaiting Review',
-      'Approved',
-      'Rejected',
-      'Active',
-      'Archived',
-    ],
-    default: 'Draft',
+    enum: ['In Progress', 'Awaiting Approval', 'Approved'],
+    default: 'In Progress',
   })
   @IsOptional()
-  @IsEnum([
-    'Draft',
-    'Awaiting Review',
-    'Approved',
-    'Rejected',
-    'Active',
-    'Archived',
-  ])
+  @IsEnum(['In Progress', 'Awaiting Approval', 'Approved'])
   status?: string;
 }

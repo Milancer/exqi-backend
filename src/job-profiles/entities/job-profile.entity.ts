@@ -14,18 +14,16 @@ import { JobProfileCompetency } from './job-profile-competency.entity';
 import { JobProfileSkill } from './job-profile-skill.entity';
 import { JobProfileDeliverable } from './job-profile-deliverable.entity';
 import { JobProfileRequirement } from './job-profile-requirement.entity';
+import { JobProfileApprover } from './job-profile-approver.entity';
 import { User } from '../../users/entities/user.entity';
 import { Department } from '../../departments/entities/department.entity';
 import { JobGrade } from '../../job-grades/entities/job-grade.entity';
 import { WorkLevel } from '../../work-levels/entities/work-level.entity';
 
 export const JP_STATUSES = [
-  'Draft',
-  'Awaiting Review',
+  'In Progress',
+  'Awaiting Approval',
   'Approved',
-  'Rejected',
-  'Active',
-  'Archived',
   'Deleted',
 ] as const;
 
@@ -86,7 +84,7 @@ export class JobProfile {
   @Column({
     type: 'enum',
     enum: JP_STATUSES,
-    default: 'Draft',
+    default: 'In Progress',
   })
   status: string;
 
@@ -135,4 +133,7 @@ export class JobProfile {
 
   @OneToOne(() => JobProfileRequirement, (jpr) => jpr.jobProfile)
   requirements: JobProfileRequirement;
+
+  @OneToMany(() => JobProfileApprover, (jpa) => jpa.jobProfile)
+  approvers: JobProfileApprover[];
 }

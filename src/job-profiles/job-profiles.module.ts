@@ -7,6 +7,7 @@ import { JobProfileCompetency } from './entities/job-profile-competency.entity';
 import { JobProfileSkill } from './entities/job-profile-skill.entity';
 import { JobProfileDeliverable } from './entities/job-profile-deliverable.entity';
 import { JobProfileRequirement } from './entities/job-profile-requirement.entity';
+import { JobProfileApprover } from './entities/job-profile-approver.entity';
 import { JpCompetencyType } from './entities/jp-competency-type.entity';
 import { JpCompetencyCluster } from './entities/jp-competency-cluster.entity';
 import { JpCompetency } from './entities/jp-competency.entity';
@@ -22,6 +23,7 @@ import { EmailModule } from '../email/email.module';
       JobProfileSkill,
       JobProfileDeliverable,
       JobProfileRequirement,
+      JobProfileApprover,
       JpCompetencyType,
       JpCompetencyCluster,
       JpCompetency,

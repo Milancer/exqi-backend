@@ -30,6 +30,7 @@ import { UpdateJpCompetencyClusterDto } from './dto/jp-competency-cluster/update
 import { CreateJpCompetencyDto } from './dto/jp-competency/create-jp-competency.dto';
 import { UpdateJpCompetencyDto } from './dto/jp-competency/update-jp-competency.dto';
 import { AssignReviewerDto } from './dto/assign-reviewer.dto';
+import { AssignApproversDto } from './dto/assign-approvers.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
@@ -404,5 +405,43 @@ export class JobProfilesController {
     @Request() req,
   ) {
     return this.jobProfilesService.reviewJobProfile(+id, body.action, req.user);
+  }
+
+  // ─── Multi-Approver endpoints ─────────────────────────────────
+
+  @Post(':id/assign-approvers')
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
+  @ApiOperation({
+    summary: 'Assign multiple approvers to a job profile',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Approvers assigned, notifications sent',
+  })
+  assignApprovers(
+    @Param('id') id: string,
+    @Body() dto: AssignApproversDto,
+    @Request() req,
+  ) {
+    return this.jobProfilesService.assignApprovers(
+      +id,
+      dto.approver_ids,
+      req.user,
+    );
+  }
+
+  @Post(':id/approver-action')
+  @Roles(UserRole.OFFICE_MANAGER)
+  @ApiOperation({
+    summary:
+      'Individual approver approves or rejects a job profile',
+  })
+  @ApiResponse({ status: 200, description: 'Approver action processed' })
+  approverAction(
+    @Param('id') id: string,
+    @Body() body: { action: 'approve' | 'reject' },
+    @Request() req,
+  ) {
+    return this.jobProfilesService.approverAction(+id, body.action, req.user);
   }
 }
