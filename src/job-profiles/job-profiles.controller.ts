@@ -280,7 +280,7 @@ export class JobProfilesController {
   }
 
   @Post(':id/competencies')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
   @ApiOperation({ summary: 'Add competency to job profile' })
   @ApiResponse({ status: 201, description: 'Competency added successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -293,7 +293,7 @@ export class JobProfilesController {
   }
 
   @Delete(':id/competencies/:competencyId')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
   @ApiOperation({ summary: 'Remove competency from job profile' })
   @ApiResponse({ status: 200, description: 'Competency removed successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -310,7 +310,7 @@ export class JobProfilesController {
   }
 
   @Post(':id/skills')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
   @ApiOperation({ summary: 'Add skill to job profile' })
   @ApiResponse({ status: 201, description: 'Skill added successfully' })
   addSkill(@Param('id') id: string, @Body() dto: AddSkillDto, @Request() req) {
@@ -318,7 +318,7 @@ export class JobProfilesController {
   }
 
   @Delete(':id/skills/:skillId')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
   @ApiOperation({ summary: 'Remove skill from job profile' })
   @ApiResponse({ status: 200, description: 'Skill removed successfully' })
   removeSkill(
@@ -330,7 +330,7 @@ export class JobProfilesController {
   }
 
   @Post(':id/deliverables')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
   @ApiOperation({ summary: 'Add deliverable to job profile' })
   @ApiResponse({ status: 201, description: 'Deliverable added successfully' })
   addDeliverable(
@@ -342,7 +342,7 @@ export class JobProfilesController {
   }
 
   @Delete(':id/deliverables/:deliverableId')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
   @ApiOperation({ summary: 'Remove deliverable from job profile' })
   @ApiResponse({ status: 200, description: 'Deliverable removed successfully' })
   removeDeliverable(
@@ -358,7 +358,7 @@ export class JobProfilesController {
   }
 
   @Patch(':id/requirements')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_USER)
   @ApiOperation({ summary: 'Update job profile requirements' })
   @ApiResponse({
     status: 200,

@@ -124,9 +124,14 @@ export class JobProfilesService {
       whereClause.job_title = ILike(`%${options.search}%`);
     }
 
+    const relations = ['competencies', 'competencies.jpCompetency', 'department'];
+    if (user.role === UserRole.ADMIN) {
+      relations.push('client');
+    }
+
     const [data, total] = await this.jobProfileRepository.findAndCount({
       where: whereClause,
-      relations: ['competencies', 'competencies.jpCompetency'],
+      relations,
       skip,
       take: limit,
       order: { job_profile_id: 'DESC' },

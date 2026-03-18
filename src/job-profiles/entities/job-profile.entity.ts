@@ -16,6 +16,7 @@ import { JobProfileDeliverable } from './job-profile-deliverable.entity';
 import { JobProfileRequirement } from './job-profile-requirement.entity';
 import { JobProfileApprover } from './job-profile-approver.entity';
 import { User } from '../../users/entities/user.entity';
+import { Client } from '../../clients/entities/client.entity';
 import { Department } from '../../departments/entities/department.entity';
 import { JobGrade } from '../../job-grades/entities/job-grade.entity';
 import { WorkLevel } from '../../work-levels/entities/work-level.entity';
@@ -93,6 +94,10 @@ export class JobProfile {
   })
   @Column({ nullable: true })
   reviewer_id: number;
+
+  @ManyToOne(() => Client, { nullable: true, eager: false })
+  @JoinColumn({ name: 'client_id' })
+  client: Client;
 
   @ManyToOne(() => User, { nullable: true, eager: false })
   @JoinColumn({ name: 'reviewer_id' })
