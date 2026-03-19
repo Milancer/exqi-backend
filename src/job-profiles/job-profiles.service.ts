@@ -612,6 +612,34 @@ export class JobProfilesService {
     return { message: 'Competency removed from job profile successfully' };
   }
 
+  // Update competency link on a job profile
+  async updateCompetency(
+    jobProfileId: number,
+    competencyId: number,
+    data: { level?: number; is_critical?: boolean; is_differentiating?: boolean },
+    user: any,
+  ) {
+    await this.findOne(jobProfileId, user);
+
+    const competency = await this.jobProfileCompetencyRepository.findOne({
+      where: {
+        job_profile_id: jobProfileId,
+        jp_competency_id: competencyId,
+      },
+    });
+
+    if (!competency) {
+      throw new NotFoundException('Competency not found in this job profile');
+    }
+
+    if (data.level !== undefined) competency.level = data.level;
+    if (data.is_critical !== undefined) competency.is_critical = data.is_critical;
+    if (data.is_differentiating !== undefined)
+      competency.is_differentiating = data.is_differentiating;
+
+    return this.jobProfileCompetencyRepository.save(competency);
+  }
+
   // ─── Skills ─────────────────────────────────────────────────────
 
   async addSkill(jobProfileId: number, dto: AddSkillDto, user: any) {

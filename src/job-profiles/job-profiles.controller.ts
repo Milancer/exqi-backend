@@ -299,6 +299,19 @@ export class JobProfilesController {
     return this.jobProfilesService.addCompetency(+id, dto, req.user);
   }
 
+  @Patch(':id/competencies/:competencyId')
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @ApiOperation({ summary: 'Update competency link on a job profile' })
+  @ApiResponse({ status: 200, description: 'Competency updated successfully' })
+  updateCompetency(
+    @Param('id') id: string,
+    @Param('competencyId') competencyId: string,
+    @Body() data: { level?: number; is_critical?: boolean; is_differentiating?: boolean },
+    @Request() req,
+  ) {
+    return this.jobProfilesService.updateCompetency(+id, +competencyId, data, req.user);
+  }
+
   @Delete(':id/competencies/:competencyId')
   @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
   @ApiOperation({ summary: 'Remove competency from job profile' })
