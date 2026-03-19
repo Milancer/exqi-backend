@@ -23,6 +23,7 @@ import { WorkLevel } from '../../work-levels/entities/work-level.entity';
 
 export const JP_STATUSES = [
   'In Progress',
+  'Awaiting Review',
   'Awaiting Approval',
   'Approved',
   'Deleted',

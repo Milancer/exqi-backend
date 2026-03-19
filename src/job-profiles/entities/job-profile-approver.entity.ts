@@ -11,6 +11,7 @@ import { JobProfile } from './job-profile.entity';
 import { User } from '../../users/entities/user.entity';
 
 export const APPROVER_STATUSES = ['Pending', 'Approved', 'Rejected'] as const;
+export const APPROVER_TYPES = ['reviewer', 'approver'] as const;
 
 @Entity('job_profile_approvers')
 export class JobProfileApprover {
@@ -25,6 +26,14 @@ export class JobProfileApprover {
   @ApiProperty({ description: 'User ID of the approver' })
   @Column()
   approver_id: number;
+
+  @ApiProperty({ enum: APPROVER_TYPES, description: 'Whether this person is the reviewer or approver' })
+  @Column({
+    type: 'enum',
+    enum: APPROVER_TYPES,
+    default: 'approver',
+  })
+  type: string;
 
   @ApiProperty({ enum: APPROVER_STATUSES })
   @Column({

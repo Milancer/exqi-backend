@@ -66,10 +66,11 @@ export class JobProfilesService {
     if (
       user.role !== UserRole.ADMIN &&
       user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.OFFICE_REVIEWER &&
       user.role !== UserRole.OFFICE_USER
     ) {
       throw new ForbiddenException(
-        'Only ADMIN, OFFICE_MANAGER, and OFFICE_USER can create job profiles',
+        'Only ADMIN, OFFICE_MANAGER, OFFICE_REVIEWER, and OFFICE_USER can create job profiles',
       );
     }
 
@@ -109,6 +110,7 @@ export class JobProfilesService {
     } else {
       whereClause.status = In([
         'In Progress',
+        'Awaiting Review',
         'Awaiting Approval',
         'Approved',
       ]);
@@ -230,10 +232,11 @@ export class JobProfilesService {
     if (
       user.role !== UserRole.ADMIN &&
       user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.OFFICE_REVIEWER &&
       user.role !== UserRole.OFFICE_USER
     ) {
       throw new ForbiddenException(
-        'Only ADMIN, OFFICE_MANAGER, and OFFICE_USER can update job profiles',
+        'Only ADMIN, OFFICE_MANAGER, OFFICE_REVIEWER, and OFFICE_USER can update job profiles',
       );
     }
 
@@ -275,20 +278,18 @@ export class JobProfilesService {
     return { message: 'Job Profile deleted successfully' };
   }
 
-  // ─── Reviewer / Approval workflow ──────────────────────────────
+  // ─── Two-step Review → Approval workflow ──────────────────────
 
-  /** Get list of OFFICE_MANAGER users that can be assigned as reviewers */
-  async getReviewerCandidates(user: any) {
+  /** Get candidate users for reviewer or approver selection */
+  async getCandidates(user: any, type: 'reviewer' | 'approver' = 'approver') {
     const where: any = {
-      role: UserRole.OFFICE_MANAGER,
+      role: type === 'reviewer' ? UserRole.OFFICE_REVIEWER : UserRole.OFFICE_MANAGER,
       status: UserStatus.ACTIVE,
     };
-    // Non-admin users only see managers in their own client
     if (user.role !== UserRole.ADMIN) {
       where.clientId = user.clientId;
     }
     const users = await this.userRepository.find({ where });
-    // Strip sensitive fields
     return users.map((u) => ({
       id: u.id,
       name: u.name,
@@ -298,28 +299,66 @@ export class JobProfilesService {
     }));
   }
 
-  /** Assign an OFFICE_MANAGER as reviewer → sets status to 'Awaiting Approval' + creates notification */
-  async assignReviewer(jobProfileId: number, reviewerId: number, user: any) {
+  /**
+   * Submit for review — assigns both reviewer (OFFICE_REVIEWER) and approver (OFFICE_MANAGER) upfront.
+   * Status goes to 'Awaiting Review'. Reviewer gets notified first.
+   */
+  async submitForReview(
+    jobProfileId: number,
+    reviewerId: number,
+    approverId: number,
+    user: any,
+  ) {
     const jp = await this.findOne(jobProfileId, user);
 
-    // Validate the reviewer is an active OFFICE_MANAGER
-    const reviewer = await this.userRepository.findOne({
-      where: { id: reviewerId },
-    });
-    if (!reviewer) {
-      throw new NotFoundException('Reviewer user not found');
-    }
-    if (reviewer.role !== UserRole.OFFICE_MANAGER) {
-      throw new BadRequestException('Reviewer must be an OFFICE_MANAGER');
+    if (jp.status !== 'In Progress') {
+      throw new BadRequestException(
+        'Job profile must be "In Progress" to submit for review',
+      );
     }
 
-    // Update JP
+    // Validate reviewer
+    const reviewer = await this.userRepository.findOne({ where: { id: reviewerId } });
+    if (!reviewer) throw new NotFoundException('Reviewer user not found');
+    if (reviewer.role !== UserRole.OFFICE_REVIEWER) {
+      throw new BadRequestException('Reviewer must be an OFFICE_REVIEWER');
+    }
+
+    // Validate approver
+    const approver = await this.userRepository.findOne({ where: { id: approverId } });
+    if (!approver) throw new NotFoundException('Approver user not found');
+    if (approver.role !== UserRole.OFFICE_MANAGER) {
+      throw new BadRequestException('Approver must be an OFFICE_MANAGER');
+    }
+
+    // Remove any existing records
+    await this.jobProfileApproverRepository.delete({ job_profile_id: jobProfileId });
+
+    // Create reviewer record
+    const reviewerRecord = this.jobProfileApproverRepository.create({
+      job_profile_id: jobProfileId,
+      approver_id: reviewerId,
+      type: 'reviewer',
+      status: 'Pending',
+    });
+
+    // Create approver record
+    const approverRecord = this.jobProfileApproverRepository.create({
+      job_profile_id: jobProfileId,
+      approver_id: approverId,
+      type: 'approver',
+      status: 'Pending',
+    });
+
+    await this.jobProfileApproverRepository.save([reviewerRecord, approverRecord]);
+
+    // Update JP status
+    jp.status = 'Awaiting Review';
     jp.reviewer_id = reviewerId;
-    jp.status = 'Awaiting Approval';
     jp.reviewed_at = null as any;
     await this.jobProfileRepository.save(jp);
 
-    // Create notification for the reviewer
+    // Notify the reviewer
     await this.notificationsService.create({
       user_id: reviewerId,
       type: NotificationType.JOB_PROFILE_APPROVAL,
@@ -330,7 +369,6 @@ export class JobProfilesService {
       client_id: jp.client_id,
     });
 
-    // Send email notification to the reviewer
     await this.emailService.sendReviewerAssignmentEmail(
       reviewer.email,
       reviewer.name,
@@ -341,126 +379,111 @@ export class JobProfilesService {
     return this.findOne(jobProfileId, user);
   }
 
-  /** Reviewer approves or rejects a job profile */
-  async reviewJobProfile(
+  /** Reviewer (OFFICE_REVIEWER) approves or rejects at the 'Awaiting Review' stage */
+  async reviewerAction(
     jobProfileId: number,
     action: 'approve' | 'reject',
     user: any,
   ) {
     const jp = await this.findOne(jobProfileId, user);
 
-    if (jp.status !== 'Awaiting Approval') {
+    if (jp.status !== 'Awaiting Review') {
       throw new BadRequestException(
-        'Job profile is not in "Awaiting Approval" status',
+        'Job profile is not in "Awaiting Review" status',
       );
     }
 
-    if (jp.reviewer_id !== user.userId) {
-      throw new ForbiddenException(
-        'Only the assigned reviewer can approve or reject this job profile',
-      );
-    }
-
-    jp.status = action === 'approve' ? 'Approved' : 'In Progress';
-    jp.reviewed_at = new Date();
-    await this.jobProfileRepository.save(jp);
-
-    // Notify the creator
-    const creatorId = Number(jp.user_id);
-    if (creatorId) {
-      await this.notificationsService.create({
-        user_id: creatorId,
-        type: NotificationType.JOB_PROFILE_APPROVAL,
-        title:
-          action === 'approve'
-            ? 'Job Profile Approved'
-            : 'Job Profile Requires Changes',
-        message:
-          action === 'approve'
-            ? `Your job profile "${jp.job_title}" has been approved.`
-            : `Your job profile "${jp.job_title}" was not approved and has been returned to In Progress for changes.`,
-        reference_type: 'job_profile',
-        reference_id: jobProfileId,
-        client_id: jp.client_id,
-      });
-    }
-
-    return this.findOne(jobProfileId, user);
-  }
-
-  // ─── Multi-Approver workflow ─────────────────────────────────────
-
-  /** Assign multiple approvers to a job profile → sets status to 'Awaiting Approval' */
-  async assignApprovers(
-    jobProfileId: number,
-    approverIds: number[],
-    user: any,
-  ) {
-    const jp = await this.findOne(jobProfileId, user);
-
-    // Validate all approver users exist and are active OFFICE_MANAGERs
-    const approvers = await this.userRepository.find({
-      where: { id: In(approverIds) },
+    // Find this user's reviewer record
+    const reviewerRecord = await this.jobProfileApproverRepository.findOne({
+      where: {
+        job_profile_id: jobProfileId,
+        approver_id: user.userId,
+        type: 'reviewer',
+      },
     });
 
-    if (approvers.length !== approverIds.length) {
-      throw new BadRequestException('One or more approver users not found');
+    if (!reviewerRecord) {
+      throw new ForbiddenException(
+        'You are not assigned as the reviewer for this job profile',
+      );
     }
 
-    for (const approver of approvers) {
-      if (approver.role !== UserRole.OFFICE_MANAGER) {
-        throw new BadRequestException(
-          `User ${approver.name} ${approver.surname} is not an OFFICE_MANAGER`,
-        );
+    if (reviewerRecord.status !== 'Pending') {
+      throw new BadRequestException('You have already reviewed this job profile');
+    }
+
+    reviewerRecord.status = action === 'approve' ? 'Approved' : 'Rejected';
+    reviewerRecord.approved_at = new Date();
+    await this.jobProfileApproverRepository.save(reviewerRecord);
+
+    const creatorId = Number(jp.user_id);
+
+    if (action === 'reject') {
+      jp.status = 'In Progress';
+      jp.reviewed_at = new Date();
+      await this.jobProfileRepository.save(jp);
+
+      if (creatorId) {
+        await this.notificationsService.create({
+          user_id: creatorId,
+          type: NotificationType.JOB_PROFILE_APPROVAL,
+          title: 'Job Profile Requires Changes',
+          message: `Your job profile "${jp.job_title}" was rejected by reviewer ${user.name || ''} and has been returned to In Progress.`,
+          reference_type: 'job_profile',
+          reference_id: jobProfileId,
+          client_id: jp.client_id,
+        });
+      }
+    } else {
+      // Reviewer approved → move to 'Awaiting Approval', notify the approver
+      jp.status = 'Awaiting Approval';
+      jp.reviewed_at = new Date();
+      await this.jobProfileRepository.save(jp);
+
+      // Find the approver record and notify them
+      const approverRecord = await this.jobProfileApproverRepository.findOne({
+        where: { job_profile_id: jobProfileId, type: 'approver' },
+        relations: ['approver'],
+      });
+
+      if (approverRecord) {
+        await this.notificationsService.create({
+          user_id: approverRecord.approver_id,
+          type: NotificationType.JOB_PROFILE_APPROVAL,
+          title: 'Job Profile Approval Required',
+          message: `The job profile "${jp.job_title}" has been reviewed and is now awaiting your approval.`,
+          reference_type: 'job_profile',
+          reference_id: jobProfileId,
+          client_id: jp.client_id,
+        });
+
+        if (approverRecord.approver) {
+          await this.emailService.sendReviewerAssignmentEmail(
+            approverRecord.approver.email,
+            approverRecord.approver.name,
+            jp.job_title,
+            jobProfileId,
+          );
+        }
+      }
+
+      if (creatorId) {
+        await this.notificationsService.create({
+          user_id: creatorId,
+          type: NotificationType.JOB_PROFILE_APPROVAL,
+          title: 'Job Profile Reviewed',
+          message: `Your job profile "${jp.job_title}" has been reviewed and is now awaiting final approval.`,
+          reference_type: 'job_profile',
+          reference_id: jobProfileId,
+          client_id: jp.client_id,
+        });
       }
     }
 
-    // Remove existing approvers for this profile
-    await this.jobProfileApproverRepository.delete({
-      job_profile_id: jobProfileId,
-    });
-
-    // Create new approver records
-    const approverEntities = approverIds.map((approverId) =>
-      this.jobProfileApproverRepository.create({
-        job_profile_id: jobProfileId,
-        approver_id: approverId,
-        status: 'Pending',
-      }),
-    );
-    await this.jobProfileApproverRepository.save(approverEntities);
-
-    // Update JP status
-    jp.status = 'Awaiting Approval';
-    jp.reviewed_at = null as any;
-    // Keep backward compat: set reviewer_id to the first approver
-    jp.reviewer_id = approverIds[0];
-    await this.jobProfileRepository.save(jp);
-
-    // Notify each approver
-    for (const approver of approvers) {
-      await this.notificationsService.create({
-        user_id: approver.id,
-        type: NotificationType.JOB_PROFILE_APPROVAL,
-        title: 'Job Profile Review Required',
-        message: `You have been assigned to review the job profile "${jp.job_title}". Please review and approve or reject it.`,
-        reference_type: 'job_profile',
-        reference_id: jobProfileId,
-        client_id: jp.client_id,
-      });
-
-      await this.emailService.sendReviewerAssignmentEmail(
-        approver.email,
-        approver.name,
-        jp.job_title,
-        jobProfileId,
-      );
-    }
-
     return this.findOne(jobProfileId, user);
   }
 
-  /** Individual approver approves or rejects a job profile */
+  /** Approver (OFFICE_MANAGER) approves or rejects at the 'Awaiting Approval' stage */
   async approverAction(
     jobProfileId: number,
     action: 'approve' | 'reject',
@@ -479,74 +502,59 @@ export class JobProfilesService {
       where: {
         job_profile_id: jobProfileId,
         approver_id: user.userId,
+        type: 'approver',
       },
     });
 
     if (!approverRecord) {
       throw new ForbiddenException(
-        'You are not assigned as an approver for this job profile',
+        'You are not assigned as the approver for this job profile',
       );
     }
 
     if (approverRecord.status !== 'Pending') {
-      throw new BadRequestException(
-        'You have already reviewed this job profile',
-      );
+      throw new BadRequestException('You have already acted on this job profile');
     }
 
-    // Update this approver's status
     approverRecord.status = action === 'approve' ? 'Approved' : 'Rejected';
     approverRecord.approved_at = new Date();
     await this.jobProfileApproverRepository.save(approverRecord);
 
-    // Check if all approvers have acted
-    const allApprovers = await this.jobProfileApproverRepository.find({
-      where: { job_profile_id: jobProfileId },
-    });
+    const creatorId = Number(jp.user_id);
 
-    const allApproved = allApprovers.every((a) => a.status === 'Approved');
-    const anyRejected = allApprovers.some((a) => a.status === 'Rejected');
-
-    if (anyRejected) {
-      // If any approver rejects, return to In Progress
+    if (action === 'reject') {
       jp.status = 'In Progress';
       jp.reviewed_at = new Date();
       await this.jobProfileRepository.save(jp);
 
-      // Notify creator
-      const creatorId = Number(jp.user_id);
       if (creatorId) {
         await this.notificationsService.create({
           user_id: creatorId,
           type: NotificationType.JOB_PROFILE_APPROVAL,
           title: 'Job Profile Requires Changes',
-          message: `Your job profile "${jp.job_title}" was rejected by ${user.name || 'a reviewer'} and has been returned to In Progress for changes.`,
+          message: `Your job profile "${jp.job_title}" was rejected by ${user.name || 'the approver'} and has been returned to In Progress.`,
           reference_type: 'job_profile',
           reference_id: jobProfileId,
           client_id: jp.client_id,
         });
       }
-    } else if (allApproved) {
-      // All approvers have approved
+    } else {
       jp.status = 'Approved';
       jp.reviewed_at = new Date();
       await this.jobProfileRepository.save(jp);
 
-      // Notify creator
-      const creatorId = Number(jp.user_id);
       if (creatorId) {
         await this.notificationsService.create({
           user_id: creatorId,
           type: NotificationType.JOB_PROFILE_APPROVAL,
           title: 'Job Profile Approved',
-          message: `Your job profile "${jp.job_title}" has been approved by all approvers.`,
+          message: `Your job profile "${jp.job_title}" has been fully approved.`,
           reference_type: 'job_profile',
           reference_id: jobProfileId,
           client_id: jp.client_id,
         });
       }
     }
-    // If some are still pending, the status stays as 'Awaiting Approval'
 
     return this.findOne(jobProfileId, user);
   }

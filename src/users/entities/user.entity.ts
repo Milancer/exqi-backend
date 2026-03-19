@@ -13,6 +13,7 @@ import { Client } from '../../clients/entities/client.entity';
 export enum UserRole {
   ADMIN = 'ADMIN',
   OFFICE_MANAGER = 'OFFICE_MANAGER',
+  OFFICE_REVIEWER = 'OFFICE_REVIEWER',
   OFFICE_USER = 'OFFICE_USER',
 }
 

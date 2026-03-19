@@ -26,6 +26,7 @@ export function IsValidRoleForClient(validationOptions?: ValidationOptions) {
           // OFFICE roles cannot belong to Client 1
           if (
             (role === UserRole.OFFICE_MANAGER ||
+              role === UserRole.OFFICE_REVIEWER ||
               role === UserRole.OFFICE_USER) &&
             clientId === 1
           ) {
@@ -45,10 +46,11 @@ export function IsValidRoleForClient(validationOptions?: ValidationOptions) {
 
           if (
             (role === UserRole.OFFICE_MANAGER ||
+              role === UserRole.OFFICE_REVIEWER ||
               role === UserRole.OFFICE_USER) &&
             clientId === 1
           ) {
-            return 'Office roles (OFFICE_MANAGER, OFFICE_USER) cannot belong to system client (Client ID = 1)';
+            return 'Office roles (OFFICE_MANAGER, OFFICE_REVIEWER, OFFICE_USER) cannot belong to system client (Client ID = 1)';
           }
 
           return 'Invalid role and client combination';
