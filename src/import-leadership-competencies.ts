@@ -1,5 +1,5 @@
-import { config } from 'dotenv';
-config(); // Load .env before anything else
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+require('dotenv').config();
 
 import { DataSource } from 'typeorm';
 import * as fs from 'fs';
