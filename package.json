@@ -22,7 +22,8 @@
     "seed:prod": "node dist/seed.js",
     "import:client": "ts-node -r tsconfig-paths/register src/import-client.ts",
     "import:sita": "ts-node -r tsconfig-paths/register src/import-client.ts sita",
-    "import:experttech": "ts-node -r tsconfig-paths/register src/import-client.ts experttech"
+    "import:experttech": "ts-node -r tsconfig-paths/register src/import-client.ts experttech",
+    "import:competencies": "ts-node -r tsconfig-paths/register src/import-leadership-competencies.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

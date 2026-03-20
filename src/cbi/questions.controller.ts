@@ -42,19 +42,28 @@ export class QuestionsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all questions (with optional filters)' })
-  @ApiResponse({ status: 200, description: 'Return all questions' })
+  @ApiOperation({ summary: 'Get all questions (with optional filters and pagination)' })
+  @ApiResponse({ status: 200, description: 'Return paginated questions' })
   @ApiQuery({ name: 'competencyId', required: false, type: Number })
   @ApiQuery({ name: 'level', required: false, type: Number })
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  @ApiQuery({ name: 'status', required: false, type: String })
   findAll(
     @Request() req,
     @Query('competencyId') competencyId?: number,
     @Query('level') level?: number,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('status') status?: string,
   ) {
     return this.cbiService.findAllQuestions(
       req.user,
       competencyId ? +competencyId : undefined,
       level ? +level : undefined,
+      page ? +page : undefined,
+      limit ? +limit : undefined,
+      status || undefined,
     );
   }
 

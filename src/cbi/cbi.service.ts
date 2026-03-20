@@ -173,8 +173,22 @@ export class CbiService {
     return this.questionRepository.save(question);
   }
 
-  async findAllQuestions(user: any, competencyId?: number, level?: number) {
-    const whereClause: any = { status: In(['Active', 'Inactive']) };
+  async findAllQuestions(
+    user: any,
+    competencyId?: number,
+    level?: number,
+    page?: number,
+    limit?: number,
+    status?: string,
+  ) {
+    const whereClause: any = {};
+
+    // Status filter — default to Active+Inactive
+    if (status) {
+      whereClause.status = status;
+    } else {
+      whereClause.status = In(['Active', 'Inactive']);
+    }
 
     // Multi-tenancy: show global (client_id=1) + user's client questions
     if (user.role !== UserRole.ADMIN) {
@@ -189,10 +203,19 @@ export class CbiService {
       whereClause.level = level;
     }
 
-    return this.questionRepository.find({
+    // Paginated response
+    const take = limit && limit > 0 ? Math.min(limit, 200) : 50;
+    const skip = page && page > 1 ? (page - 1) * take : 0;
+
+    const [data, total] = await this.questionRepository.findAndCount({
       where: whereClause,
       relations: ['competency'],
+      order: { competency_question_id: 'DESC' },
+      take,
+      skip,
     });
+
+    return { data, total, page: page || 1, limit: take };
   }
 
   async findOneQuestion(id: number, user: any) {
