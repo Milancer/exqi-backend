@@ -352,11 +352,12 @@ export class JobProfilesService {
 
     await this.jobProfileApproverRepository.save([reviewerRecord, approverRecord]);
 
-    // Update JP status
-    jp.status = 'Awaiting Review';
-    jp.reviewer_id = reviewerId;
-    jp.reviewed_at = null as any;
-    await this.jobProfileRepository.save(jp);
+    // Update JP status (use update() to avoid TypeORM cascading stale approvers)
+    await this.jobProfileRepository.update(jobProfileId, {
+      status: 'Awaiting Review',
+      reviewer_id: reviewerId,
+      reviewed_at: null as any,
+    });
 
     // Notify the reviewer
     await this.notificationsService.create({
