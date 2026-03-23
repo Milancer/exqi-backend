@@ -142,6 +142,19 @@ export class UsersService {
     });
   }
 
+  // Generate a new invite token for an existing user (resend invite)
+  async generateInviteToken(userId: number): Promise<{ user: User; resetToken: string }> {
+    const user = await this.findOneById(userId);
+
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpiry = new Date();
+    resetTokenExpiry.setHours(resetTokenExpiry.getHours() + 24); // 24 hours
+
+    await this.updateResetToken(userId, resetToken, resetTokenExpiry);
+
+    return { user, resetToken };
+  }
+
   // Clear reset token after use
   async clearResetToken(userId: number) {
     return this.usersRepository.update(userId, {

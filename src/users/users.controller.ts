@@ -98,4 +98,14 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
+
+  @Post(':id/resend-invite')
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @ApiOperation({ summary: 'Resend invite email to a user' })
+  @ApiResponse({ status: 200, description: 'Invite email resent successfully' })
+  async resendInvite(@Param('id') id: string) {
+    const { user, resetToken } = await this.usersService.generateInviteToken(+id);
+    await this.emailService.sendWelcomeEmail(user.email, user.name, resetToken);
+    return { message: 'Invite resent successfully' };
+  }
 }

@@ -19,6 +19,7 @@ import { WorkLevelsModule } from './work-levels/work-levels.module';
 import { SkillsModule } from './skills/skills.module';
 import { ImportModule } from './import/import.module';
 import { EmailModule } from './email/email.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { EmailModule } from './email/email.module';
     SkillsModule,
     ImportModule,
     EmailModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
