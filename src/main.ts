@@ -12,7 +12,11 @@ async function bootstrap() {
   // Enable CORS for frontend
   const allowedOrigins = process.env.CORS_ORIGIN
     ? process.env.CORS_ORIGIN.split(',').map((o) => o.trim())
-    : ['http://localhost:5173'];
+    : [];
+  // Always allow localhost for development
+  if (!allowedOrigins.includes('http://localhost:5173')) {
+    allowedOrigins.push('http://localhost:5173');
+  }
   app.enableCors({
     origin: allowedOrigins,
     credentials: true,
