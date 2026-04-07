@@ -37,6 +37,7 @@ export class AuthService {
       role: user.role,
       clientId: user.clientId,
       modules: user.client?.modules || [],
+      hasSignature: !!user.signature,
     };
   }
 
