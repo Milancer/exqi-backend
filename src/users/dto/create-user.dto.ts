@@ -35,7 +35,10 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @ApiPropertyOptional({ description: 'Optional - if not provided, user will receive email to set password' })
+  @ApiPropertyOptional({
+    description:
+      'Optional - if not provided, user will receive email to set password',
+  })
   @IsString()
   @IsOptional()
   password?: string;

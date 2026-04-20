@@ -167,7 +167,12 @@ async function run() {
     username: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || 'postgres',
     database: process.env.DB_NAME || 'nexus',
-    entities: [CompetencyType, CompetencyCluster, Competency, CompetencyQuestion],
+    entities: [
+      CompetencyType,
+      CompetencyCluster,
+      Competency,
+      CompetencyQuestion,
+    ],
     synchronize: false,
     ssl: (process.env.DB_HOST || '').includes('railway')
       ? { rejectUnauthorized: false }
@@ -208,9 +213,13 @@ async function run() {
           }),
         );
         createdTypes++;
-        console.log(`  + Type: "${entry.typeName}" (id: ${existing.competency_type_id})`);
+        console.log(
+          `  + Type: "${entry.typeName}" (id: ${existing.competency_type_id})`,
+        );
       } else {
-        console.log(`  = Type: "${entry.typeName}" exists (id: ${existing.competency_type_id})`);
+        console.log(
+          `  = Type: "${entry.typeName}" exists (id: ${existing.competency_type_id})`,
+        );
       }
       typeCache.set(typeKey, existing.competency_type_id);
     }
@@ -236,9 +245,13 @@ async function run() {
           }),
         );
         createdClusters++;
-        console.log(`  + Cluster: "${entry.clusterName}" (id: ${existing.competency_cluster_id})`);
+        console.log(
+          `  + Cluster: "${entry.clusterName}" (id: ${existing.competency_cluster_id})`,
+        );
       } else {
-        console.log(`  = Cluster: "${entry.clusterName}" exists (id: ${existing.competency_cluster_id})`);
+        console.log(
+          `  = Cluster: "${entry.clusterName}" exists (id: ${existing.competency_cluster_id})`,
+        );
       }
       clusterCache.set(clusterKey, existing.competency_cluster_id);
     }
@@ -267,9 +280,13 @@ async function run() {
           }),
         );
         createdCompetencies++;
-        console.log(`  + Competency: "${entry.competencyName}" (id: ${existing.competency_id})`);
+        console.log(
+          `  + Competency: "${entry.competencyName}" (id: ${existing.competency_id})`,
+        );
       } else {
-        console.log(`  = Competency: "${entry.competencyName}" exists (id: ${existing.competency_id})`);
+        console.log(
+          `  = Competency: "${entry.competencyName}" exists (id: ${existing.competency_id})`,
+        );
       }
       compCache.set(compKey, existing.competency_id);
     }

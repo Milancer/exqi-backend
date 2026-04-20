@@ -136,7 +136,9 @@ async function seed() {
       });
 
       await userRepo.save(user);
-      console.log(`User created: ${userData.name} ${userData.surname} (${userData.email})`);
+      console.log(
+        `User created: ${userData.name} ${userData.surname} (${userData.email})`,
+      );
 
       // Send welcome email
       try {

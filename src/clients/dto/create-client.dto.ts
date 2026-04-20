@@ -1,4 +1,11 @@
-import { IsString, IsEmail, IsOptional, IsNotEmpty, IsArray, IsEnum } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  IsOptional,
+  IsNotEmpty,
+  IsArray,
+  IsEnum,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { ClientModule } from '../entities/client.entity';
 

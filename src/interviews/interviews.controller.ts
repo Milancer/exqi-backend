@@ -52,6 +52,21 @@ export class InterviewsController {
     return this.service.findAll(req.user);
   }
 
+  @Get('template/:templateId/questions')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary:
+      'Get the full resolved question list for a template (for the picker)',
+  })
+  getTemplateQuestions(
+    @Param('templateId') templateId: string,
+    @Request() req,
+  ) {
+    return this.service.getTemplateQuestions(+templateId, req.user);
+  }
+
   /* ───── Public (token-based) endpoints ───── */
   /* These MUST be defined BEFORE :id routes to avoid NestJS matching "public" as an :id */
 

@@ -14,12 +14,15 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<{ user: User; resetToken?: string }> {
+  async create(
+    createUserDto: CreateUserDto,
+  ): Promise<{ user: User; resetToken?: string }> {
     const salt = await bcrypt.genSalt();
 
     // If no password provided, generate a random one and create reset token
     const needsPasswordSetup = !createUserDto.password;
-    const password = createUserDto.password || crypto.randomBytes(16).toString('hex');
+    const password =
+      createUserDto.password || crypto.randomBytes(16).toString('hex');
     const hashedPassword = await bcrypt.hash(password, salt);
 
     let resetToken: string | undefined;
@@ -143,7 +146,9 @@ export class UsersService {
   }
 
   // Generate a new invite token for an existing user (resend invite)
-  async generateInviteToken(userId: number): Promise<{ user: User; resetToken: string }> {
+  async generateInviteToken(
+    userId: number,
+  ): Promise<{ user: User; resetToken: string }> {
     const user = await this.findOneById(userId);
 
     const resetToken = crypto.randomBytes(32).toString('hex');

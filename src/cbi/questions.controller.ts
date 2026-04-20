@@ -42,7 +42,9 @@ export class QuestionsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all questions (with optional filters and pagination)' })
+  @ApiOperation({
+    summary: 'Get all questions (with optional filters and pagination)',
+  })
   @ApiResponse({ status: 200, description: 'Return paginated questions' })
   @ApiQuery({ name: 'competencyId', required: false, type: Number })
   @ApiQuery({ name: 'level', required: false, type: Number })

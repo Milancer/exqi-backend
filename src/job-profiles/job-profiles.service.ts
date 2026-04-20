@@ -6,12 +6,18 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In, ILike } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+import * as crypto from 'crypto';
 import { JobProfile } from './entities/job-profile.entity';
 import { JobProfileCompetency } from './entities/job-profile-competency.entity';
 import { JobProfileSkill } from './entities/job-profile-skill.entity';
 import { JobProfileDeliverable } from './entities/job-profile-deliverable.entity';
 import { JobProfileRequirement } from './entities/job-profile-requirement.entity';
 import { JobProfileApprover } from './entities/job-profile-approver.entity';
+import {
+  JobProfileAuditLog,
+  AuditEventType,
+} from './entities/job-profile-audit-log.entity';
 import { JpCompetencyType } from './entities/jp-competency-type.entity';
 import { JpCompetencyCluster } from './entities/jp-competency-cluster.entity';
 import { JpCompetency } from './entities/jp-competency.entity';
@@ -47,6 +53,8 @@ export class JobProfilesService {
     private readonly jobProfileRequirementRepository: Repository<JobProfileRequirement>,
     @InjectRepository(JobProfileApprover)
     private readonly jobProfileApproverRepository: Repository<JobProfileApprover>,
+    @InjectRepository(JobProfileAuditLog)
+    private readonly auditLogRepository: Repository<JobProfileAuditLog>,
     @InjectRepository(JpCompetencyType)
     private readonly jpTypeRepository: Repository<JpCompetencyType>,
     @InjectRepository(JpCompetencyCluster)
@@ -104,6 +112,21 @@ export class JobProfilesService {
       whereClause.client_id = user.clientId;
     }
 
+    // OFFICE_REVIEWER and (when not also creator) OFFICE_MANAGER acting as approver
+    // can only see job profiles where they are an assigned reviewer/approver.
+    if (user.role === UserRole.OFFICE_REVIEWER) {
+      const assigned = await this.jobProfileApproverRepository.find({
+        where: { approver_id: user.userId },
+        select: ['job_profile_id'],
+      });
+      const ids = assigned.map((a) => a.job_profile_id);
+      // If they have no assignments, return an empty page early.
+      if (ids.length === 0) {
+        return { data: [], total: 0, page, limit, totalPages: 0 };
+      }
+      whereClause.job_profile_id = In(ids);
+    }
+
     // Filter by status (single status or default list)
     if (options?.status) {
       whereClause.status = options.status;
@@ -126,7 +149,11 @@ export class JobProfilesService {
       whereClause.job_title = ILike(`%${options.search}%`);
     }
 
-    const relations = ['competencies', 'competencies.jpCompetency', 'department'];
+    const relations = [
+      'competencies',
+      'competencies.jpCompetency',
+      'department',
+    ];
     if (user.role === UserRole.ADMIN) {
       relations.push('client');
     }
@@ -165,7 +192,9 @@ export class JobProfilesService {
   }
 
   // Get lightweight job profile options for dropdowns (Reports To, etc.)
-  async getDropdownOptions(user: any): Promise<{ value: number; label: string }[]> {
+  async getDropdownOptions(
+    user: any,
+  ): Promise<{ value: number; label: string }[]> {
     const query = this.jobProfileRepository
       .createQueryBuilder('jp')
       .select(['jp.job_profile_id', 'jp.job_title'])
@@ -212,6 +241,16 @@ export class JobProfilesService {
       throw new ForbiddenException('Access denied to this job profile');
     }
 
+    // OFFICE_REVIEWER can only access profiles where they are an assigned reviewer/approver
+    if (user.role === UserRole.OFFICE_REVIEWER) {
+      const isAssigned = (jobProfile.approvers || []).some(
+        (a) => a.approver_id === user.userId,
+      );
+      if (!isAssigned) {
+        throw new ForbiddenException('Access denied to this job profile');
+      }
+    }
+
     // Strip sensitive fields from approver user data, keep signature
     if (jobProfile.approvers) {
       jobProfile.approvers = jobProfile.approvers.map((a) => {
@@ -251,7 +290,27 @@ export class JobProfilesService {
       );
     }
 
+    // Compute diff against the existing profile before applying the update
+    const changes = this.diffRecords(jobProfile as any, dto as any, [
+      'updated_at',
+      'created_at',
+      'job_profile_id',
+      'status',
+      'reviewer_id',
+      'reviewed_at',
+    ]);
+
     await this.jobProfileRepository.update(id, dto);
+
+    if (changes.length > 0) {
+      await this.recordEditAndMaybeRevert({
+        jobProfileId: id,
+        user,
+        summary: `Job profile fields updated: ${changes.map((c) => c.field).join(', ')}`,
+        changes,
+      });
+    }
+
     return this.findOne(id, user);
   }
 
@@ -283,7 +342,10 @@ export class JobProfilesService {
   /** Get candidate users for reviewer or approver selection */
   async getCandidates(user: any, type: 'reviewer' | 'approver' = 'approver') {
     const where: any = {
-      role: type === 'reviewer' ? UserRole.OFFICE_REVIEWER : UserRole.OFFICE_MANAGER,
+      role:
+        type === 'reviewer'
+          ? UserRole.OFFICE_REVIEWER
+          : UserRole.OFFICE_MANAGER,
       status: UserStatus.ACTIVE,
     };
     if (user.role !== UserRole.ADMIN) {
@@ -300,13 +362,65 @@ export class JobProfilesService {
   }
 
   /**
+   * Find an existing user by email or create a new invited user with the given role.
+   * Returns the user and an optional resetToken (only set when a new user was created).
+   */
+  private async findOrInviteUser(
+    email: string,
+    role: UserRole,
+    clientId: number,
+  ): Promise<{ user: User; resetToken?: string; created: boolean }> {
+    if (!email || !email.includes('@')) {
+      throw new BadRequestException('Invalid email address');
+    }
+    const normalisedEmail = email.trim().toLowerCase();
+
+    const existing = await this.userRepository.findOne({
+      where: { email: ILike(normalisedEmail) },
+    });
+    if (existing) {
+      return { user: existing, created: false };
+    }
+
+    const tempPassword = crypto.randomBytes(16).toString('hex');
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(tempPassword, salt);
+
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpiry = new Date();
+    resetTokenExpiry.setHours(resetTokenExpiry.getHours() + 72); // 3 days for reviewer invites
+
+    const newUser = this.userRepository.create({
+      name: normalisedEmail.split('@')[0],
+      surname: '',
+      idNumber: '',
+      phoneNumber: '',
+      email: normalisedEmail,
+      password: hashedPassword,
+      role,
+      status: UserStatus.ACTIVE,
+      clientId,
+      resetToken,
+      resetTokenExpiry,
+    });
+    const saved = await this.userRepository.save(newUser);
+    return { user: saved, resetToken, created: true };
+  }
+
+  /**
    * Submit for review — assigns both reviewer (OFFICE_REVIEWER) and approver (OFFICE_MANAGER) upfront.
+   * Either an existing user ID OR an email address can be provided. If an email is given for someone
+   * who isn't yet a user, they are auto-created and emailed an invite link to set their password.
    * Status goes to 'Awaiting Review'. Reviewer gets notified first.
    */
   async submitForReview(
     jobProfileId: number,
-    reviewerId: number,
-    approverId: number,
+    body: {
+      reviewer_id?: number;
+      reviewer_email?: string;
+      approver_id?: number;
+      approver_email?: string;
+    },
     user: any,
   ) {
     const jp = await this.findOne(jobProfileId, user);
@@ -317,27 +431,71 @@ export class JobProfilesService {
       );
     }
 
-    // Validate reviewer
-    const reviewer = await this.userRepository.findOne({ where: { id: reviewerId } });
-    if (!reviewer) throw new NotFoundException('Reviewer user not found');
-    if (reviewer.role !== UserRole.OFFICE_REVIEWER) {
-      throw new BadRequestException('Reviewer must be an OFFICE_REVIEWER');
+    // Resolve reviewer (existing user by ID, or find/invite by email)
+    let reviewer: User;
+    let reviewerResetToken: string | undefined;
+    let reviewerWasCreated = false;
+    if (body.reviewer_id) {
+      const found = await this.userRepository.findOne({
+        where: { id: body.reviewer_id },
+      });
+      if (!found) throw new NotFoundException('Reviewer user not found');
+      if (found.role !== UserRole.OFFICE_REVIEWER) {
+        throw new BadRequestException('Reviewer must be an OFFICE_REVIEWER');
+      }
+      reviewer = found;
+    } else if (body.reviewer_email) {
+      const result = await this.findOrInviteUser(
+        body.reviewer_email,
+        UserRole.OFFICE_REVIEWER,
+        jp.client_id,
+      );
+      reviewer = result.user;
+      reviewerResetToken = result.resetToken;
+      reviewerWasCreated = result.created;
+    } else {
+      throw new BadRequestException(
+        'reviewer_id or reviewer_email is required',
+      );
     }
 
-    // Validate approver
-    const approver = await this.userRepository.findOne({ where: { id: approverId } });
-    if (!approver) throw new NotFoundException('Approver user not found');
-    if (approver.role !== UserRole.OFFICE_MANAGER) {
-      throw new BadRequestException('Approver must be an OFFICE_MANAGER');
+    // Resolve approver (existing user by ID, or find/invite by email)
+    let approver: User;
+    let approverResetToken: string | undefined;
+    let approverWasCreated = false;
+    if (body.approver_id) {
+      const found = await this.userRepository.findOne({
+        where: { id: body.approver_id },
+      });
+      if (!found) throw new NotFoundException('Approver user not found');
+      if (found.role !== UserRole.OFFICE_MANAGER) {
+        throw new BadRequestException('Approver must be an OFFICE_MANAGER');
+      }
+      approver = found;
+    } else if (body.approver_email) {
+      const result = await this.findOrInviteUser(
+        body.approver_email,
+        UserRole.OFFICE_MANAGER,
+        jp.client_id,
+      );
+      approver = result.user;
+      approverResetToken = result.resetToken;
+      approverWasCreated = result.created;
+    } else {
+      throw new BadRequestException(
+        'approver_id or approver_email is required',
+      );
     }
 
     // Remove any existing records
-    await this.jobProfileApproverRepository.delete({ job_profile_id: jobProfileId });
+    await this.jobProfileApproverRepository.delete({
+      job_profile_id: jobProfileId,
+    });
 
     // Create reviewer record
     const reviewerRecord = this.jobProfileApproverRepository.create({
       job_profile_id: jobProfileId,
-      approver_id: reviewerId,
+      approver_id: reviewer.id,
       type: 'reviewer',
       status: 'Pending',
     });
@@ -345,23 +503,26 @@ export class JobProfilesService {
     // Create approver record
     const approverRecord = this.jobProfileApproverRepository.create({
       job_profile_id: jobProfileId,
-      approver_id: approverId,
+      approver_id: approver.id,
       type: 'approver',
       status: 'Pending',
     });
 
-    await this.jobProfileApproverRepository.save([reviewerRecord, approverRecord]);
+    await this.jobProfileApproverRepository.save([
+      reviewerRecord,
+      approverRecord,
+    ]);
 
     // Update JP status (use update() to avoid TypeORM cascading stale approvers)
     await this.jobProfileRepository.update(jobProfileId, {
       status: 'Awaiting Review',
-      reviewer_id: reviewerId,
+      reviewer_id: reviewer.id,
       reviewed_at: null as any,
     });
 
     // Notify the reviewer
     await this.notificationsService.create({
-      user_id: reviewerId,
+      user_id: reviewer.id,
       type: NotificationType.JOB_PROFILE_APPROVAL,
       title: 'Job Profile Review Required',
       message: `You have been assigned to review the job profile "${jp.job_title}". Please review and approve or reject it.`,
@@ -370,12 +531,39 @@ export class JobProfilesService {
       client_id: jp.client_id,
     });
 
-    await this.emailService.sendReviewerAssignmentEmail(
-      reviewer.email,
-      reviewer.name,
-      jp.job_title,
+    // For newly invited users, send the welcome/invite email with reset token + redirect to job profile.
+    // For existing users, send the standard reviewer assignment email.
+    if (reviewerWasCreated && reviewerResetToken) {
+      await this.emailService.sendReviewerInviteEmail(
+        reviewer.email,
+        jp.job_title,
+        jobProfileId,
+        reviewerResetToken,
+      );
+    } else {
+      await this.emailService.sendReviewerAssignmentEmail(
+        reviewer.email,
+        reviewer.name,
+        jp.job_title,
+        jobProfileId,
+      );
+    }
+
+    if (approverWasCreated && approverResetToken) {
+      await this.emailService.sendReviewerInviteEmail(
+        approver.email,
+        jp.job_title,
+        jobProfileId,
+        approverResetToken,
+      );
+    }
+
+    await this.logAuditEvent({
       jobProfileId,
-    );
+      userId: user.userId,
+      eventType: 'submitted_for_review',
+      summary: `Submitted for review. Reviewer: ${reviewer.email}, Approver: ${approver.email}`,
+    });
 
     return this.findOne(jobProfileId, user);
   }
@@ -385,6 +573,7 @@ export class JobProfilesService {
     jobProfileId: number,
     action: 'approve' | 'reject',
     user: any,
+    comment?: string,
   ) {
     const jp = await this.findOne(jobProfileId, user);
 
@@ -410,7 +599,9 @@ export class JobProfilesService {
     }
 
     if (reviewerRecord.status !== 'Pending') {
-      throw new BadRequestException('You have already reviewed this job profile');
+      throw new BadRequestException(
+        'You have already reviewed this job profile',
+      );
     }
 
     reviewerRecord.status = action === 'approve' ? 'Approved' : 'Rejected';
@@ -481,6 +672,18 @@ export class JobProfilesService {
       }
     }
 
+    await this.logAuditEvent({
+      jobProfileId,
+      userId: user.userId,
+      eventType:
+        action === 'approve' ? 'reviewer_approved' : 'reviewer_rejected',
+      summary:
+        action === 'approve'
+          ? 'Reviewer approved the job profile'
+          : 'Reviewer rejected the job profile',
+      comment: comment || undefined,
+    });
+
     return this.findOne(jobProfileId, user);
   }
 
@@ -489,6 +692,7 @@ export class JobProfilesService {
     jobProfileId: number,
     action: 'approve' | 'reject',
     user: any,
+    comment?: string,
   ) {
     const jp = await this.findOne(jobProfileId, user);
 
@@ -514,7 +718,9 @@ export class JobProfilesService {
     }
 
     if (approverRecord.status !== 'Pending') {
-      throw new BadRequestException('You have already acted on this job profile');
+      throw new BadRequestException(
+        'You have already acted on this job profile',
+      );
     }
 
     approverRecord.status = action === 'approve' ? 'Approved' : 'Rejected';
@@ -557,6 +763,18 @@ export class JobProfilesService {
       }
     }
 
+    await this.logAuditEvent({
+      jobProfileId,
+      userId: user.userId,
+      eventType:
+        action === 'approve' ? 'approver_approved' : 'approver_rejected',
+      summary:
+        action === 'approve'
+          ? 'Approver approved the job profile'
+          : 'Approver rejected the job profile',
+      comment: comment || undefined,
+    });
+
     return this.findOne(jobProfileId, user);
   }
 
@@ -585,7 +803,13 @@ export class JobProfilesService {
       ...dto,
     });
 
-    return this.jobProfileCompetencyRepository.save(competency);
+    const saved = await this.jobProfileCompetencyRepository.save(competency);
+    await this.recordEditAndMaybeRevert({
+      jobProfileId,
+      user,
+      summary: `Competency added (id ${dto.jp_competency_id}, level ${dto.level})`,
+    });
+    return saved;
   }
 
   // Remove competency from job profile
@@ -610,6 +834,11 @@ export class JobProfilesService {
     await this.jobProfileCompetencyRepository.delete(
       competency.job_profile_competency_id,
     );
+    await this.recordEditAndMaybeRevert({
+      jobProfileId,
+      user,
+      summary: `Competency removed (id ${competencyId})`,
+    });
     return { message: 'Competency removed from job profile successfully' };
   }
 
@@ -617,7 +846,11 @@ export class JobProfilesService {
   async updateCompetency(
     jobProfileId: number,
     competencyId: number,
-    data: { level?: number; is_critical?: boolean; is_differentiating?: boolean },
+    data: {
+      level?: number;
+      is_critical?: boolean;
+      is_differentiating?: boolean;
+    },
     user: any,
   ) {
     await this.findOne(jobProfileId, user);
@@ -633,12 +866,33 @@ export class JobProfilesService {
       throw new NotFoundException('Competency not found in this job profile');
     }
 
+    const before = {
+      level: competency.level,
+      is_critical: competency.is_critical,
+      is_differentiating: competency.is_differentiating,
+    };
+
     if (data.level !== undefined) competency.level = data.level;
-    if (data.is_critical !== undefined) competency.is_critical = data.is_critical;
+    if (data.is_critical !== undefined)
+      competency.is_critical = data.is_critical;
     if (data.is_differentiating !== undefined)
       competency.is_differentiating = data.is_differentiating;
 
-    return this.jobProfileCompetencyRepository.save(competency);
+    const saved = await this.jobProfileCompetencyRepository.save(competency);
+    const changes = this.diffRecords(before as any, data as any);
+    if (changes.length > 0) {
+      await this.recordEditAndMaybeRevert({
+        jobProfileId,
+        user,
+        summary: `Competency updated: ${changes.map((c) => c.field).join(', ')}`,
+        changes: changes.map((c) => ({
+          field: `competency#${competencyId}.${c.field}`,
+          old: c.old,
+          new: c.new,
+        })),
+      });
+    }
+    return saved;
   }
 
   // ─── Skills ─────────────────────────────────────────────────────
@@ -651,7 +905,13 @@ export class JobProfilesService {
       ...dto,
     });
 
-    return this.jobProfileSkillRepository.save(skill);
+    const saved = await this.jobProfileSkillRepository.save(skill);
+    await this.recordEditAndMaybeRevert({
+      jobProfileId,
+      user,
+      summary: `Skill added: ${(dto as any).skill_name || `(id ${(dto as any).skill_id})`} at level ${(dto as any).level}`,
+    });
+    return saved;
   }
 
   async removeSkill(jobProfileId: number, skillId: number, user: any) {
@@ -666,6 +926,11 @@ export class JobProfilesService {
     }
 
     await this.jobProfileSkillRepository.delete(skillId);
+    await this.recordEditAndMaybeRevert({
+      jobProfileId,
+      user,
+      summary: `Skill removed (id ${skillId})`,
+    });
     return { message: 'Skill removed from job profile successfully' };
   }
 
@@ -683,7 +948,16 @@ export class JobProfilesService {
       ...dto,
     });
 
-    return this.jobProfileDeliverableRepository.save(deliverable);
+    const saved = await this.jobProfileDeliverableRepository.save(deliverable);
+    await this.recordEditAndMaybeRevert({
+      jobProfileId,
+      user,
+      summary: `Deliverable added: ${(dto as any).deliverable || ''}`.slice(
+        0,
+        200,
+      ),
+    });
+    return saved;
   }
 
   async removeDeliverable(
@@ -705,6 +979,11 @@ export class JobProfilesService {
     }
 
     await this.jobProfileDeliverableRepository.delete(deliverableId);
+    await this.recordEditAndMaybeRevert({
+      jobProfileId,
+      user,
+      summary: `Deliverable removed (id ${deliverableId})`,
+    });
     return { message: 'Deliverable removed from job profile successfully' };
   }
 
@@ -721,6 +1000,8 @@ export class JobProfilesService {
       where: { job_profile_id: jobProfileId },
     });
 
+    const before = requirements ? { ...requirements } : null;
+
     if (!requirements) {
       requirements = this.jobProfileRequirementRepository.create({
         job_profile_id: jobProfileId,
@@ -730,7 +1011,27 @@ export class JobProfilesService {
       Object.assign(requirements, dto);
     }
 
-    return this.jobProfileRequirementRepository.save(requirements);
+    const saved = await this.jobProfileRequirementRepository.save(requirements);
+
+    const changes = before
+      ? this.diffRecords(before as any, dto as any, [
+          'updated_at',
+          'created_at',
+          'job_profile_id',
+          'job_profile_requirement_id',
+        ])
+      : Object.entries(dto).map(([k, v]) => ({ field: k, old: null, new: v }));
+
+    if (changes.length > 0) {
+      await this.recordEditAndMaybeRevert({
+        jobProfileId,
+        user,
+        summary: `Requirements updated: ${changes.map((c) => c.field).join(', ')}`,
+        changes,
+      });
+    }
+
+    return saved;
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -899,5 +1200,142 @@ export class JobProfilesService {
     await this.findOneJpCompetency(id);
     await this.jpCompetencyRepository.update(id, { status: 'Deleted' });
     return { message: 'JP Competency deleted successfully' };
+  }
+
+  // ─── Audit log helpers ─────────────────────────────────────────────
+
+  /** Append an entry to the audit log for a job profile. */
+  private async logAuditEvent(opts: {
+    jobProfileId: number;
+    userId: number;
+    eventType: AuditEventType;
+    summary?: string;
+    comment?: string;
+    changes?: Array<{ field: string; old: unknown; new: unknown }> | null;
+  }) {
+    const entry = this.auditLogRepository.create({
+      job_profile_id: opts.jobProfileId,
+      user_id: opts.userId,
+      event_type: opts.eventType,
+      summary: opts.summary ?? null,
+      comment: opts.comment ?? null,
+      changes: opts.changes ?? null,
+    });
+    await this.auditLogRepository.save(entry);
+  }
+
+  /**
+   * Compare old and new versions of a record and return only the fields that changed.
+   * Skips fields listed in `ignore`.
+   */
+  private diffRecords<T extends Record<string, any>>(
+    before: T,
+    after: Partial<T>,
+    ignore: string[] = ['updated_at', 'created_at'],
+  ): Array<{ field: string; old: unknown; new: unknown }> {
+    const changes: Array<{ field: string; old: unknown; new: unknown }> = [];
+    for (const key of Object.keys(after)) {
+      if (ignore.includes(key)) continue;
+      const oldVal = before?.[key];
+      const newVal = (after as any)[key];
+      // Treat null/undefined/empty string as equivalent for non-edit detection
+      const isEmpty = (v: any) => v === null || v === undefined || v === '';
+      if (isEmpty(oldVal) && isEmpty(newVal)) continue;
+      if (JSON.stringify(oldVal) !== JSON.stringify(newVal)) {
+        changes.push({ field: key, old: oldVal, new: newVal });
+      }
+    }
+    return changes;
+  }
+
+  /**
+   * Called after any edit to a job profile. If the profile is currently
+   * "Awaiting Review" or "Awaiting Approval", reverts it to "In Progress",
+   * notifies the assigned reviewer/approver via email with the diff, and
+   * logs both the edit and the auto-revert to the audit log.
+   */
+  private async recordEditAndMaybeRevert(opts: {
+    jobProfileId: number;
+    user: any;
+    summary: string;
+    changes?: Array<{ field: string; old: unknown; new: unknown }> | null;
+  }) {
+    const jp = await this.jobProfileRepository.findOne({
+      where: { job_profile_id: opts.jobProfileId },
+      relations: ['approvers', 'approvers.approver'],
+    });
+    if (!jp) return;
+
+    // Always log the edit itself
+    await this.logAuditEvent({
+      jobProfileId: opts.jobProfileId,
+      userId: opts.user.userId,
+      eventType: 'updated',
+      summary: opts.summary,
+      changes: opts.changes ?? null,
+    });
+
+    // Auto-revert if the profile was awaiting action
+    if (jp.status === 'Awaiting Review' || jp.status === 'Awaiting Approval') {
+      const previousStatus = jp.status;
+      await this.jobProfileRepository.update(opts.jobProfileId, {
+        status: 'In Progress',
+      });
+
+      await this.logAuditEvent({
+        jobProfileId: opts.jobProfileId,
+        userId: opts.user.userId,
+        eventType: 'reverted_to_in_progress',
+        summary: `Status auto-reverted from ${previousStatus} to In Progress because the profile was edited.`,
+      });
+
+      // Reset all approver statuses to Pending so the next submission starts fresh
+      await this.jobProfileApproverRepository.update(
+        { job_profile_id: opts.jobProfileId },
+        { status: 'Pending', approved_at: null as any },
+      );
+
+      // Email the assigned reviewer/approver(s) so they know to expect a re-submission
+      const editorName =
+        opts.user.name || opts.user.email || `User #${opts.user.userId}`;
+      const recipients = (jp.approvers || []).filter(
+        (a) => a.approver && a.approver.email,
+      );
+      for (const rec of recipients) {
+        try {
+          await this.emailService.sendJobProfileChangedEmail(
+            rec.approver.email,
+            rec.approver.name || '',
+            jp.job_title,
+            opts.jobProfileId,
+            editorName,
+            opts.summary,
+            opts.changes ?? null,
+          );
+        } catch {
+          /* swallow email errors so the edit still succeeds */
+        }
+      }
+    }
+  }
+
+  /** Public: list the audit log for a job profile (newest first). */
+  async getAuditLog(jobProfileId: number, user: any) {
+    // Reuse the access guard from findOne
+    await this.findOne(jobProfileId, user);
+    const entries = await this.auditLogRepository.find({
+      where: { job_profile_id: jobProfileId },
+      relations: ['user'],
+      order: { created_at: 'DESC' },
+    });
+    // Strip sensitive user fields
+    return entries.map((e) => {
+      if (e.user) {
+        const { password, resetToken, resetTokenExpiry, ...safeUser } =
+          e.user as any;
+        e.user = safeUser;
+      }
+      return e;
+    });
   }
 }

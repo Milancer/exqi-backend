@@ -42,7 +42,11 @@ export class UsersController {
 
     // Send welcome email if user needs to set password
     if (resetToken) {
-      await this.emailService.sendWelcomeEmail(user.email, user.name, resetToken);
+      await this.emailService.sendWelcomeEmail(
+        user.email,
+        user.name,
+        resetToken,
+      );
     }
 
     return user;
@@ -104,7 +108,8 @@ export class UsersController {
   @ApiOperation({ summary: 'Resend invite email to a user' })
   @ApiResponse({ status: 200, description: 'Invite email resent successfully' })
   async resendInvite(@Param('id') id: string) {
-    const { user, resetToken } = await this.usersService.generateInviteToken(+id);
+    const { user, resetToken } =
+      await this.usersService.generateInviteToken(+id);
     await this.emailService.sendWelcomeEmail(user.email, user.name, resetToken);
     return { message: 'Invite resent successfully' };
   }

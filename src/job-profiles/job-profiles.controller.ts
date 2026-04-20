@@ -208,7 +208,12 @@ export class JobProfilesController {
   // ─── Job Profile CRUD ──────────────────────────────────────────
 
   @Post()
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({
     summary: 'Create a new job profile',
   })
@@ -246,7 +251,9 @@ export class JobProfilesController {
   }
 
   @Get('dropdown-options')
-  @ApiOperation({ summary: 'Get lightweight job profile list for dropdowns (id + title only)' })
+  @ApiOperation({
+    summary: 'Get lightweight job profile list for dropdowns (id + title only)',
+  })
   @ApiResponse({ status: 200, description: 'List of job profile options' })
   getDropdownOptions(@Request() req) {
     return this.jobProfilesService.getDropdownOptions(req.user);
@@ -261,7 +268,12 @@ export class JobProfilesController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Update a job profile' })
   @ApiResponse({ status: 200, description: 'Job profile updated successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -287,7 +299,12 @@ export class JobProfilesController {
   }
 
   @Post(':id/competencies')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Add competency to job profile' })
   @ApiResponse({ status: 201, description: 'Competency added successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -300,20 +317,40 @@ export class JobProfilesController {
   }
 
   @Patch(':id/competencies/:competencyId')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Update competency link on a job profile' })
   @ApiResponse({ status: 200, description: 'Competency updated successfully' })
   updateCompetency(
     @Param('id') id: string,
     @Param('competencyId') competencyId: string,
-    @Body() data: { level?: number; is_critical?: boolean; is_differentiating?: boolean },
+    @Body()
+    data: {
+      level?: number;
+      is_critical?: boolean;
+      is_differentiating?: boolean;
+    },
     @Request() req,
   ) {
-    return this.jobProfilesService.updateCompetency(+id, +competencyId, data, req.user);
+    return this.jobProfilesService.updateCompetency(
+      +id,
+      +competencyId,
+      data,
+      req.user,
+    );
   }
 
   @Delete(':id/competencies/:competencyId')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Remove competency from job profile' })
   @ApiResponse({ status: 200, description: 'Competency removed successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -330,7 +367,12 @@ export class JobProfilesController {
   }
 
   @Post(':id/skills')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Add skill to job profile' })
   @ApiResponse({ status: 201, description: 'Skill added successfully' })
   addSkill(@Param('id') id: string, @Body() dto: AddSkillDto, @Request() req) {
@@ -338,7 +380,12 @@ export class JobProfilesController {
   }
 
   @Delete(':id/skills/:skillId')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Remove skill from job profile' })
   @ApiResponse({ status: 200, description: 'Skill removed successfully' })
   removeSkill(
@@ -350,7 +397,12 @@ export class JobProfilesController {
   }
 
   @Post(':id/deliverables')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Add deliverable to job profile' })
   @ApiResponse({ status: 201, description: 'Deliverable added successfully' })
   addDeliverable(
@@ -362,7 +414,12 @@ export class JobProfilesController {
   }
 
   @Delete(':id/deliverables/:deliverableId')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Remove deliverable from job profile' })
   @ApiResponse({ status: 200, description: 'Deliverable removed successfully' })
   removeDeliverable(
@@ -378,7 +435,12 @@ export class JobProfilesController {
   }
 
   @Patch(':id/requirements')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({ summary: 'Update job profile requirements' })
   @ApiResponse({
     status: 200,
@@ -392,25 +454,49 @@ export class JobProfilesController {
     return this.jobProfilesService.updateRequirements(+id, dto, req.user);
   }
 
+  // ─── Audit log ─────────────────────────────────────────────────
+
+  @Get(':id/audit-log')
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
+  @ApiOperation({ summary: 'Get the audit log for a job profile' })
+  getAuditLog(@Param('id') id: string, @Request() req) {
+    return this.jobProfilesService.getAuditLog(+id, req.user);
+  }
+
   // ─── Two-step Review → Approval workflow ──────────────────────
 
   @Post(':id/submit-for-review')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.OFFICE_REVIEWER, UserRole.OFFICE_USER)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
   @ApiOperation({
-    summary: 'Submit job profile for review — assigns reviewer and approver upfront',
+    summary:
+      'Submit job profile for review — assigns reviewer and approver upfront',
   })
-  @ApiResponse({ status: 200, description: 'Submitted for review, reviewer notified' })
+  @ApiResponse({
+    status: 200,
+    description: 'Submitted for review, reviewer notified',
+  })
   submitForReview(
     @Param('id') id: string,
-    @Body() body: { reviewer_id: number; approver_id: number },
+    @Body()
+    body: {
+      reviewer_id?: number;
+      reviewer_email?: string;
+      approver_id?: number;
+      approver_email?: string;
+    },
     @Request() req,
   ) {
-    return this.jobProfilesService.submitForReview(
-      +id,
-      body.reviewer_id,
-      body.approver_id,
-      req.user,
-    );
+    return this.jobProfilesService.submitForReview(+id, body, req.user);
   }
 
   @Post(':id/reviewer-action')
@@ -419,21 +505,33 @@ export class JobProfilesController {
   @ApiResponse({ status: 200, description: 'Reviewer action processed' })
   reviewerAction(
     @Param('id') id: string,
-    @Body() body: { action: 'approve' | 'reject' },
+    @Body() body: { action: 'approve' | 'reject'; comment?: string },
     @Request() req,
   ) {
-    return this.jobProfilesService.reviewerAction(+id, body.action, req.user);
+    return this.jobProfilesService.reviewerAction(
+      +id,
+      body.action,
+      req.user,
+      body.comment,
+    );
   }
 
   @Post(':id/approver-action')
   @Roles(UserRole.OFFICE_MANAGER)
-  @ApiOperation({ summary: 'Approver gives final approval or rejects a job profile' })
+  @ApiOperation({
+    summary: 'Approver gives final approval or rejects a job profile',
+  })
   @ApiResponse({ status: 200, description: 'Approver action processed' })
   approverAction(
     @Param('id') id: string,
-    @Body() body: { action: 'approve' | 'reject' },
+    @Body() body: { action: 'approve' | 'reject'; comment?: string },
     @Request() req,
   ) {
-    return this.jobProfilesService.approverAction(+id, body.action, req.user);
+    return this.jobProfilesService.approverAction(
+      +id,
+      body.action,
+      req.user,
+      body.comment,
+    );
   }
 }

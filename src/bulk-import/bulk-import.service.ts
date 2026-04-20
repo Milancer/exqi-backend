@@ -278,7 +278,7 @@ export class BulkImportService {
     const clusterCache = new Map<string, number>(); // "type::cluster" → id
     const compCache = new Map<string, number>(); // "type::cluster::comp" → id
     let questionsCount = 0;
-    let skippedRows = 0;
+    const skippedRows = 0;
 
     // Group questions by competency to build indicators
     const compQuestions = new Map<
@@ -402,7 +402,7 @@ export class BulkImportService {
     const clusterCache = new Map<string, number>();
     const compCache = new Map<string, number>();
     let questionsCount = 0;
-    let skippedRows = 0;
+    const skippedRows = 0;
 
     for (const row of rows) {
       // Ensure type exists

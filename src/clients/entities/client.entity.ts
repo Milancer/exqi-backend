@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export enum ClientModule {
@@ -66,7 +72,10 @@ export class Client {
   @Column({ nullable: true })
   logo: string;
 
-  @ApiPropertyOptional({ description: 'List of active modules', example: ['JOB_PROFILES', 'COMPETENCY_BASED_INTERVIEWS'] })
+  @ApiPropertyOptional({
+    description: 'List of active modules',
+    example: ['JOB_PROFILES', 'COMPETENCY_BASED_INTERVIEWS'],
+  })
   @Column('text', { array: true, default: [] })
   modules: string[];
 

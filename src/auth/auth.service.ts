@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { EmailService } from '../email/email.service';
@@ -64,13 +69,19 @@ export class AuthService {
     expiry.setHours(expiry.getHours() + 1); // 1 hour for forgot password
 
     await this.usersService.updateResetToken(user.id, token, expiry);
-    await this.emailService.sendPasswordResetEmail(user.email, user.name, token);
+    await this.emailService.sendPasswordResetEmail(
+      user.email,
+      user.name,
+      token,
+    );
 
     return { message: 'If the email exists, a reset link has been sent.' };
   }
 
   // Verify reset token is valid
-  async verifyResetToken(token: string): Promise<{ valid: boolean; email?: string }> {
+  async verifyResetToken(
+    token: string,
+  ): Promise<{ valid: boolean; email?: string }> {
     const user = await this.usersService.findByResetToken(token);
     if (!user) {
       return { valid: false };
@@ -84,7 +95,10 @@ export class AuthService {
   }
 
   // Reset password using token
-  async resetPassword(token: string, newPassword: string): Promise<{ message: string }> {
+  async resetPassword(
+    token: string,
+    newPassword: string,
+  ): Promise<{ message: string }> {
     const user = await this.usersService.findByResetToken(token);
     if (!user) {
       throw new BadRequestException('Invalid or expired reset token');

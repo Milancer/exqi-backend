@@ -75,13 +75,52 @@ export class InterviewsService {
     }
 
     // Map to simple object structure for snapshot
-    const questionSnapshot = questions.map((q) => ({
+    let questionSnapshot = questions.map((q) => ({
       question_id: q.competency_question_id,
       competency_id: q.competency_id,
       question_text: q.question,
       competency_name: q.competency?.competency || 'Unknown',
       level: q.level,
     }));
+
+    // If the caller provided a subset of question IDs, filter the snapshot down
+    // to only those — and require at least one question per competency.
+    if (dto.selected_question_ids && dto.selected_question_ids.length > 0) {
+      const selectedIdSet = new Set(dto.selected_question_ids);
+      const allowedIdSet = new Set(questionSnapshot.map((q) => q.question_id));
+
+      // Reject any IDs that aren't part of the template's resolvable set
+      const invalid = dto.selected_question_ids.filter(
+        (id) => !allowedIdSet.has(id),
+      );
+      if (invalid.length > 0) {
+        throw new BadRequestException(
+          `These question IDs are not part of the selected template: ${invalid.join(', ')}`,
+        );
+      }
+
+      const filtered = questionSnapshot.filter((q) =>
+        selectedIdSet.has(q.question_id),
+      );
+
+      // Validate every competency in the template has at least one selected question
+      const allCompetencyIds = new Set(
+        questionSnapshot.map((q) => q.competency_id),
+      );
+      const selectedCompetencyIds = new Set(
+        filtered.map((q) => q.competency_id),
+      );
+      const missing = [...allCompetencyIds].filter(
+        (cid) => !selectedCompetencyIds.has(cid),
+      );
+      if (missing.length > 0) {
+        throw new BadRequestException(
+          'At least one question must be selected for every competency in the template.',
+        );
+      }
+
+      questionSnapshot = filtered;
+    }
 
     if (questionSnapshot.length === 0) {
       throw new BadRequestException(
@@ -119,6 +158,47 @@ export class InterviewsService {
     });
 
     return this.findOne(saved.session_id, user);
+  }
+
+  /**
+   * Resolve the full set of questions a template would produce, so the frontend
+   * can render a per-question checkbox picker before creating the interview.
+   */
+  async getTemplateQuestions(templateId: number, user: any) {
+    const template = await this.sessionRepo.manager
+      .getRepository('CbiTemplate')
+      .findOne({ where: { cbi_template_id: templateId } });
+    if (!template) throw new NotFoundException('Template not found');
+
+    let questions: CompetencyQuestion[] = [];
+
+    if (template.questions && template.questions.length > 0) {
+      questions = await this.questionRepo.find({
+        where: { competency_question_id: In(template.questions) },
+        relations: ['competency'],
+      });
+    } else if (template.competencies && template.competencies.length > 0) {
+      for (const comp of template.competencies) {
+        const matching = await this.questionRepo.find({
+          where: {
+            competency_id: comp.competency_id,
+            level: comp.level,
+            client_id: In([1, user.clientId || 1]),
+            status: 'Active',
+          },
+          relations: ['competency'],
+        });
+        questions.push(...matching);
+      }
+    }
+
+    return questions.map((q) => ({
+      question_id: q.competency_question_id,
+      competency_id: q.competency_id,
+      competency_name: q.competency?.competency || 'Unknown',
+      level: q.level,
+      question_text: q.question,
+    }));
   }
 
   async findAll(user: any): Promise<InterviewSession[]> {

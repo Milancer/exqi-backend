@@ -27,7 +27,10 @@ export class JobProfileApprover {
   @Column()
   approver_id: number;
 
-  @ApiProperty({ enum: APPROVER_TYPES, description: 'Whether this person is the reviewer or approver' })
+  @ApiProperty({
+    enum: APPROVER_TYPES,
+    description: 'Whether this person is the reviewer or approver',
+  })
   @Column({
     type: 'enum',
     enum: APPROVER_TYPES,

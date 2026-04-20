@@ -37,7 +37,9 @@ async function importCitaData() {
       JobProfileRequirement,
     ],
     synchronize: false,
-    ssl: process.env.DB_HOST?.includes('railway') ? { rejectUnauthorized: false } : false,
+    ssl: process.env.DB_HOST?.includes('railway')
+      ? { rejectUnauthorized: false }
+      : false,
   });
 
   try {
@@ -46,28 +48,40 @@ async function importCitaData() {
 
     // Load JSON files
     const jpCompetencyTypes = JSON.parse(
-      fs.readFileSync(path.join(DATA_DIR, 'jp_competency_types.json'), 'utf-8')
+      fs.readFileSync(path.join(DATA_DIR, 'jp_competency_types.json'), 'utf-8'),
     );
     const jpCompetencyClusters = JSON.parse(
-      fs.readFileSync(path.join(DATA_DIR, 'jp_competency_clusters.json'), 'utf-8')
+      fs.readFileSync(
+        path.join(DATA_DIR, 'jp_competency_clusters.json'),
+        'utf-8',
+      ),
     );
     const jpCompetencies = JSON.parse(
-      fs.readFileSync(path.join(DATA_DIR, 'jp_competencies.json'), 'utf-8')
+      fs.readFileSync(path.join(DATA_DIR, 'jp_competencies.json'), 'utf-8'),
     );
     const jobProfiles = JSON.parse(
-      fs.readFileSync(path.join(DATA_DIR, 'job_profiles.json'), 'utf-8')
+      fs.readFileSync(path.join(DATA_DIR, 'job_profiles.json'), 'utf-8'),
     );
     const jobProfileDeliverables = JSON.parse(
-      fs.readFileSync(path.join(DATA_DIR, 'job_profile_deliverables.json'), 'utf-8')
+      fs.readFileSync(
+        path.join(DATA_DIR, 'job_profile_deliverables.json'),
+        'utf-8',
+      ),
     );
     const jobProfileCompetencies = JSON.parse(
-      fs.readFileSync(path.join(DATA_DIR, 'job_profile_competencies.json'), 'utf-8')
+      fs.readFileSync(
+        path.join(DATA_DIR, 'job_profile_competencies.json'),
+        'utf-8',
+      ),
     );
     const jobProfileSkills = JSON.parse(
-      fs.readFileSync(path.join(DATA_DIR, 'job_profile_skills.json'), 'utf-8')
+      fs.readFileSync(path.join(DATA_DIR, 'job_profile_skills.json'), 'utf-8'),
     );
     const jobProfileRequirements = JSON.parse(
-      fs.readFileSync(path.join(DATA_DIR, 'job_profile_requirements.json'), 'utf-8')
+      fs.readFileSync(
+        path.join(DATA_DIR, 'job_profile_requirements.json'),
+        'utf-8',
+      ),
     );
 
     // Track ID mappings (old ID -> new ID)
@@ -79,7 +93,9 @@ async function importCitaData() {
     // 1. Import JP Competency Types
     console.log('\n1. Importing JP Competency Types...');
     const typeRepo = dataSource.getRepository(JpCompetencyType);
-    for (const type of jpCompetencyTypes.filter((t: any) => t.status === 'Active')) {
+    for (const type of jpCompetencyTypes.filter(
+      (t: any) => t.status === 'Active',
+    )) {
       const newType = typeRepo.create({
         competency_type: type.competency_type,
         status: 'Active',
@@ -87,16 +103,22 @@ async function importCitaData() {
       });
       const saved = await typeRepo.save(newType);
       typeIdMap.set(type.jp_competency_type_id, saved.jp_competency_type_id);
-      console.log(`  Type: ${type.competency_type} (${type.jp_competency_type_id} -> ${saved.jp_competency_type_id})`);
+      console.log(
+        `  Type: ${type.competency_type} (${type.jp_competency_type_id} -> ${saved.jp_competency_type_id})`,
+      );
     }
 
     // 2. Import JP Competency Clusters
     console.log('\n2. Importing JP Competency Clusters...');
     const clusterRepo = dataSource.getRepository(JpCompetencyCluster);
-    for (const cluster of jpCompetencyClusters.filter((c: any) => c.status === 'Active')) {
+    for (const cluster of jpCompetencyClusters.filter(
+      (c: any) => c.status === 'Active',
+    )) {
       const newTypeId = typeIdMap.get(cluster.jp_competency_type_id);
       if (!newTypeId) {
-        console.log(`  Skipping cluster ${cluster.cluster_name} - type not found`);
+        console.log(
+          `  Skipping cluster ${cluster.cluster_name} - type not found`,
+        );
         continue;
       }
       const newCluster = clusterRepo.create({
@@ -107,18 +129,27 @@ async function importCitaData() {
         client_id: CLIENT_ID,
       });
       const saved = await clusterRepo.save(newCluster);
-      clusterIdMap.set(cluster.jp_competency_cluster_id, saved.jp_competency_cluster_id);
-      console.log(`  Cluster: ${cluster.cluster_name} (${cluster.jp_competency_cluster_id} -> ${saved.jp_competency_cluster_id})`);
+      clusterIdMap.set(
+        cluster.jp_competency_cluster_id,
+        saved.jp_competency_cluster_id,
+      );
+      console.log(
+        `  Cluster: ${cluster.cluster_name} (${cluster.jp_competency_cluster_id} -> ${saved.jp_competency_cluster_id})`,
+      );
     }
 
     // 3. Import JP Competencies
     console.log('\n3. Importing JP Competencies...');
     const competencyRepo = dataSource.getRepository(JpCompetency);
-    for (const comp of jpCompetencies.filter((c: any) => c.status === 'Active')) {
+    for (const comp of jpCompetencies.filter(
+      (c: any) => c.status === 'Active',
+    )) {
       const newTypeId = typeIdMap.get(comp.jp_competency_type_id);
       const newClusterId = clusterIdMap.get(comp.jp_competency_cluster_id);
       if (!newTypeId || !newClusterId) {
-        console.log(`  Skipping competency ${comp.competency} - type or cluster not found`);
+        console.log(
+          `  Skipping competency ${comp.competency} - type or cluster not found`,
+        );
         continue;
       }
       const newComp = competencyRepo.create({
@@ -132,7 +163,9 @@ async function importCitaData() {
       });
       const saved = await competencyRepo.save(newComp);
       competencyIdMap.set(comp.jp_competency_id, saved.jp_competency_id);
-      console.log(`  Competency: ${comp.competency.substring(0, 40)}... (${comp.jp_competency_id} -> ${saved.jp_competency_id})`);
+      console.log(
+        `  Competency: ${comp.competency.substring(0, 40)}... (${comp.jp_competency_id} -> ${saved.jp_competency_id})`,
+      );
     }
 
     // 4. Import Job Profiles (only Active/Approved ones, filter client_id=1)
@@ -140,7 +173,10 @@ async function importCitaData() {
     const jpRepo = dataSource.getRepository(JobProfile);
     const validStatuses = ['Active', 'Approved', 'Awaiting Review', 'Draft'];
     const filteredProfiles = jobProfiles.filter(
-      (jp: any) => jp.client_id === 1 && validStatuses.includes(jp.status) && jp.status !== 'Deleted'
+      (jp: any) =>
+        jp.client_id === 1 &&
+        validStatuses.includes(jp.status) &&
+        jp.status !== 'Deleted',
     );
 
     for (const jp of filteredProfiles) {
@@ -162,7 +198,9 @@ async function importCitaData() {
       });
       const saved = await jpRepo.save(newJp);
       jobProfileIdMap.set(jp.job_profile_id, saved.job_profile_id);
-      console.log(`  Job Profile: ${jp.job_title.substring(0, 50)}... (${jp.job_profile_id} -> ${saved.job_profile_id})`);
+      console.log(
+        `  Job Profile: ${jp.job_title.substring(0, 50)}... (${jp.job_profile_id} -> ${saved.job_profile_id})`,
+      );
     }
 
     // 5. Import Job Profile Deliverables
@@ -256,7 +294,6 @@ async function importCitaData() {
     console.log(`  - Competency Links: ${competencyLinkCount}`);
     console.log(`  - Skills: ${skillCount}`);
     console.log(`  - Requirements: ${reqCount}`);
-
   } catch (error) {
     console.error('Import failed:', error);
     throw error;

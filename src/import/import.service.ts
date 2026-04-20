@@ -50,7 +50,7 @@ export class ImportService {
     const statusMap = {
       'In Progress': 'Draft',
       'Awaiting Approval': 'Awaiting Review',
-      'Approved': 'Approved',
+      Approved: 'Approved',
     };
     return statusMap[status] || 'Draft';
   }
@@ -104,9 +104,7 @@ export class ImportService {
       await this.jpSkillRepo.clear();
       await this.jpCompetencyRepo.clear();
       await this.jobProfileRepo.delete({ client_id: targetClientId });
-      this.logger.log(
-        `Cleared data for client_id: ${targetClientId}`,
-      );
+      this.logger.log(`Cleared data for client_id: ${targetClientId}`);
     } else {
       // Clear all data
       await this.jpRequirementRepo.clear();
@@ -130,9 +128,7 @@ export class ImportService {
 
     // Only import clients that don't exist
     for (const c of data) {
-      const existingClient = existing.find(
-        (ec) => ec.id === c.client_id,
-      );
+      const existingClient = existing.find((ec) => ec.id === c.client_id);
       if (!existingClient) {
         const client = this.clientRepo.create({
           id: c.client_id,
@@ -229,9 +225,11 @@ export class ImportService {
     // Drop the problematic FK constraint if it exists
     try {
       await this.competencyRepo.query(
-        'ALTER TABLE competencies DROP CONSTRAINT IF EXISTS "FK_fdf5bd370a4603c59cb6491c200"'
+        'ALTER TABLE competencies DROP CONSTRAINT IF EXISTS "FK_fdf5bd370a4603c59cb6491c200"',
       );
-      this.logger.log('Dropped FK constraint on competencies.competency_cluster_id');
+      this.logger.log(
+        'Dropped FK constraint on competencies.competency_cluster_id',
+      );
     } catch (error) {
       this.logger.warn('Could not drop FK constraint:', error.message);
     }
@@ -312,7 +310,7 @@ export class ImportService {
     // Drop problematic FK constraints if they exist
     try {
       await this.jobProfileRepo.query(
-        'ALTER TABLE job_profiles DROP CONSTRAINT IF EXISTS "FK_06ece0d35ec4ce91a7d69101b5a"'
+        'ALTER TABLE job_profiles DROP CONSTRAINT IF EXISTS "FK_06ece0d35ec4ce91a7d69101b5a"',
       );
       this.logger.log('Dropped FK constraint on job_profiles');
     } catch (error) {
@@ -349,7 +347,9 @@ export class ImportService {
     );
 
     await this.jobProfileRepo.save(profiles);
-    this.logger.log(`✅ Imported ${profiles.length} job profiles (all clients)`);
+    this.logger.log(
+      `✅ Imported ${profiles.length} job profiles (all clients)`,
+    );
   }
 
   private async importJobProfileRelatedData(clientId: number) {
@@ -407,7 +407,7 @@ export class ImportService {
     // Drop problematic FK constraints if they exist
     try {
       await this.jpCompetencyRepo.query(
-        'ALTER TABLE job_profile_competencies DROP CONSTRAINT IF EXISTS "FK_0ce1111da7e6d9d8dbfa2fb7647"'
+        'ALTER TABLE job_profile_competencies DROP CONSTRAINT IF EXISTS "FK_0ce1111da7e6d9d8dbfa2fb7647"',
       );
       this.logger.log('Dropped FK constraint on job_profile_competencies');
     } catch (error) {
@@ -498,10 +498,7 @@ export class ImportService {
           .filter(Boolean)
           .join(' | '),
         experience: jpr.work_experience,
-        certifications: [
-          jpr.certification,
-          jpr.professional_body_registration,
-        ]
+        certifications: [jpr.certification, jpr.professional_body_registration]
           .filter(Boolean)
           .join(' | '),
         other_requirements: jpr.knowledge,
