@@ -38,6 +38,23 @@ export class JobProfileRequirement {
   @Column('text', { nullable: true })
   other_requirements: string;
 
+  // ─── Structured fields (aligned with old EXQI) ──────────────
+  @ApiPropertyOptional({ description: 'Minimum qualification' })
+  @Column('text', { nullable: true })
+  minimum_qualification: string | null;
+
+  @ApiPropertyOptional({ description: 'Preferred qualification' })
+  @Column('text', { nullable: true })
+  preferred_qualification: string | null;
+
+  @ApiPropertyOptional({ description: 'Professional body registration' })
+  @Column('text', { nullable: true })
+  professional_body_registration: string | null;
+
+  @ApiPropertyOptional({ description: 'Knowledge required' })
+  @Column('text', { nullable: true })
+  knowledge: string | null;
+
   @ApiProperty({ enum: ['Active', 'Inactive'] })
   @Column({
     type: 'enum',

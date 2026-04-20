@@ -493,42 +493,62 @@ async function importClient(clientName: string) {
     });
     console.log(`   ${jpMap.size} job profiles\n`);
 
-    // 9. Deliverables (check existing to avoid duplicates)
-    console.log('9. Deliverables...');
-    const existDeliverables = await ds.query(
-      `SELECT job_profile_id, deliverable FROM job_profile_deliverables`,
-    );
-    const existDelKeys = new Set(
-      existDeliverables.map(
-        (d: any) => `${d.job_profile_id}-${d.deliverable?.substring(0, 100)}`,
-      ),
-    );
+    // 9. Deliverables — idempotent: per-matched-profile wipe + insert structured
+    console.log('9. Deliverables (structured: kpa/kpis/responsibilities/weight)...');
+    const matchedNewIds = new Set([...jpMap.values()]);
     const delRecs = jpDeliverables
-      .filter((d) => jpIds.has(d.job_profile_id) && jpMap.has(d.job_profile_id))
-      .map((d) => ({
-        job_profile_id: jpMap.get(d.job_profile_id),
-        deliverable: (
-          [d.kpa, d.kpis, d.responsibilities].filter(Boolean).join(' | ') ||
-          d.deliverable ||
-          ''
-        ).substring(0, 5000),
-        sequence: d.weight || d.sequence || 1,
-        status: 'Active',
-      }))
       .filter(
         (d) =>
-          !existDelKeys.has(
-            `${d.job_profile_id}-${d.deliverable?.substring(0, 100)}`,
-          ),
+          d.status === 'Active' &&
+          jpIds.has(d.job_profile_id) &&
+          jpMap.has(d.job_profile_id),
+      )
+      .map((d, idx) => ({
+        job_profile_id: jpMap.get(d.job_profile_id),
+        // Keep `deliverable` populated (NOT NULL column) using KPA as the headline fallback
+        deliverable: (d.kpa || d.responsibilities || '(no KPA)').substring(0, 5000),
+        sequence: idx + 1,
+        kpa: d.kpa || null,
+        kpis: d.kpis || null,
+        responsibilities: d.responsibilities || null,
+        weight: d.weight ?? null,
+        status: 'Active',
+      }));
+
+    if (matchedNewIds.size > 0) {
+      // Wipe existing rows for matched profiles (in batches to respect SQL parameter limits)
+      const idsArr = [...matchedNewIds];
+      const wipeBatch = 1000;
+      for (let i = 0; i < idsArr.length; i += wipeBatch) {
+        const batch = idsArr.slice(i, i + wipeBatch);
+        await ds.query(
+          `DELETE FROM job_profile_deliverables WHERE job_profile_id = ANY($1::int[])`,
+          [batch],
+        );
+      }
+      console.log(
+        `   wiped existing deliverables for ${idsArr.length} matched profiles`,
       );
-    if (delRecs.length > 0)
+    }
+
+    if (delRecs.length > 0) {
       await batchInsert(
         ds,
         'job_profile_deliverables',
-        ['job_profile_id', 'deliverable', 'sequence', 'status'],
+        [
+          'job_profile_id',
+          'deliverable',
+          'sequence',
+          'kpa',
+          'kpis',
+          'responsibilities',
+          'weight',
+          'status',
+        ],
         delRecs,
       );
-    console.log(`   ${delRecs.length} deliverables (skipped existing)\n`);
+    }
+    console.log(`   ${delRecs.length} deliverables inserted\n`);
 
     // 10. JP Competencies (check existing to avoid duplicates)
     console.log('10. JP Competencies...');
@@ -604,38 +624,46 @@ async function importClient(clientName: string) {
       );
     console.log(`   ${jpsRecs.length} jp skills (skipped existing)\n`);
 
-    // 12. JP Requirements (one per job profile - check existing)
-    console.log('12. JP Requirements...');
-    const existReqs = await ds.query(
-      `SELECT job_profile_id FROM job_profile_requirements`,
-    );
-    const existReqJpIds = new Set(existReqs.map((r: any) => r.job_profile_id));
+    // 12. JP Requirements — idempotent: per-matched-profile wipe + insert structured
+    console.log('12. JP Requirements (structured: minimum_qualification/preferred_qualification/professional_body_registration/knowledge)...');
     const jprRecs = jpRequirements
       .filter(
         (jpr) =>
+          jpr.status === 'Active' &&
           jpIds.has(jpr.job_profile_id) &&
-          jpMap.has(jpr.job_profile_id) &&
-          !existReqJpIds.has(jpMap.get(jpr.job_profile_id)),
+          jpMap.has(jpr.job_profile_id),
       )
       .map((jpr) => ({
         job_profile_id: jpMap.get(jpr.job_profile_id),
-        education:
-          [jpr.minimum_qualification, jpr.preferred_qualification]
-            .filter(Boolean)
-            .join(' | ') ||
-          jpr.education ||
-          '',
+        // Legacy fields: keep populated for backwards compat with old code paths
+        education: jpr.minimum_qualification || jpr.education || '',
         experience: jpr.work_experience || jpr.experience || '',
-        certifications:
-          [jpr.certification, jpr.professional_body_registration]
-            .filter(Boolean)
-            .join(' | ') ||
-          jpr.certifications ||
-          '',
-        other_requirements: jpr.knowledge || jpr.other_requirements || '',
+        certifications: jpr.certification || jpr.certifications || '',
+        other_requirements: '', // old EXQI didn't have this
+        // Structured fields (preferred going forward)
+        minimum_qualification: jpr.minimum_qualification || null,
+        preferred_qualification: jpr.preferred_qualification || null,
+        professional_body_registration: jpr.professional_body_registration || null,
+        knowledge: jpr.knowledge || null,
         status: 'Active',
       }));
-    if (jprRecs.length > 0)
+
+    if (matchedNewIds.size > 0) {
+      const idsArr = [...matchedNewIds];
+      const wipeBatch = 1000;
+      for (let i = 0; i < idsArr.length; i += wipeBatch) {
+        const batch = idsArr.slice(i, i + wipeBatch);
+        await ds.query(
+          `DELETE FROM job_profile_requirements WHERE job_profile_id = ANY($1::int[])`,
+          [batch],
+        );
+      }
+      console.log(
+        `   wiped existing requirements for ${idsArr.length} matched profiles`,
+      );
+    }
+
+    if (jprRecs.length > 0) {
       await batchInsert(
         ds,
         'job_profile_requirements',
@@ -645,11 +673,16 @@ async function importClient(clientName: string) {
           'experience',
           'certifications',
           'other_requirements',
+          'minimum_qualification',
+          'preferred_qualification',
+          'professional_body_registration',
+          'knowledge',
           'status',
         ],
         jprRecs,
       );
-    console.log(`   ${jprRecs.length} jp requirements\n`);
+    }
+    console.log(`   ${jprRecs.length} jp requirements inserted\n`);
 
     console.log(`${'='.repeat(60)}`);
     console.log(`  DONE: ${clientName.toUpperCase()}`);

@@ -25,4 +25,24 @@ export class UpdateRequirementsDto {
   @IsOptional()
   @IsString()
   other_requirements?: string;
+
+  @ApiPropertyOptional({ description: 'Minimum qualification' })
+  @IsOptional()
+  @IsString()
+  minimum_qualification?: string;
+
+  @ApiPropertyOptional({ description: 'Preferred qualification' })
+  @IsOptional()
+  @IsString()
+  preferred_qualification?: string;
+
+  @ApiPropertyOptional({ description: 'Professional body registration' })
+  @IsOptional()
+  @IsString()
+  professional_body_registration?: string;
+
+  @ApiPropertyOptional({ description: 'Knowledge required' })
+  @IsOptional()
+  @IsString()
+  knowledge?: string;
 }

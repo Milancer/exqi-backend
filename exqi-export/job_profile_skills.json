@@ -166,5 +166,75 @@
     "skill_id": 5,
     "level": 5,
     "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 73,
+    "job_profile_id": 1604,
+    "skill_id": 1,
+    "level": 3,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 74,
+    "job_profile_id": 1604,
+    "skill_id": 2,
+    "level": 3,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 75,
+    "job_profile_id": 1604,
+    "skill_id": 3,
+    "level": 3,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 80,
+    "job_profile_id": 1610,
+    "skill_id": 1,
+    "level": 4,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 81,
+    "job_profile_id": 1610,
+    "skill_id": 2,
+    "level": 4,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 82,
+    "job_profile_id": 1610,
+    "skill_id": 3,
+    "level": 4,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 83,
+    "job_profile_id": 1610,
+    "skill_id": 5,
+    "level": 3,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 90,
+    "job_profile_id": 523,
+    "skill_id": 1,
+    "level": 3,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 91,
+    "job_profile_id": 523,
+    "skill_id": 2,
+    "level": 3,
+    "status": "Active"
+  },
+  {
+    "job_profile_skill_id": 92,
+    "job_profile_id": 523,
+    "skill_id": 5,
+    "level": 3,
+    "status": "Active"
   }
 ]

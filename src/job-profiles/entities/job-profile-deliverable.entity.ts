@@ -26,6 +26,23 @@ export class JobProfileDeliverable {
   @Column({ default: 1 })
   sequence: number;
 
+  // ─── Structured fields (aligned with old EXQI) ──────────────
+  @ApiProperty({ description: 'Key Performance Area (short headline)', required: false })
+  @Column('text', { nullable: true })
+  kpa: string | null;
+
+  @ApiProperty({ description: 'Key Performance Indicators (one per line)', required: false })
+  @Column('text', { nullable: true })
+  kpis: string | null;
+
+  @ApiProperty({ description: 'Responsibilities (one per line)', required: false })
+  @Column('text', { nullable: true })
+  responsibilities: string | null;
+
+  @ApiProperty({ description: 'Relative weight 0–100', required: false })
+  @Column({ type: 'int', nullable: true })
+  weight: number | null;
+
   @ApiProperty({ enum: ['Active', 'Inactive'] })
   @Column({
     type: 'enum',
