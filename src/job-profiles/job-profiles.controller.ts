@@ -22,6 +22,7 @@ import { UpdateJobProfileDto } from './dto/update-job-profile.dto';
 import { AddCompetencyDto } from './dto/add-competency.dto';
 import { AddSkillDto } from './dto/add-skill.dto';
 import { AddDeliverableDto } from './dto/add-deliverable.dto';
+import { UpdateDeliverableDto } from './dto/update-deliverable.dto';
 import { UpdateRequirementsDto } from './dto/update-requirements.dto';
 import { CreateJpCompetencyTypeDto } from './dto/jp-competency-type/create-jp-competency-type.dto';
 import { UpdateJpCompetencyTypeDto } from './dto/jp-competency-type/update-jp-competency-type.dto';
@@ -430,6 +431,29 @@ export class JobProfilesController {
     return this.jobProfilesService.removeDeliverable(
       +id,
       +deliverableId,
+      req.user,
+    );
+  }
+
+  @Patch(':id/deliverables/:deliverableId')
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.OFFICE_MANAGER,
+    UserRole.OFFICE_REVIEWER,
+    UserRole.OFFICE_USER,
+  )
+  @ApiOperation({ summary: 'Update a deliverable (KPA / KPIs / Responsibilities)' })
+  @ApiResponse({ status: 200, description: 'Deliverable updated successfully' })
+  updateDeliverable(
+    @Param('id') id: string,
+    @Param('deliverableId') deliverableId: string,
+    @Body() dto: UpdateDeliverableDto,
+    @Request() req,
+  ) {
+    return this.jobProfilesService.updateDeliverable(
+      +id,
+      +deliverableId,
+      dto,
       req.user,
     );
   }

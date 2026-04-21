@@ -1042,6 +1042,71 @@ export class JobProfilesService {
     return { message: 'Deliverable removed from job profile successfully' };
   }
 
+  async updateDeliverable(
+    jobProfileId: number,
+    deliverableId: number,
+    data: {
+      deliverable?: string;
+      sequence?: number;
+      kpa?: string;
+      kpis?: string;
+      responsibilities?: string;
+      weight?: number;
+    },
+    user: any,
+  ) {
+    await this.findOne(jobProfileId, user);
+
+    const deliverable = await this.jobProfileDeliverableRepository.findOne({
+      where: {
+        job_profile_deliverable_id: deliverableId,
+        job_profile_id: jobProfileId,
+      },
+    });
+
+    if (!deliverable) {
+      throw new NotFoundException('Deliverable not found in this job profile');
+    }
+
+    const before = {
+      deliverable: deliverable.deliverable,
+      sequence: deliverable.sequence,
+      kpa: deliverable.kpa,
+      kpis: deliverable.kpis,
+      responsibilities: deliverable.responsibilities,
+      weight: deliverable.weight,
+    };
+
+    if (data.deliverable !== undefined) deliverable.deliverable = data.deliverable;
+    if (data.sequence !== undefined) deliverable.sequence = data.sequence;
+    if (data.kpa !== undefined) deliverable.kpa = data.kpa || null;
+    if (data.kpis !== undefined) deliverable.kpis = data.kpis || null;
+    if (data.responsibilities !== undefined)
+      deliverable.responsibilities = data.responsibilities || null;
+    if (data.weight !== undefined) deliverable.weight = data.weight;
+
+    // `deliverable` column is NOT NULL — fall back to KPA if caller wiped it
+    if (!deliverable.deliverable) {
+      deliverable.deliverable = deliverable.kpa || '(no KPA)';
+    }
+
+    const saved = await this.jobProfileDeliverableRepository.save(deliverable);
+    const changes = this.diffRecords(before as any, data as any);
+    if (changes.length > 0) {
+      await this.recordEditAndMaybeRevert({
+        jobProfileId,
+        user,
+        summary: `Deliverable updated: ${changes.map((c) => c.field).join(', ')}`,
+        changes: changes.map((c) => ({
+          field: `deliverable#${deliverableId}.${c.field}`,
+          old: c.old,
+          new: c.new,
+        })),
+      });
+    }
+    return saved;
+  }
+
   // ─── Requirements ──────────────────────────────────────────────
 
   async updateRequirements(
