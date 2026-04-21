@@ -64,6 +64,13 @@ export class JobProfileAuditLog {
   @Column({ type: 'jsonb', nullable: true })
   changes: Array<{ field: string; old: unknown; new: unknown }> | null;
 
+  @ApiPropertyOptional({
+    description:
+      'Full JSON snapshot of the job profile (with competencies, skills, deliverables, requirements) captured at the time of this event. Intended for legal/audit archival so that an exact point-in-time copy can be reconstructed.',
+  })
+  @Column({ type: 'jsonb', nullable: true })
+  snapshot: Record<string, unknown> | null;
+
   @ApiProperty()
   @CreateDateColumn()
   created_at: Date;

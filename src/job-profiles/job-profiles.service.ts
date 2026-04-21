@@ -571,6 +571,7 @@ export class JobProfilesService {
       userId: user.userId,
       eventType: 'submitted_for_review',
       summary: `Submitted for review. Reviewer: ${reviewer.email}, Approver: ${approver.email}`,
+      captureSnapshot: true,
     });
 
     return this.findOne(jobProfileId, user);
@@ -729,6 +730,7 @@ export class JobProfilesService {
           ? 'Reviewer approved the job profile'
           : 'Reviewer rejected the job profile',
       comment: comment || undefined,
+      captureSnapshot: true,
     });
 
     return this.findOne(jobProfileId, user);
@@ -828,6 +830,7 @@ export class JobProfilesService {
           ? 'Approver approved the job profile'
           : 'Approver rejected the job profile',
       comment: comment || undefined,
+      captureSnapshot: true,
     });
 
     return this.findOne(jobProfileId, user);
@@ -1332,7 +1335,22 @@ export class JobProfilesService {
     summary?: string;
     comment?: string;
     changes?: Array<{ field: string; old: unknown; new: unknown }> | null;
+    /**
+     * If true, capture a full JSON snapshot of the job profile (with all
+     * relations) and store it on the audit row. Used for legal archival
+     * of every state-changing event.
+     */
+    captureSnapshot?: boolean;
   }) {
+    let snapshot: Record<string, unknown> | null = null;
+    if (opts.captureSnapshot) {
+      try {
+        snapshot = await this.buildFullSnapshot(opts.jobProfileId);
+      } catch {
+        // Snapshotting is best-effort — never block the audit entry
+        snapshot = null;
+      }
+    }
     const entry = this.auditLogRepository.create({
       job_profile_id: opts.jobProfileId,
       user_id: opts.userId,
@@ -1340,8 +1358,47 @@ export class JobProfilesService {
       summary: opts.summary ?? null,
       comment: opts.comment ?? null,
       changes: opts.changes ?? null,
+      snapshot,
     });
     await this.auditLogRepository.save(entry);
+  }
+
+  /**
+   * Build a full read-only JSON snapshot of a job profile, including all
+   * relations (competencies, skills, deliverables, requirements, approvers).
+   * Strips sensitive user fields from approver rows.
+   */
+  private async buildFullSnapshot(
+    jobProfileId: number,
+  ): Promise<Record<string, unknown>> {
+    const jp = await this.jobProfileRepository.findOne({
+      where: { job_profile_id: jobProfileId },
+      relations: [
+        'competencies',
+        'competencies.jpCompetency',
+        'competencies.jpCompetency.competencyType',
+        'competencies.jpCompetency.competencyCluster',
+        'skills',
+        'skills.skill',
+        'deliverables',
+        'requirements',
+        'approvers',
+        'approvers.approver',
+      ],
+    });
+    if (!jp) return { missing: true, job_profile_id: jobProfileId };
+    const scrubbed = JSON.parse(JSON.stringify(jp));
+    // Strip sensitive fields from nested approver users
+    if (Array.isArray(scrubbed.approvers)) {
+      for (const a of scrubbed.approvers) {
+        if (a?.approver) {
+          delete a.approver.password;
+          delete a.approver.resetToken;
+          delete a.approver.resetTokenExpiry;
+        }
+      }
+    }
+    return scrubbed;
   }
 
   /**
@@ -1386,13 +1443,14 @@ export class JobProfilesService {
     });
     if (!jp) return;
 
-    // Always log the edit itself
+    // Always log the edit itself — with a full snapshot for legal archival
     await this.logAuditEvent({
       jobProfileId: opts.jobProfileId,
       userId: opts.user.userId,
       eventType: 'updated',
       summary: opts.summary,
       changes: opts.changes ?? null,
+      captureSnapshot: true,
     });
 
     // Auto-revert if the profile was awaiting action

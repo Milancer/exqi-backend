@@ -161,6 +161,100 @@ export class InterviewsService {
   }
 
   /**
+   * Edit an interview session after creation. Allows changing candidate,
+   * interviewer, or the selected question set (which replaces the snapshot).
+   * Cannot edit Completed sessions — the candidate has already responded and
+   * the score is tied to the original question set.
+   */
+  async update(
+    sessionId: number,
+    dto: {
+      candidate_id?: number;
+      interviewer_id?: number;
+      selected_question_ids?: number[];
+    },
+    user: any,
+  ): Promise<InterviewSession> {
+    const session = await this.findOne(sessionId, user);
+
+    if (session.status === SessionStatus.COMPLETED) {
+      throw new BadRequestException(
+        'Cannot edit a completed interview. Responses are tied to the original questions.',
+      );
+    }
+
+    if (dto.candidate_id !== undefined) session.candidate_id = dto.candidate_id;
+    if (dto.interviewer_id !== undefined) session.interviewer_id = dto.interviewer_id;
+
+    if (dto.selected_question_ids) {
+      // Re-resolve the template question set, then filter by selection
+      const template = await this.sessionRepo.manager
+        .getRepository('CbiTemplate')
+        .findOne({ where: { cbi_template_id: session.cbi_template_id } });
+      if (!template) throw new NotFoundException('Template not found');
+
+      let questions: CompetencyQuestion[] = [];
+      if (template.questions && template.questions.length > 0) {
+        questions = await this.questionRepo.find({
+          where: { competency_question_id: In(template.questions) },
+          relations: ['competency'],
+        });
+      } else if (template.competencies && template.competencies.length > 0) {
+        for (const comp of template.competencies) {
+          const matching = await this.questionRepo.find({
+            where: {
+              competency_id: comp.competency_id,
+              level: comp.level,
+              client_id: In([1, user.clientId || 1]),
+              status: 'Active',
+            },
+            relations: ['competency'],
+          });
+          questions.push(...matching);
+        }
+      }
+
+      const allSnapshot = questions.map((q) => ({
+        question_id: q.competency_question_id,
+        competency_id: q.competency_id,
+        question_text: q.question,
+        competency_name: q.competency?.competency || 'Unknown',
+        level: q.level,
+      }));
+
+      const selectedIdSet = new Set(dto.selected_question_ids);
+      const allowedIdSet = new Set(allSnapshot.map((q) => q.question_id));
+      const invalid = dto.selected_question_ids.filter(
+        (id) => !allowedIdSet.has(id),
+      );
+      if (invalid.length > 0) {
+        throw new BadRequestException(
+          `These question IDs are not part of the selected template: ${invalid.join(', ')}`,
+        );
+      }
+
+      const filtered = allSnapshot.filter((q) => selectedIdSet.has(q.question_id));
+      const allCompIds = new Set(allSnapshot.map((q) => q.competency_id));
+      const pickedCompIds = new Set(filtered.map((q) => q.competency_id));
+      const missing = [...allCompIds].filter((cid) => !pickedCompIds.has(cid));
+      if (missing.length > 0) {
+        throw new BadRequestException(
+          'At least one question must be selected for every competency in the template.',
+        );
+      }
+      if (filtered.length === 0) {
+        throw new BadRequestException(
+          'An interview must have at least one question.',
+        );
+      }
+      session.questions = filtered;
+    }
+
+    await this.sessionRepo.save(session);
+    return this.findOne(sessionId, user);
+  }
+
+  /**
    * Resolve the full set of questions a template would produce, so the frontend
    * can render a per-question checkbox picker before creating the interview.
    */

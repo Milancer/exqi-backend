@@ -128,6 +128,27 @@ export class InterviewsController {
     return this.service.updateScores(+id, dto, req.user);
   }
 
+  @Patch(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary:
+      'Edit an interview session (candidate / interviewer / selected questions) before it is completed',
+  })
+  update(
+    @Param('id') id: string,
+    @Body()
+    dto: {
+      candidate_id?: number;
+      interviewer_id?: number;
+      selected_question_ids?: number[];
+    },
+    @Request() req,
+  ) {
+    return this.service.update(+id, dto, req.user);
+  }
+
   @Delete(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
