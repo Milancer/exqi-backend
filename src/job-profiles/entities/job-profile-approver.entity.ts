@@ -46,6 +46,13 @@ export class JobProfileApprover {
   })
   status: string;
 
+  @ApiProperty({
+    description:
+      'Which submission-for-review round this row belongs to. Starts at 1 and increments each time a Job Profile is re-submitted. Rows from prior rounds are preserved for audit purposes.',
+  })
+  @Column({ type: 'int', default: 1 })
+  round_number: number;
+
   @ApiPropertyOptional({ description: 'When this approver took action' })
   @Column({ type: 'timestamp', nullable: true })
   approved_at: Date;

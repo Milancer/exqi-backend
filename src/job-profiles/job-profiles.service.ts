@@ -487,25 +487,32 @@ export class JobProfilesService {
       );
     }
 
-    // Remove any existing records
-    await this.jobProfileApproverRepository.delete({
-      job_profile_id: jobProfileId,
+    // Preserve history across re-submissions: instead of deleting prior
+    // reviewer/approver rows, compute the next round number and append new
+    // rows. The Review & Approval Status Table on the frontend groups rows
+    // by round so all prior approvals remain visible for audit purposes.
+    const latest = await this.jobProfileApproverRepository.findOne({
+      where: { job_profile_id: jobProfileId },
+      order: { round_number: 'DESC' },
     });
+    const nextRound = (latest?.round_number ?? 0) + 1;
 
-    // Create reviewer record
+    // Create reviewer record for this round
     const reviewerRecord = this.jobProfileApproverRepository.create({
       job_profile_id: jobProfileId,
       approver_id: reviewer.id,
       type: 'reviewer',
       status: 'Pending',
+      round_number: nextRound,
     });
 
-    // Create approver record
+    // Create approver record for this round
     const approverRecord = this.jobProfileApproverRepository.create({
       job_profile_id: jobProfileId,
       approver_id: approver.id,
       type: 'approver',
       status: 'Pending',
+      round_number: nextRound,
     });
 
     await this.jobProfileApproverRepository.save([
@@ -549,14 +556,15 @@ export class JobProfilesService {
       );
     }
 
-    if (approverWasCreated && approverResetToken) {
-      await this.emailService.sendReviewerInviteEmail(
-        approver.email,
-        jp.job_title,
-        jobProfileId,
-        approverResetToken,
-      );
-    }
+    // Note: the approver is intentionally NOT emailed here. They are contacted
+    // only after the reviewer approves (see reviewerAction below). This keeps
+    // the review → approval sequence strictly ordered so that a newly-invited
+    // approver cannot act on the profile before the reviewer has reviewed it.
+    // `approverWasCreated` / `approverResetToken` are no longer consumed at
+    // submit time — a fresh reset token is issued in reviewerAction if the
+    // approver still hasn't set their password by then.
+    void approverWasCreated;
+    void approverResetToken;
 
     await this.logAuditEvent({
       jobProfileId,
@@ -583,12 +591,20 @@ export class JobProfilesService {
       );
     }
 
-    // Find this user's reviewer record
+    // Only the current (latest) round is actionable — historical rows from
+    // prior re-submissions are kept for audit but must not be touched here.
+    const currentRound = Math.max(
+      1,
+      ...(jp.approvers || []).map((a) => a.round_number ?? 1),
+    );
+
+    // Find this user's reviewer record for the current round
     const reviewerRecord = await this.jobProfileApproverRepository.findOne({
       where: {
         job_profile_id: jobProfileId,
         approver_id: user.userId,
         type: 'reviewer',
+        round_number: currentRound,
       },
     });
 
@@ -632,9 +648,13 @@ export class JobProfilesService {
       jp.reviewed_at = new Date();
       await this.jobProfileRepository.save(jp);
 
-      // Find the approver record and notify them
+      // Find the approver record for the current round and notify them
       const approverRecord = await this.jobProfileApproverRepository.findOne({
-        where: { job_profile_id: jobProfileId, type: 'approver' },
+        where: {
+          job_profile_id: jobProfileId,
+          type: 'approver',
+          round_number: currentRound,
+        },
         relations: ['approver'],
       });
 
@@ -650,12 +670,39 @@ export class JobProfilesService {
         });
 
         if (approverRecord.approver) {
-          await this.emailService.sendReviewerAssignmentEmail(
-            approverRecord.approver.email,
-            approverRecord.approver.name,
-            jp.job_title,
-            jobProfileId,
-          );
+          // If the approver was invited by email at submit time and still
+          // hasn't completed account setup, they won't have a usable password
+          // — send them the invite-with-setup email so they can set a
+          // password and land on the profile. Regenerate a fresh reset token
+          // (never reuse the old one: it may be expired, and one-time-use
+          // tokens shouldn't be reissued verbatim).
+          const approverUser = await this.userRepository.findOne({
+            where: { id: approverRecord.approver_id },
+          });
+          const needsInvite = !!approverUser?.resetToken;
+
+          if (needsInvite && approverUser) {
+            const freshToken = crypto.randomBytes(32).toString('hex');
+            const resetTokenExpiry = new Date();
+            resetTokenExpiry.setHours(resetTokenExpiry.getHours() + 72);
+            await this.userRepository.update(approverUser.id, {
+              resetToken: freshToken,
+              resetTokenExpiry,
+            });
+            await this.emailService.sendReviewerInviteEmail(
+              approverUser.email,
+              jp.job_title,
+              jobProfileId,
+              freshToken,
+            );
+          } else {
+            await this.emailService.sendReviewerAssignmentEmail(
+              approverRecord.approver.email,
+              approverRecord.approver.name,
+              jp.job_title,
+              jobProfileId,
+            );
+          }
         }
       }
 
@@ -702,12 +749,20 @@ export class JobProfilesService {
       );
     }
 
-    // Find this user's approver record
+    // Only the current (latest) round is actionable — historical rows from
+    // prior re-submissions are kept for audit but must not be touched here.
+    const currentRound = Math.max(
+      1,
+      ...(jp.approvers || []).map((a) => a.round_number ?? 1),
+    );
+
+    // Find this user's approver record for the current round
     const approverRecord = await this.jobProfileApproverRepository.findOne({
       where: {
         job_profile_id: jobProfileId,
         approver_id: user.userId,
         type: 'approver',
+        round_number: currentRound,
       },
     });
 
@@ -1289,17 +1344,23 @@ export class JobProfilesService {
         summary: `Status auto-reverted from ${previousStatus} to In Progress because the profile was edited.`,
       });
 
-      // Reset all approver statuses to Pending so the next submission starts fresh
-      await this.jobProfileApproverRepository.update(
-        { job_profile_id: opts.jobProfileId },
-        { status: 'Pending', approved_at: null as any },
-      );
+      // NOTE: Historical approver rows (from this or prior rounds) are now
+      // immutable audit records — we no longer reset them to Pending here.
+      // The next call to submitForReview appends a fresh round with Pending
+      // rows of its own, so no reset is required.
 
-      // Email the assigned reviewer/approver(s) so they know to expect a re-submission
+      // Email only the CURRENT round's reviewer/approver — historical rows
+      // from previous rounds should not be re-emailed every time the profile
+      // is edited.
       const editorName =
         opts.user.name || opts.user.email || `User #${opts.user.userId}`;
+      const currentRound = Math.max(
+        1,
+        ...(jp.approvers || []).map((a) => a.round_number ?? 1),
+      );
       const recipients = (jp.approvers || []).filter(
-        (a) => a.approver && a.approver.email,
+        (a) =>
+          a.round_number === currentRound && a.approver && a.approver.email,
       );
       for (const rec of recipients) {
         try {
