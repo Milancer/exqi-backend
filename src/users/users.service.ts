@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User, UserRole } from './entities/user.entity';
+import { User, UserRole, UserStatus } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -46,13 +46,19 @@ export class UsersService {
   }
 
   async findAll(currentUser: any) {
+    // Hide soft-deleted (INACTIVE) users from the list — they are preserved
+    // in the database for audit-trail integrity (they may still be referenced
+    // as approvers on historical job profiles, in notifications, etc.) but
+    // should no longer appear in the app.
+    const activeOnly = { status: UserStatus.ACTIVE };
+
     // Admins can see all users
     if (currentUser.role === UserRole.ADMIN) {
-      return this.usersRepository.find();
+      return this.usersRepository.find({ where: activeOnly });
     }
     // Others can only see users in their own client
     return this.usersRepository.find({
-      where: { clientId: currentUser.clientId },
+      where: { clientId: currentUser.clientId, status: UserStatus.ACTIVE },
     });
   }
 
@@ -119,8 +125,23 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-  remove(id: number) {
-    return this.usersRepository.delete(id);
+  async remove(id: number) {
+    // Soft-delete: mark the user INACTIVE instead of DELETE so that existing
+    // references (job_profile_approvers, audit logs, notifications, interviews
+    // they were interviewer on, ...) stay intact for auditing. The user is
+    // hidden from the list and cannot sign in (login-time status check lives
+    // in the auth service), but their history is preserved.
+    const user = await this.usersRepository.findOneBy({ id });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    user.status = UserStatus.INACTIVE;
+    // Invalidate any outstanding reset token so an old invite link can't be
+    // used to "revive" a deleted account.
+    user.resetToken = null as unknown as string;
+    user.resetTokenExpiry = null as unknown as Date;
+    await this.usersRepository.save(user);
+    return { success: true, id };
   }
 
   // Update reset token and expiry

@@ -20,7 +20,9 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOneByEmail(email);
-    if (user && (await bcrypt.compare(pass, user.password))) {
+    // Deactivated users (soft-deleted) cannot sign in.
+    if (!user || user.status !== 'ACTIVE') return null;
+    if (await bcrypt.compare(pass, user.password)) {
       const { password, ...result } = user;
       return result;
     }
