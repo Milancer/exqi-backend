@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
@@ -16,7 +20,7 @@ export class UsersService {
 
   async create(
     createUserDto: CreateUserDto,
-  ): Promise<{ user: User; resetToken?: string }> {
+  ): Promise<{ user: User; resetToken?: string; reactivated?: boolean }> {
     const salt = await bcrypt.genSalt();
 
     // If no password provided, generate a random one and create reset token
@@ -32,6 +36,40 @@ export class UsersService {
       resetToken = crypto.randomBytes(32).toString('hex');
       resetTokenExpiry = new Date();
       resetTokenExpiry.setHours(resetTokenExpiry.getHours() + 24); // 24 hours
+    }
+
+    // If a user with this email already exists we need to decide between
+    //   (a) it's an ACTIVE user → real conflict, return 409
+    //   (b) it's a soft-deleted (INACTIVE) user → reactivate in place so
+    //       historical FK references (approvers, audit log, notifications,
+    //       interviews) stay valid. The admin treats this as a "create" but
+    //       under the hood we update the existing row, which is the correct
+    //       audit-preserving behavior.
+    const existing = await this.usersRepository.findOne({
+      where: { email: ILike(createUserDto.email) },
+    });
+    if (existing) {
+      if (existing.status === UserStatus.ACTIVE) {
+        throw new ConflictException(
+          `A user with email ${createUserDto.email} already exists`,
+        );
+      }
+      // Reactivate + update details
+      existing.name = createUserDto.name;
+      existing.surname = createUserDto.surname;
+      existing.idNumber = createUserDto.idNumber ?? '';
+      existing.phoneNumber = createUserDto.phoneNumber ?? '';
+      existing.role = createUserDto.role;
+      existing.clientId = createUserDto.clientId;
+      existing.status = createUserDto.status ?? UserStatus.ACTIVE;
+      existing.password = hashedPassword;
+      if (createUserDto.profilePicture !== undefined) {
+        existing.profilePicture = createUserDto.profilePicture;
+      }
+      existing.resetToken = resetToken as unknown as string;
+      existing.resetTokenExpiry = resetTokenExpiry as unknown as Date;
+      const saved = await this.usersRepository.save(existing);
+      return { user: saved, resetToken, reactivated: true };
     }
 
     const user = this.usersRepository.create({
