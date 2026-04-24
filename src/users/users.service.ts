@@ -54,7 +54,13 @@ export class UsersService {
           `A user with email ${createUserDto.email} already exists`,
         );
       }
-      // Reactivate + update details
+      // Reactivate + update details. ALWAYS issue a fresh invite token (even
+      // if the admin posted a password) so the user has to re-verify via
+      // email — any old lingering token is invalidated.
+      const freshToken = crypto.randomBytes(32).toString('hex');
+      const freshExpiry = new Date();
+      freshExpiry.setHours(freshExpiry.getHours() + 24);
+
       existing.name = createUserDto.name;
       existing.surname = createUserDto.surname;
       existing.idNumber = createUserDto.idNumber ?? '';
@@ -66,10 +72,11 @@ export class UsersService {
       if (createUserDto.profilePicture !== undefined) {
         existing.profilePicture = createUserDto.profilePicture;
       }
-      existing.resetToken = resetToken as unknown as string;
-      existing.resetTokenExpiry = resetTokenExpiry as unknown as Date;
+      existing.resetToken = freshToken;
+      existing.resetTokenExpiry = freshExpiry;
       const saved = await this.usersRepository.save(existing);
-      return { user: saved, resetToken, reactivated: true };
+      // Return the fresh token so the controller triggers the welcome email
+      return { user: saved, resetToken: freshToken, reactivated: true };
     }
 
     const user = this.usersRepository.create({
