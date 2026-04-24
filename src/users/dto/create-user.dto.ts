@@ -21,15 +21,15 @@ export class CreateUserDto {
   @IsNotEmpty()
   surname: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsString()
-  @IsNotEmpty()
-  idNumber: string;
+  @IsOptional()
+  idNumber?: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsString()
-  @IsNotEmpty()
-  phoneNumber: string;
+  @IsOptional()
+  phoneNumber?: string;
 
   @ApiProperty()
   @IsEmail()

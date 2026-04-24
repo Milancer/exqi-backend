@@ -36,6 +36,10 @@ export class UsersService {
 
     const user = this.usersRepository.create({
       ...createUserDto,
+      // idNumber + phoneNumber are optional in the API but the DB columns are
+      // NOT NULL — default them to an empty string so the insert succeeds.
+      idNumber: createUserDto.idNumber ?? '',
+      phoneNumber: createUserDto.phoneNumber ?? '',
       password: hashedPassword,
       resetToken,
       resetTokenExpiry,
