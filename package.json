@@ -24,6 +24,7 @@
     "import:sita": "ts-node -r tsconfig-paths/register src/import-client.ts sita",
     "import:experttech": "ts-node -r tsconfig-paths/register src/import-client.ts experttech",
     "import:competencies": "ts-node -r tsconfig-paths/register src/import-leadership-competencies.ts",
+    "import:business-processes": "ts-node -r tsconfig-paths/register src/import-business-processes.ts",
     "export:excel": "ts-node -r tsconfig-paths/register src/export-job-profiles-excel.ts"
   },
   "dependencies": {

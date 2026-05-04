@@ -37,6 +37,7 @@ import { CreateJpCompetencyClusterDto } from './dto/jp-competency-cluster/create
 import { UpdateJpCompetencyClusterDto } from './dto/jp-competency-cluster/update-jp-competency-cluster.dto';
 import { CreateJpCompetencyDto } from './dto/jp-competency/create-jp-competency.dto';
 import { UpdateJpCompetencyDto } from './dto/jp-competency/update-jp-competency.dto';
+import { BusinessProcessesService } from '../business-processes/business-processes.service';
 
 @Injectable()
 export class JobProfilesService {
@@ -65,6 +66,7 @@ export class JobProfilesService {
     private readonly userRepository: Repository<User>,
     private readonly notificationsService: NotificationsService,
     private readonly emailService: EmailService,
+    private readonly businessProcessesService: BusinessProcessesService,
   ) {}
 
   // ─── Job Profile CRUD ───────────────────────────────────────────
@@ -227,6 +229,8 @@ export class JobProfilesService {
         'reviewer',
         'approvers',
         'approvers.approver',
+        'businessProcesses',
+        // 'businessProcesses.node' is eager on the join entity
       ],
     });
 
@@ -290,8 +294,13 @@ export class JobProfilesService {
       );
     }
 
-    // Compute diff against the existing profile before applying the update
-    const changes = this.diffRecords(jobProfile as any, dto as any, [
+    // Pull business_process_node_ids out of the dto - it's a relation, not a column.
+    const { business_process_node_ids, ...dtoColumns } = dto as any;
+
+    // Compute diff against the existing profile before applying the update.
+    // Exclude business_process_node_ids from the column-level diff; we handle
+    // it separately and add a synthetic change entry below if it differed.
+    const changes = this.diffRecords(jobProfile as any, dtoColumns as any, [
       'updated_at',
       'created_at',
       'job_profile_id',
@@ -300,7 +309,33 @@ export class JobProfilesService {
       'reviewed_at',
     ]);
 
-    await this.jobProfileRepository.update(id, dto);
+    if (Object.keys(dtoColumns).length > 0) {
+      await this.jobProfileRepository.update(id, dtoColumns);
+    }
+
+    if (Array.isArray(business_process_node_ids)) {
+      const previousIds = ((jobProfile as any).businessProcesses ?? [])
+        .map((j: any) => j.business_process_node_id)
+        .sort((a: number, b: number) => a - b);
+      const nextIds = [...business_process_node_ids].sort(
+        (a: number, b: number) => a - b,
+      );
+      const sameSelection =
+        previousIds.length === nextIds.length &&
+        previousIds.every((v: number, i: number) => v === nextIds[i]);
+
+      if (!sameSelection) {
+        await this.businessProcessesService.setSelectionForJobProfile(
+          id,
+          business_process_node_ids,
+        );
+        changes.push({
+          field: 'business_processes',
+          old: previousIds,
+          new: nextIds,
+        });
+      }
+    }
 
     if (changes.length > 0) {
       await this.recordEditAndMaybeRevert({
@@ -1384,6 +1419,8 @@ export class JobProfilesService {
         'requirements',
         'approvers',
         'approvers.approver',
+        'businessProcesses',
+        // 'businessProcesses.node' is eager on the join entity
       ],
     });
     if (!jp) return { missing: true, job_profile_id: jobProfileId };

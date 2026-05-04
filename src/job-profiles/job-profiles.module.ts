@@ -15,6 +15,7 @@ import { JpCompetency } from './entities/jp-competency.entity';
 import { User } from '../users/entities/user.entity';
 import { NotificationsModule } from '../notifications/notifications.module';
 import { EmailModule } from '../email/email.module';
+import { BusinessProcessesModule } from '../business-processes/business-processes.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { EmailModule } from '../email/email.module';
     ]),
     NotificationsModule,
     EmailModule,
+    BusinessProcessesModule,
   ],
   controllers: [JobProfilesController],
   providers: [JobProfilesService],

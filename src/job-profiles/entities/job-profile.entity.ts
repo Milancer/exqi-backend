@@ -15,6 +15,7 @@ import { JobProfileSkill } from './job-profile-skill.entity';
 import { JobProfileDeliverable } from './job-profile-deliverable.entity';
 import { JobProfileRequirement } from './job-profile-requirement.entity';
 import { JobProfileApprover } from './job-profile-approver.entity';
+import { JobProfileBusinessProcess } from '../../business-processes/entities/job-profile-business-process.entity';
 import { User } from '../../users/entities/user.entity';
 import { Client } from '../../clients/entities/client.entity';
 import { Department } from '../../departments/entities/department.entity';
@@ -142,4 +143,7 @@ export class JobProfile {
 
   @OneToMany(() => JobProfileApprover, (jpa) => jpa.jobProfile)
   approvers: JobProfileApprover[];
+
+  @OneToMany(() => JobProfileBusinessProcess, (jpbp) => jpbp.jobProfile)
+  businessProcesses: JobProfileBusinessProcess[];
 }

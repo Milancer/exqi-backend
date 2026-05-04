@@ -20,6 +20,7 @@ import { SkillsModule } from './skills/skills.module';
 import { ImportModule } from './import/import.module';
 import { EmailModule } from './email/email.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { BusinessProcessesModule } from './business-processes/business-processes.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     ImportModule,
     EmailModule,
     DashboardModule,
+    BusinessProcessesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
