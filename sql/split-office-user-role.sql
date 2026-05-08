@@ -43,6 +43,11 @@ WHERE  role = 'OFFICE_USER';
 -- 3) Recreate the enum cleanly without OFFICE_USER. Postgres has no
 --    `ALTER TYPE ... DROP VALUE`, so we cast to text, drop, recreate,
 --    and cast back.
+--
+--    The DROP DEFAULT is required: the existing column default
+--    `'OFFICE_USER'::user_role_enum` is a dependency on the type and
+--    blocks the DROP TYPE if left in place.
+ALTER TABLE "user" ALTER COLUMN role DROP DEFAULT;
 ALTER TABLE "user" ALTER COLUMN role TYPE text;
 
 DROP TYPE "user_role_enum";
