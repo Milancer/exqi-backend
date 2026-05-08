@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsNotEmpty,
   IsNumber,
+  IsArray,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserRole, UserStatus } from '../entities/user.entity';
@@ -64,4 +65,15 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   profilePicture?: string;
+
+  @ApiPropertyOptional({
+    description:
+      'Per-user module access (overrides client modules when set). Leave empty to inherit from client.',
+    isArray: true,
+    example: ['Job Profile'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  modules?: string[];
 }

@@ -67,6 +67,22 @@ export class User {
   @Column({ type: 'enum', enum: UserStatus, default: UserStatus.ACTIVE })
   status: UserStatus;
 
+  /**
+   * Optional per-user list of allowed modules (e.g.
+   * ['Job Profile'], ['Competency Based Interview'], or both).
+   * When null/empty the user inherits the client's `modules` list (legacy
+   * behavior). When set it overrides the client list and gates sidebar /
+   * route access on the frontend.
+   */
+  @ApiPropertyOptional({
+    description:
+      'Per-user module access (overrides client modules when set). Empty/null means inherit from client.',
+    isArray: true,
+    example: ['Job Profile'],
+  })
+  @Column({ type: 'simple-array', nullable: true })
+  modules: string[] | null;
+
   @ApiProperty()
   @Column()
   clientId: number;

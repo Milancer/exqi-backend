@@ -30,12 +30,23 @@ export class AuthService {
   }
 
   async login(user: any) {
+    // Per-user `modules` overrides client-level modules when set. ADMIN
+    // always sees all modules (no gating on the sidebar).
+    const userModules: string[] | null = Array.isArray(user.modules)
+      ? user.modules
+      : null;
+    const clientModules: string[] = Array.isArray(user.client?.modules)
+      ? user.client.modules
+      : [];
+    const effectiveModules =
+      userModules && userModules.length > 0 ? userModules : clientModules;
+
     const payload = {
       email: user.email,
       sub: user.id,
       role: user.role,
       clientId: user.clientId,
-      modules: user.client?.modules || [],
+      modules: effectiveModules,
     };
     return {
       access_token: this.jwtService.sign(payload),
@@ -43,7 +54,7 @@ export class AuthService {
       email: user.email,
       role: user.role,
       clientId: user.clientId,
-      modules: user.client?.modules || [],
+      modules: effectiveModules,
       hasSignature: !!user.signature,
     };
   }

@@ -72,6 +72,9 @@ export class UsersService {
       if (createUserDto.profilePicture !== undefined) {
         existing.profilePicture = createUserDto.profilePicture;
       }
+      if (createUserDto.modules !== undefined) {
+        existing.modules = createUserDto.modules;
+      }
       existing.resetToken = freshToken;
       existing.resetTokenExpiry = freshExpiry;
       const saved = await this.usersRepository.save(existing);
