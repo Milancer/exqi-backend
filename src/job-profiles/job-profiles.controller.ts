@@ -213,7 +213,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({
     summary: 'Create a new job profile',
@@ -273,7 +273,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Update a job profile' })
   @ApiResponse({ status: 200, description: 'Job profile updated successfully' })
@@ -304,7 +304,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Add competency to job profile' })
   @ApiResponse({ status: 201, description: 'Competency added successfully' })
@@ -322,7 +322,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Update competency link on a job profile' })
   @ApiResponse({ status: 200, description: 'Competency updated successfully' })
@@ -350,7 +350,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Remove competency from job profile' })
   @ApiResponse({ status: 200, description: 'Competency removed successfully' })
@@ -372,7 +372,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Add skill to job profile' })
   @ApiResponse({ status: 201, description: 'Skill added successfully' })
@@ -385,7 +385,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Remove skill from job profile' })
   @ApiResponse({ status: 200, description: 'Skill removed successfully' })
@@ -402,7 +402,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Add deliverable to job profile' })
   @ApiResponse({ status: 201, description: 'Deliverable added successfully' })
@@ -419,7 +419,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Remove deliverable from job profile' })
   @ApiResponse({ status: 200, description: 'Deliverable removed successfully' })
@@ -440,7 +440,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Update a deliverable (KPA / KPIs / Responsibilities)' })
   @ApiResponse({ status: 200, description: 'Deliverable updated successfully' })
@@ -463,7 +463,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Update job profile requirements' })
   @ApiResponse({
@@ -485,7 +485,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({ summary: 'Get the audit log for a job profile' })
   getAuditLog(@Param('id') id: string, @Request() req) {
@@ -499,7 +499,7 @@ export class JobProfilesController {
     UserRole.ADMIN,
     UserRole.OFFICE_MANAGER,
     UserRole.OFFICE_REVIEWER,
-    UserRole.OFFICE_USER,
+    UserRole.JOB_PROFILE_USER,
   )
   @ApiOperation({
     summary:

@@ -31,7 +31,7 @@ export class CandidatesController {
   constructor(private readonly service: CandidatesService) {}
 
   @Post()
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Create a new candidate' })
   @ApiResponse({ status: 201, description: 'Candidate created' })
   create(@Body() dto: CreateCandidateDto, @Request() req) {
@@ -53,7 +53,7 @@ export class CandidatesController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Update a candidate' })
   @ApiResponse({ status: 200, description: 'Candidate updated' })
   update(
@@ -65,7 +65,7 @@ export class CandidatesController {
   }
 
   @Delete(':id')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Archive a candidate' })
   @ApiResponse({ status: 200, description: 'Candidate archived' })
   remove(@Param('id') id: string, @Request() req) {

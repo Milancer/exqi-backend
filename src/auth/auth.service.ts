@@ -30,16 +30,38 @@ export class AuthService {
   }
 
   async login(user: any) {
-    // Per-user `modules` overrides client-level modules when set. ADMIN
-    // always sees all modules (no gating on the sidebar).
-    const userModules: string[] | null = Array.isArray(user.modules)
-      ? user.modules
-      : null;
+    // Module access is now derived from the user's role:
+    //   ADMIN, OFFICE_MANAGER → both modules (cross-module managers)
+    //   OFFICE_REVIEWER, JOB_PROFILE_USER → Job Profile only
+    //   CBI_USER → Competency Based Interview only
+    // Per-user `modules` array is kept for legacy migration but is intersected
+    // with the client's `modules` (if any) so a client without CBI subscription
+    // can't have CBI-flagged users seeing those screens.
+    const JOB_PROFILE = 'Job Profile';
+    const CBI = 'Competency Based Interview';
+    let roleModules: string[];
+    switch (user.role) {
+      case 'ADMIN':
+      case 'OFFICE_MANAGER':
+        roleModules = [JOB_PROFILE, CBI];
+        break;
+      case 'OFFICE_REVIEWER':
+      case 'JOB_PROFILE_USER':
+        roleModules = [JOB_PROFILE];
+        break;
+      case 'CBI_USER':
+        roleModules = [CBI];
+        break;
+      default:
+        roleModules = [];
+    }
     const clientModules: string[] = Array.isArray(user.client?.modules)
       ? user.client.modules
       : [];
     const effectiveModules =
-      userModules && userModules.length > 0 ? userModules : clientModules;
+      user.role === 'ADMIN' || clientModules.length === 0
+        ? roleModules
+        : roleModules.filter((m) => clientModules.includes(m));
 
     const payload = {
       email: user.email,

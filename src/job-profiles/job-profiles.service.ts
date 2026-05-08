@@ -77,10 +77,10 @@ export class JobProfilesService {
       user.role !== UserRole.ADMIN &&
       user.role !== UserRole.OFFICE_MANAGER &&
       user.role !== UserRole.OFFICE_REVIEWER &&
-      user.role !== UserRole.OFFICE_USER
+      user.role !== UserRole.JOB_PROFILE_USER
     ) {
       throw new ForbiddenException(
-        'Only ADMIN, OFFICE_MANAGER, OFFICE_REVIEWER, and OFFICE_USER can create job profiles',
+        'Only ADMIN, OFFICE_MANAGER, OFFICE_REVIEWER, and JOB_PROFILE_USER can create job profiles',
       );
     }
 
@@ -276,10 +276,10 @@ export class JobProfilesService {
       user.role !== UserRole.ADMIN &&
       user.role !== UserRole.OFFICE_MANAGER &&
       user.role !== UserRole.OFFICE_REVIEWER &&
-      user.role !== UserRole.OFFICE_USER
+      user.role !== UserRole.JOB_PROFILE_USER
     ) {
       throw new ForbiddenException(
-        'Only ADMIN, OFFICE_MANAGER, OFFICE_REVIEWER, and OFFICE_USER can update job profiles',
+        'Only ADMIN, OFFICE_MANAGER, OFFICE_REVIEWER, and JOB_PROFILE_USER can update job profiles',
       );
     }
 

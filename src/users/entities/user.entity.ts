@@ -14,7 +14,8 @@ export enum UserRole {
   ADMIN = 'ADMIN',
   OFFICE_MANAGER = 'OFFICE_MANAGER',
   OFFICE_REVIEWER = 'OFFICE_REVIEWER',
-  OFFICE_USER = 'OFFICE_USER',
+  JOB_PROFILE_USER = 'JOB_PROFILE_USER',
+  CBI_USER = 'CBI_USER',
 }
 
 export enum UserStatus {
@@ -60,7 +61,7 @@ export class User {
   signature: string;
 
   @ApiProperty({ enum: UserRole })
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.OFFICE_USER })
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.JOB_PROFILE_USER })
   role: UserRole;
 
   @ApiProperty({ enum: UserStatus })

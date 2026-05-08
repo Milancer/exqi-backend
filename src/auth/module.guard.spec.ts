@@ -49,7 +49,7 @@ describe('ModuleGuard', () => {
 
     const mockUser = {
       userId: 1,
-      role: UserRole.OFFICE_USER,
+      role: UserRole.JOB_PROFILE_USER,
       modules: [],
     };
     const context = createMockContext(mockUser);
@@ -94,7 +94,7 @@ describe('ModuleGuard', () => {
 
     const mockUser = {
       userId: 3,
-      role: UserRole.OFFICE_USER,
+      role: UserRole.JOB_PROFILE_USER,
       modules: [ClientModule.JOB_PROFILE], // Different module
     };
     const context = createMockContext(mockUser);

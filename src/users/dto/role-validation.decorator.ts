@@ -23,11 +23,12 @@ export function IsValidRoleForClient(validationOptions?: ValidationOptions) {
             return false;
           }
 
-          // OFFICE roles cannot belong to Client 1
+          // Non-admin roles cannot belong to Client 1
           if (
             (role === UserRole.OFFICE_MANAGER ||
               role === UserRole.OFFICE_REVIEWER ||
-              role === UserRole.OFFICE_USER) &&
+              role === UserRole.JOB_PROFILE_USER ||
+              role === UserRole.CBI_USER) &&
             clientId === 1
           ) {
             return false;
@@ -47,10 +48,11 @@ export function IsValidRoleForClient(validationOptions?: ValidationOptions) {
           if (
             (role === UserRole.OFFICE_MANAGER ||
               role === UserRole.OFFICE_REVIEWER ||
-              role === UserRole.OFFICE_USER) &&
+              role === UserRole.JOB_PROFILE_USER ||
+              role === UserRole.CBI_USER) &&
             clientId === 1
           ) {
-            return 'Office roles (OFFICE_MANAGER, OFFICE_REVIEWER, OFFICE_USER) cannot belong to system client (Client ID = 1)';
+            return 'Non-admin roles cannot belong to the system client (Client ID = 1)';
           }
 
           return 'Invalid role and client combination';

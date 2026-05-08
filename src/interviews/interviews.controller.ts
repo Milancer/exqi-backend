@@ -33,7 +33,7 @@ export class InterviewsController {
 
   @Post()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new interview session' })
   @ApiResponse({
@@ -54,7 +54,7 @@ export class InterviewsController {
 
   @Get('template/:templateId/questions')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiBearerAuth()
   @ApiOperation({
     summary:
@@ -118,7 +118,7 @@ export class InterviewsController {
   }
 
   @Patch(':id/score')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Update scores for an interview session' })
   async updateScores(
     @Param('id') id: string,
@@ -130,7 +130,7 @@ export class InterviewsController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiBearerAuth()
   @ApiOperation({
     summary:
@@ -151,7 +151,7 @@ export class InterviewsController {
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Cancel an interview session' })
   cancel(@Param('id') id: string, @Request() req) {

@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsEmail } from 'class-validator';
 
 export class CreateCandidateDto {
   @ApiProperty()
@@ -12,7 +12,7 @@ export class CreateCandidateDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
+  @IsEmail({}, { message: 'email must be a valid email address' })
   email?: string;
 
   @ApiPropertyOptional()

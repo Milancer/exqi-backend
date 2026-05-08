@@ -33,7 +33,7 @@ export class QuestionsController {
   constructor(private readonly cbiService: CbiService) {}
 
   @Post()
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Create a new question (ADMIN or OFFICE_MANAGER)' })
   @ApiResponse({ status: 201, description: 'Question created successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -78,7 +78,7 @@ export class QuestionsController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Update a question (ADMIN or OFFICE_MANAGER)' })
   @ApiResponse({ status: 200, description: 'Question updated successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -92,7 +92,7 @@ export class QuestionsController {
   }
 
   @Delete(':id')
-  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({
     summary: 'Delete a question (ADMIN or OFFICE_MANAGER, soft delete)',
   })

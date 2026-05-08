@@ -33,7 +33,7 @@ describe('CompetenciesService', () => {
   const mockRegularUser = {
     userId: 2,
     clientId: 2,
-    role: UserRole.OFFICE_USER,
+    role: UserRole.JOB_PROFILE_USER,
   };
 
   const mockRepository = {

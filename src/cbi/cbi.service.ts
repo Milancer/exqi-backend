@@ -158,10 +158,14 @@ export class CbiService {
   // CompetencyQuestion CRUD (Question Bank)
   async createQuestion(dto: CreateCompetencyQuestionDto, user: any) {
     // ADMIN creates global questions (client_id=1)
-    // OFFICE_MANAGER creates client-specific questions
-    if (user.role !== UserRole.ADMIN && user.role !== UserRole.OFFICE_MANAGER) {
+    // OFFICE_MANAGER + CBI_USER create client-specific questions
+    if (
+      user.role !== UserRole.ADMIN &&
+      user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.CBI_USER
+    ) {
       throw new ForbiddenException(
-        'Only ADMIN and OFFICE_MANAGER can create questions',
+        'Only ADMIN, OFFICE_MANAGER and CBI_USER can create questions',
       );
     }
 
@@ -246,18 +250,21 @@ export class CbiService {
     user: any,
   ) {
     // ADMIN can update any question
-    // OFFICE_MANAGER can only update their client's questions
-    if (user.role !== UserRole.ADMIN && user.role !== UserRole.OFFICE_MANAGER) {
+    // OFFICE_MANAGER + CBI_USER can only update their client's questions
+    if (
+      user.role !== UserRole.ADMIN &&
+      user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.CBI_USER
+    ) {
       throw new ForbiddenException(
-        'Only ADMIN and OFFICE_MANAGER can update questions',
+        'Only ADMIN, OFFICE_MANAGER and CBI_USER can update questions',
       );
     }
 
     const question = await this.findOneQuestion(id, user);
 
-    // OFFICE_MANAGER can only update their own client's questions
     if (
-      user.role === UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.ADMIN &&
       question.client_id !== user.clientId
     ) {
       throw new ForbiddenException(
@@ -271,18 +278,21 @@ export class CbiService {
 
   async removeQuestion(id: number, user: any) {
     // ADMIN can delete any question
-    // OFFICE_MANAGER can only delete their client's questions
-    if (user.role !== UserRole.ADMIN && user.role !== UserRole.OFFICE_MANAGER) {
+    // OFFICE_MANAGER + CBI_USER can only delete their client's questions
+    if (
+      user.role !== UserRole.ADMIN &&
+      user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.CBI_USER
+    ) {
       throw new ForbiddenException(
-        'Only ADMIN and OFFICE_MANAGER can delete questions',
+        'Only ADMIN, OFFICE_MANAGER and CBI_USER can delete questions',
       );
     }
 
     const question = await this.findOneQuestion(id, user);
 
-    // OFFICE_MANAGER can only delete their own client's questions
     if (
-      user.role === UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.ADMIN &&
       question.client_id !== user.clientId
     ) {
       throw new ForbiddenException(
