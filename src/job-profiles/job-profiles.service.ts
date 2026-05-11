@@ -73,14 +73,16 @@ export class JobProfilesService {
 
   // Create job profile
   async create(dto: CreateJobProfileDto, user: any) {
+    // Reviewers do NOT create profiles — they only review them. Allowing
+    // them to create would conflate authoring with reviewing and break
+    // the separation-of-duties the approval workflow is built around.
     if (
       user.role !== UserRole.ADMIN &&
       user.role !== UserRole.OFFICE_MANAGER &&
-      user.role !== UserRole.OFFICE_REVIEWER &&
       user.role !== UserRole.JOB_PROFILE_USER
     ) {
       throw new ForbiddenException(
-        'Only ADMIN, OFFICE_MANAGER, OFFICE_REVIEWER, and JOB_PROFILE_USER can create job profiles',
+        'Only ADMIN, OFFICE_MANAGER, and JOB_PROFILE_USER can create job profiles',
       );
     }
 

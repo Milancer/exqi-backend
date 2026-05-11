@@ -209,12 +209,7 @@ export class JobProfilesController {
   // ─── Job Profile CRUD ──────────────────────────────────────────
 
   @Post()
-  @Roles(
-    UserRole.ADMIN,
-    UserRole.OFFICE_MANAGER,
-    UserRole.OFFICE_REVIEWER,
-    UserRole.JOB_PROFILE_USER,
-  )
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.JOB_PROFILE_USER)
   @ApiOperation({
     summary: 'Create a new job profile',
   })
@@ -495,12 +490,7 @@ export class JobProfilesController {
   // ─── Two-step Review → Approval workflow ──────────────────────
 
   @Post(':id/submit-for-review')
-  @Roles(
-    UserRole.ADMIN,
-    UserRole.OFFICE_MANAGER,
-    UserRole.OFFICE_REVIEWER,
-    UserRole.JOB_PROFILE_USER,
-  )
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.JOB_PROFILE_USER)
   @ApiOperation({
     summary:
       'Submit job profile for review — assigns reviewer and approver upfront',
