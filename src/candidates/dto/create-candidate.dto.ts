@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsOptional, IsEmail } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
 export class CreateCandidateDto {
   @ApiProperty()
@@ -10,9 +10,12 @@ export class CreateCandidateDto {
   @IsString()
   surname: string;
 
+  // Candidates are no longer sent online interview links — the interviewer
+  // downloads a PDF and prints it. Email is therefore optional and is NOT
+  // format-validated (some clients only have partial contact info).
   @ApiPropertyOptional()
   @IsOptional()
-  @IsEmail({}, { message: 'email must be a valid email address' })
+  @IsString()
   email?: string;
 
   @ApiPropertyOptional()
