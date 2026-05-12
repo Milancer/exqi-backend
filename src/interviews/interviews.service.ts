@@ -136,7 +136,7 @@ export class InterviewsService {
     const session = this.sessionRepo.create({
       candidate_id: dto.candidate_id,
       cbi_template_id: dto.cbi_template_id,
-      interviewer_id: dto.interviewer_id,
+      interviewer_id: dto.interviewer_id ?? null,
       token: uuidv4(),
       status: SessionStatus.PENDING,
       expires_at: expiresAt,
@@ -146,16 +146,19 @@ export class InterviewsService {
 
     const saved = await this.sessionRepo.save(session);
 
-    // 4. Notify interviewer
-    await this.notificationsService.create({
-      user_id: dto.interviewer_id,
-      type: NotificationType.INTERVIEW_ASSIGNED,
-      title: 'Interview Assigned',
-      message: `You have been assigned a new interview session.`,
-      reference_type: 'interview_session',
-      reference_id: saved.session_id,
-      client_id: saved.client_id,
-    });
+    // 4. Notify interviewer — only when one is on the system. External
+    // panellists are common, so no interviewer means no notification.
+    if (dto.interviewer_id) {
+      await this.notificationsService.create({
+        user_id: dto.interviewer_id,
+        type: NotificationType.INTERVIEW_ASSIGNED,
+        title: 'Interview Assigned',
+        message: `You have been assigned a new interview session.`,
+        reference_type: 'interview_session',
+        reference_id: saved.session_id,
+        client_id: saved.client_id,
+      });
+    }
 
     return this.findOne(saved.session_id, user);
   }
@@ -170,7 +173,7 @@ export class InterviewsService {
     sessionId: number,
     dto: {
       candidate_id?: number;
-      interviewer_id?: number;
+      interviewer_id?: number | null;
       selected_question_ids?: number[];
     },
     user: any,
@@ -184,7 +187,10 @@ export class InterviewsService {
     }
 
     if (dto.candidate_id !== undefined) session.candidate_id = dto.candidate_id;
-    if (dto.interviewer_id !== undefined) session.interviewer_id = dto.interviewer_id;
+    if (dto.interviewer_id !== undefined) {
+      // Treat 0 / falsy as "clear assignment" so the frontend can send "" → 0
+      session.interviewer_id = dto.interviewer_id || null;
+    }
 
     if (dto.selected_question_ids) {
       // Re-resolve the template question set, then filter by selection
@@ -409,10 +415,12 @@ export class InterviewsService {
         template_name: templateName,
       },
       questions: resolvedQuestions,
-      interviewer: {
-        name: session.interviewer.name,
-        surname: session.interviewer.surname,
-      },
+      interviewer: session.interviewer
+        ? {
+            name: session.interviewer.name,
+            surname: session.interviewer.surname,
+          }
+        : null,
       status: session.status,
       expires_at: session.expires_at,
     };
@@ -472,16 +480,19 @@ export class InterviewsService {
     session.completed_at = new Date();
     await this.sessionRepo.save(session);
 
-    // Notify the session creator (all admins + office managers of the same client)
-    await this.notificationsService.create({
-      user_id: session.interviewer_id,
-      type: NotificationType.INTERVIEW_COMPLETED,
-      title: 'Interview Completed',
-      message: `Interview for ${session.candidate?.name} ${session.candidate?.surname} has been completed. Score: ${session.percentage}%`,
-      reference_type: 'interview_session',
-      reference_id: session.session_id,
-      client_id: session.client_id,
-    });
+    // Notify the assigned interviewer if there is one. External (non-user)
+    // panellists obviously can't receive in-app notifications.
+    if (session.interviewer_id) {
+      await this.notificationsService.create({
+        user_id: session.interviewer_id,
+        type: NotificationType.INTERVIEW_COMPLETED,
+        title: 'Interview Completed',
+        message: `Interview for ${session.candidate?.name} ${session.candidate?.surname} has been completed. Score: ${session.percentage}%`,
+        reference_type: 'interview_session',
+        reference_id: session.session_id,
+        client_id: session.client_id,
+      });
+    }
 
     return {
       message: 'Interview submitted successfully',

@@ -31,7 +31,7 @@ export class CbiController {
   constructor(private readonly cbiService: CbiService) {}
 
   @Post()
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Create a new CBI template (ADMIN only)' })
   @ApiResponse({ status: 201, description: 'Template created successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -55,7 +55,7 @@ export class CbiController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Update a CBI template (ADMIN only)' })
   @ApiResponse({ status: 200, description: 'Template updated successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -69,7 +69,7 @@ export class CbiController {
   }
 
   @Delete(':id')
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.ADMIN, UserRole.OFFICE_MANAGER, UserRole.CBI_USER)
   @ApiOperation({ summary: 'Delete a CBI template (ADMIN only, soft delete)' })
   @ApiResponse({ status: 200, description: 'Template deleted successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })

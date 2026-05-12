@@ -141,7 +141,7 @@ export class InterviewsController {
     @Body()
     dto: {
       candidate_id?: number;
-      interviewer_id?: number;
+      interviewer_id?: number | null;
       selected_question_ids?: number[];
     },
     @Request() req,

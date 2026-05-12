@@ -53,13 +53,17 @@ export class InterviewSession {
     level: number;
   }>;
 
-  @ApiProperty({ description: 'Office Manager assigned as interviewer' })
-  @Column()
-  interviewer_id: number;
+  @ApiPropertyOptional({
+    description:
+      'Optional system user assigned as interviewer. Nullable because many ' +
+      'interviewers are external panellists who are not on the platform.',
+  })
+  @Column({ nullable: true })
+  interviewer_id: number | null;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: true })
   @JoinColumn({ name: 'interviewer_id' })
-  interviewer: User;
+  interviewer: User | null;
 
   @ApiProperty({ description: 'Unique token for the shareable interview link' })
   @Column({ unique: true })

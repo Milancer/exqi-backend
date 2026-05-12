@@ -10,9 +10,15 @@ export class CreateInterviewDto {
   @IsNumber()
   cbi_template_id: number;
 
-  @ApiProperty({ description: 'User ID of the interviewer (Office Manager)' })
+  @ApiPropertyOptional({
+    description:
+      'Optional user ID of the interviewer. Many real-world interviewers ' +
+      'are external panellists who are NOT users on the system, so this is ' +
+      'left blank and the interviewer name is captured on the printed PDF.',
+  })
+  @IsOptional()
   @IsNumber()
-  interviewer_id: number;
+  interviewer_id?: number;
 
   @ApiPropertyOptional({
     description:

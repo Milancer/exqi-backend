@@ -22,10 +22,16 @@ export class CbiService {
     private readonly questionRepository: Repository<CompetencyQuestion>,
   ) {}
 
-  // Create CBI Template (ADMIN only)
+  // Create CBI Template (ADMIN, OFFICE_MANAGER, CBI_USER)
   async createTemplate(createDto: CreateCbiTemplateDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can create CBI templates');
+    if (
+      user.role !== UserRole.ADMIN &&
+      user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.CBI_USER
+    ) {
+      throw new ForbiddenException(
+        'Only ADMIN, OFFICE_MANAGER and CBI_USER can create CBI templates',
+      );
     }
 
     const template = this.cbiTemplateRepository.create({
@@ -81,13 +87,26 @@ export class CbiService {
     return template;
   }
 
-  // Update template (ADMIN only)
+  // Update template (ADMIN, OFFICE_MANAGER, CBI_USER for their own client)
   async updateTemplate(id: number, updateDto: UpdateCbiTemplateDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can update CBI templates');
+    if (
+      user.role !== UserRole.ADMIN &&
+      user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.CBI_USER
+    ) {
+      throw new ForbiddenException(
+        'Only ADMIN, OFFICE_MANAGER and CBI_USER can update CBI templates',
+      );
     }
 
-    await this.findOneTemplate(id, user); // Ensure template exists and user has access
+    const existing = await this.findOneTemplate(id, user); // ensures access
+    // Non-admins cannot edit global templates (client_id=1) — those are
+    // shipped/curated by Anthropic-side admins and shared across tenants.
+    if (user.role !== UserRole.ADMIN && existing.client_id === 1) {
+      throw new ForbiddenException(
+        'Global CBI templates can only be edited by ADMIN',
+      );
+    }
     await this.cbiTemplateRepository.update(id, updateDto);
 
     // Auto-regenerate questions if competencies changed
@@ -98,13 +117,24 @@ export class CbiService {
     return this.findOneTemplate(id, user);
   }
 
-  // Delete template (soft delete, ADMIN only)
+  // Delete template (soft delete, ADMIN/OFFICE_MANAGER/CBI_USER for their own client)
   async removeTemplate(id: number, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can delete CBI templates');
+    if (
+      user.role !== UserRole.ADMIN &&
+      user.role !== UserRole.OFFICE_MANAGER &&
+      user.role !== UserRole.CBI_USER
+    ) {
+      throw new ForbiddenException(
+        'Only ADMIN, OFFICE_MANAGER and CBI_USER can delete CBI templates',
+      );
     }
 
-    await this.findOneTemplate(id, user); // Ensure template exists and user has access
+    const existing = await this.findOneTemplate(id, user); // ensures access
+    if (user.role !== UserRole.ADMIN && existing.client_id === 1) {
+      throw new ForbiddenException(
+        'Global CBI templates can only be deleted by ADMIN',
+      );
+    }
     await this.cbiTemplateRepository.update(id, { status: 'Deleted' });
     return { message: 'CBI Template deleted successfully' };
   }
