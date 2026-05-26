@@ -21,6 +21,7 @@ import { ImportModule } from './import/import.module';
 import { EmailModule } from './email/email.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BusinessProcessesModule } from './business-processes/business-processes.module';
+import { BehaviouralIndicatorsModule } from './behavioural-indicators/behavioural-indicators.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { BusinessProcessesModule } from './business-processes/business-processes
     EmailModule,
     DashboardModule,
     BusinessProcessesModule,
+    BehaviouralIndicatorsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

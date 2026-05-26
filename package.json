@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "seed": "ts-node -r tsconfig-paths/register src/seed.ts",
     "seed:prod": "node dist/seed.js",
+    "seed:behavioural-indicators": "ts-node -r tsconfig-paths/register src/behavioural-indicators/seed.ts",
     "import:client": "ts-node -r tsconfig-paths/register src/import-client.ts",
     "import:sita": "ts-node -r tsconfig-paths/register src/import-client.ts sita",
     "import:experttech": "ts-node -r tsconfig-paths/register src/import-client.ts experttech",
