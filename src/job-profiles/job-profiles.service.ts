@@ -233,6 +233,9 @@ export class JobProfilesService {
         'approvers.approver',
         'businessProcesses',
         // 'businessProcesses.node' is eager on the join entity
+        'jobGrade',
+        'department',
+        'workLevel',
       ],
     });
 
@@ -1423,6 +1426,9 @@ export class JobProfilesService {
         'approvers.approver',
         'businessProcesses',
         // 'businessProcesses.node' is eager on the join entity
+        'jobGrade',
+        'department',
+        'workLevel',
       ],
     });
     if (!jp) return { missing: true, job_profile_id: jobProfileId };

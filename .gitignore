@@ -54,3 +54,7 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Local DB snapshots used as revert insurance for one-off backfills.
+# These contain customer data and must never be committed.
+/backups
