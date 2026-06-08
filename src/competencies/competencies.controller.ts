@@ -27,6 +27,15 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 
+// Roles permitted to manage CBI competency taxonomy (Types / Clusters /
+// Competencies). Mirrors the CBI Templates controller — anyone who can
+// run CBI sessions can also maintain the underlying taxonomy.
+const CBI_WRITE_ROLES = [
+  UserRole.ADMIN,
+  UserRole.OFFICE_MANAGER,
+  UserRole.CBI_USER,
+] as const;
+
 @ApiTags('Competencies')
 @ApiBearerAuth()
 @Controller('competencies')
@@ -37,8 +46,8 @@ export class CompetenciesController {
   // ─── CompetencyType endpoints (MUST be before :id routes) ───
 
   @Post('types')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Create a competency type (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Create a competency type' })
   @ApiResponse({ status: 201, description: 'Type created successfully' })
   createType(@Body() dto: CreateCompetencyTypeDto, @Request() req) {
     return this.competenciesService.createType(dto, req.user);
@@ -60,8 +69,8 @@ export class CompetenciesController {
   }
 
   @Patch('types/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Update a competency type (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Update a competency type' })
   @ApiResponse({ status: 200, description: 'Type updated successfully' })
   updateType(
     @Param('id') id: string,
@@ -72,8 +81,8 @@ export class CompetenciesController {
   }
 
   @Delete('types/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Delete a competency type (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Delete a competency type' })
   @ApiResponse({ status: 200, description: 'Type deleted successfully' })
   removeType(@Param('id') id: string, @Request() req) {
     return this.competenciesService.removeType(+id, req.user);
@@ -82,8 +91,8 @@ export class CompetenciesController {
   // ─── CompetencyCluster endpoints (MUST be before :id routes) ───
 
   @Post('clusters')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Create a competency cluster (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Create a competency cluster' })
   @ApiResponse({ status: 201, description: 'Cluster created successfully' })
   createCluster(@Body() dto: CreateCompetencyClusterDto, @Request() req) {
     return this.competenciesService.createCluster(dto, req.user);
@@ -105,8 +114,8 @@ export class CompetenciesController {
   }
 
   @Patch('clusters/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Update a competency cluster (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Update a competency cluster' })
   @ApiResponse({ status: 200, description: 'Cluster updated successfully' })
   updateCluster(
     @Param('id') id: string,
@@ -117,8 +126,8 @@ export class CompetenciesController {
   }
 
   @Delete('clusters/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Delete a competency cluster (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Delete a competency cluster' })
   @ApiResponse({ status: 200, description: 'Cluster deleted successfully' })
   removeCluster(@Param('id') id: string, @Request() req) {
     return this.competenciesService.removeCluster(+id, req.user);
@@ -127,13 +136,12 @@ export class CompetenciesController {
   // ─── Competency endpoints (generic :id routes LAST) ───
 
   @Post()
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Create a new competency (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Create a new competency' })
   @ApiResponse({
     status: 201,
     description: 'Competency created successfully',
   })
-  @ApiResponse({ status: 403, description: 'Forbidden - ADMIN role required' })
   create(@Body() createCompetencyDto: CreateCompetencyDto, @Request() req) {
     return this.competenciesService.create(createCompetencyDto, req.user);
   }
@@ -160,13 +168,12 @@ export class CompetenciesController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Update a competency (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Update a competency' })
   @ApiResponse({
     status: 200,
     description: 'Competency updated successfully',
   })
-  @ApiResponse({ status: 403, description: 'Forbidden - ADMIN role required' })
   @ApiResponse({ status: 404, description: 'Competency not found' })
   update(
     @Param('id') id: string,
@@ -177,13 +184,12 @@ export class CompetenciesController {
   }
 
   @Delete(':id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Delete a competency (ADMIN only)' })
+  @Roles(...CBI_WRITE_ROLES)
+  @ApiOperation({ summary: 'Delete a competency' })
   @ApiResponse({
     status: 200,
     description: 'Competency deleted successfully',
   })
-  @ApiResponse({ status: 403, description: 'Forbidden - ADMIN role required' })
   @ApiResponse({ status: 404, description: 'Competency not found' })
   remove(@Param('id') id: string, @Request() req) {
     return this.competenciesService.remove(+id, req.user);

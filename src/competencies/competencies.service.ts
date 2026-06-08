@@ -16,6 +16,23 @@ import { CreateCompetencyClusterDto } from './dto/competency-cluster/create-comp
 import { UpdateCompetencyClusterDto } from './dto/competency-cluster/update-competency-cluster.dto';
 import { UserRole } from '../users/entities/user.entity';
 
+// Roles permitted to manage CBI competency taxonomy. Defence-in-depth check
+// alongside the @Roles() decorators on the controller. If you change one,
+// change the other.
+const CBI_WRITE_ROLES: readonly UserRole[] = [
+  UserRole.ADMIN,
+  UserRole.OFFICE_MANAGER,
+  UserRole.CBI_USER,
+];
+
+function assertCanManageCbi(user: any, resource: string): void {
+  if (!CBI_WRITE_ROLES.includes(user?.role)) {
+    throw new ForbiddenException(
+      `Your role is not permitted to modify ${resource}`,
+    );
+  }
+}
+
 @Injectable()
 export class CompetenciesService {
   constructor(
@@ -28,15 +45,10 @@ export class CompetenciesService {
   ) {}
 
   /**
-   * Create a new competency (ADMIN only)
+   * Create a new competency (ADMIN, OFFICE_MANAGER, CBI_USER)
    */
   async create(createCompetencyDto: CreateCompetencyDto, currentUser: any) {
-    // Only ADMIN can create competencies
-    if (currentUser.role !== UserRole.ADMIN) {
-      throw new ForbiddenException(
-        'Only administrators can create competencies',
-      );
-    }
+    assertCanManageCbi(currentUser, 'competencies');
 
     const competency = this.repository.create({
       ...createCompetencyDto,
@@ -84,19 +96,14 @@ export class CompetenciesService {
   }
 
   /**
-   * Update a competency (ADMIN only)
+   * Update a competency (ADMIN, OFFICE_MANAGER, CBI_USER)
    */
   async update(
     id: number,
     updateCompetencyDto: UpdateCompetencyDto,
     currentUser: any,
   ) {
-    // Only ADMIN can update competencies
-    if (currentUser.role !== UserRole.ADMIN) {
-      throw new ForbiddenException(
-        'Only administrators can update competencies',
-      );
-    }
+    assertCanManageCbi(currentUser, 'competencies');
 
     await this.findOne(id, currentUser);
 
@@ -108,12 +115,10 @@ export class CompetenciesService {
   }
 
   /**
-   * Soft delete a competency (ADMIN only)
+   * Soft delete a competency (ADMIN, OFFICE_MANAGER, CBI_USER)
    */
   async remove(id: number, currentUser: any) {
-    if (currentUser.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can delete competencies');
-    }
+    assertCanManageCbi(currentUser, 'competencies');
 
     await this.findOne(id, currentUser);
     await this.repository.update(id, { status: 'Deleted' });
@@ -122,9 +127,7 @@ export class CompetenciesService {
 
   // CompetencyType CRUD
   async createType(dto: CreateCompetencyTypeDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can create competency types');
-    }
+    assertCanManageCbi(user, 'competency types');
     const type = this.typeRepository.create({
       ...dto,
       client_id: user.clientId || 1,
@@ -147,18 +150,14 @@ export class CompetenciesService {
   }
 
   async updateType(id: number, dto: UpdateCompetencyTypeDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can update competency types');
-    }
+    assertCanManageCbi(user, 'competency types');
     await this.findOneType(id);
     await this.typeRepository.update(id, dto);
     return this.findOneType(id);
   }
 
   async removeType(id: number, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can delete competency types');
-    }
+    assertCanManageCbi(user, 'competency types');
     await this.findOneType(id);
     await this.typeRepository.update(id, { status: 'Deleted' });
     return { message: 'CompetencyType deleted successfully' };
@@ -166,9 +165,7 @@ export class CompetenciesService {
 
   // CompetencyCluster CRUD
   async createCluster(dto: CreateCompetencyClusterDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can create competency clusters');
-    }
+    assertCanManageCbi(user, 'competency clusters');
     const cluster = this.clusterRepository.create({
       ...dto,
       client_id: user.clientId || 1,
@@ -195,18 +192,14 @@ export class CompetenciesService {
   }
 
   async updateCluster(id: number, dto: UpdateCompetencyClusterDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can update competency clusters');
-    }
+    assertCanManageCbi(user, 'competency clusters');
     await this.findOneCluster(id);
     await this.clusterRepository.update(id, dto);
     return this.findOneCluster(id);
   }
 
   async removeCluster(id: number, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can delete competency clusters');
-    }
+    assertCanManageCbi(user, 'competency clusters');
     await this.findOneCluster(id);
     await this.clusterRepository.update(id, { status: 'Deleted' });
     return { message: 'CompetencyCluster deleted successfully' };
