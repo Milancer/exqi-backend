@@ -35,6 +35,17 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 
+// Roles permitted to manage competency taxonomy (JP + CBI sides share
+// the same list — power users in either module can maintain the shared
+// building blocks). Keep in sync with competencies.controller.ts and
+// competencies.service.ts. OFFICE_REVIEWER is excluded by design.
+const TAXONOMY_WRITE_ROLES = [
+  UserRole.ADMIN,
+  UserRole.OFFICE_MANAGER,
+  UserRole.CBI_USER,
+  UserRole.JOB_PROFILE_USER,
+] as const;
+
 @ApiTags('job-profiles')
 @ApiBearerAuth()
 @Controller('job-profiles')
@@ -45,8 +56,8 @@ export class JobProfilesController {
   // ─── JP Competency Types (MUST be before :id routes) ───────────
 
   @Post('competency-types')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Create a JP competency type (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Create a JP competency type' })
   @ApiResponse({ status: 201, description: 'JP type created successfully' })
   createJpType(@Body() dto: CreateJpCompetencyTypeDto, @Request() req) {
     return this.jobProfilesService.createJpType(dto, req.user);
@@ -68,8 +79,8 @@ export class JobProfilesController {
   }
 
   @Patch('competency-types/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Update a JP competency type (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Update a JP competency type' })
   @ApiResponse({ status: 200, description: 'JP type updated successfully' })
   updateJpType(
     @Param('id') id: string,
@@ -80,8 +91,8 @@ export class JobProfilesController {
   }
 
   @Delete('competency-types/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Delete a JP competency type (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Delete a JP competency type' })
   @ApiResponse({ status: 200, description: 'JP type deleted successfully' })
   removeJpType(@Param('id') id: string, @Request() req) {
     return this.jobProfilesService.removeJpType(+id, req.user);
@@ -90,8 +101,8 @@ export class JobProfilesController {
   // ─── JP Competency Clusters (MUST be before :id routes) ────────
 
   @Post('competency-clusters')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Create a JP competency cluster (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Create a JP competency cluster' })
   @ApiResponse({ status: 201, description: 'JP cluster created successfully' })
   createJpCluster(@Body() dto: CreateJpCompetencyClusterDto, @Request() req) {
     return this.jobProfilesService.createJpCluster(dto, req.user);
@@ -113,8 +124,8 @@ export class JobProfilesController {
   }
 
   @Patch('competency-clusters/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Update a JP competency cluster (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Update a JP competency cluster' })
   @ApiResponse({ status: 200, description: 'JP cluster updated successfully' })
   updateJpCluster(
     @Param('id') id: string,
@@ -125,8 +136,8 @@ export class JobProfilesController {
   }
 
   @Delete('competency-clusters/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Delete a JP competency cluster (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Delete a JP competency cluster' })
   @ApiResponse({ status: 200, description: 'JP cluster deleted successfully' })
   removeJpCluster(@Param('id') id: string, @Request() req) {
     return this.jobProfilesService.removeJpCluster(+id, req.user);
@@ -135,8 +146,8 @@ export class JobProfilesController {
   // ─── JP Competencies (MUST be before :id routes) ───────────────
 
   @Post('competency-items')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Create a JP competency (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Create a JP competency' })
   @ApiResponse({
     status: 201,
     description: 'JP competency created successfully',
@@ -161,8 +172,8 @@ export class JobProfilesController {
   }
 
   @Patch('competency-items/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Update a JP competency (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Update a JP competency' })
   @ApiResponse({
     status: 200,
     description: 'JP competency updated successfully',
@@ -176,8 +187,8 @@ export class JobProfilesController {
   }
 
   @Delete('competency-items/:id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Delete a JP competency (ADMIN only)' })
+  @Roles(...TAXONOMY_WRITE_ROLES)
+  @ApiOperation({ summary: 'Delete a JP competency' })
   @ApiResponse({
     status: 200,
     description: 'JP competency deleted successfully',

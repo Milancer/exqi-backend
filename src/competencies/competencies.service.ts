@@ -16,17 +16,19 @@ import { CreateCompetencyClusterDto } from './dto/competency-cluster/create-comp
 import { UpdateCompetencyClusterDto } from './dto/competency-cluster/update-competency-cluster.dto';
 import { UserRole } from '../users/entities/user.entity';
 
-// Roles permitted to manage CBI competency taxonomy. Defence-in-depth check
-// alongside the @Roles() decorators on the controller. If you change one,
-// change the other.
-const CBI_WRITE_ROLES: readonly UserRole[] = [
+// Roles permitted to manage competency taxonomy (CBI + Job Profile sides).
+// Defence-in-depth check alongside the @Roles() decorators on the
+// controller. Keep this list in sync with TAXONOMY_WRITE_ROLES in
+// competencies.controller.ts and job-profiles.controller.ts.
+const TAXONOMY_WRITE_ROLES: readonly UserRole[] = [
   UserRole.ADMIN,
   UserRole.OFFICE_MANAGER,
   UserRole.CBI_USER,
+  UserRole.JOB_PROFILE_USER,
 ];
 
-function assertCanManageCbi(user: any, resource: string): void {
-  if (!CBI_WRITE_ROLES.includes(user?.role)) {
+export function assertCanManageTaxonomy(user: any, resource: string): void {
+  if (!TAXONOMY_WRITE_ROLES.includes(user?.role)) {
     throw new ForbiddenException(
       `Your role is not permitted to modify ${resource}`,
     );
@@ -48,7 +50,7 @@ export class CompetenciesService {
    * Create a new competency (ADMIN, OFFICE_MANAGER, CBI_USER)
    */
   async create(createCompetencyDto: CreateCompetencyDto, currentUser: any) {
-    assertCanManageCbi(currentUser, 'competencies');
+    assertCanManageTaxonomy(currentUser, 'competencies');
 
     const competency = this.repository.create({
       ...createCompetencyDto,
@@ -103,7 +105,7 @@ export class CompetenciesService {
     updateCompetencyDto: UpdateCompetencyDto,
     currentUser: any,
   ) {
-    assertCanManageCbi(currentUser, 'competencies');
+    assertCanManageTaxonomy(currentUser, 'competencies');
 
     await this.findOne(id, currentUser);
 
@@ -118,7 +120,7 @@ export class CompetenciesService {
    * Soft delete a competency (ADMIN, OFFICE_MANAGER, CBI_USER)
    */
   async remove(id: number, currentUser: any) {
-    assertCanManageCbi(currentUser, 'competencies');
+    assertCanManageTaxonomy(currentUser, 'competencies');
 
     await this.findOne(id, currentUser);
     await this.repository.update(id, { status: 'Deleted' });
@@ -127,7 +129,7 @@ export class CompetenciesService {
 
   // CompetencyType CRUD
   async createType(dto: CreateCompetencyTypeDto, user: any) {
-    assertCanManageCbi(user, 'competency types');
+    assertCanManageTaxonomy(user, 'competency types');
     const type = this.typeRepository.create({
       ...dto,
       client_id: user.clientId || 1,
@@ -150,14 +152,14 @@ export class CompetenciesService {
   }
 
   async updateType(id: number, dto: UpdateCompetencyTypeDto, user: any) {
-    assertCanManageCbi(user, 'competency types');
+    assertCanManageTaxonomy(user, 'competency types');
     await this.findOneType(id);
     await this.typeRepository.update(id, dto);
     return this.findOneType(id);
   }
 
   async removeType(id: number, user: any) {
-    assertCanManageCbi(user, 'competency types');
+    assertCanManageTaxonomy(user, 'competency types');
     await this.findOneType(id);
     await this.typeRepository.update(id, { status: 'Deleted' });
     return { message: 'CompetencyType deleted successfully' };
@@ -165,7 +167,7 @@ export class CompetenciesService {
 
   // CompetencyCluster CRUD
   async createCluster(dto: CreateCompetencyClusterDto, user: any) {
-    assertCanManageCbi(user, 'competency clusters');
+    assertCanManageTaxonomy(user, 'competency clusters');
     const cluster = this.clusterRepository.create({
       ...dto,
       client_id: user.clientId || 1,
@@ -192,14 +194,14 @@ export class CompetenciesService {
   }
 
   async updateCluster(id: number, dto: UpdateCompetencyClusterDto, user: any) {
-    assertCanManageCbi(user, 'competency clusters');
+    assertCanManageTaxonomy(user, 'competency clusters');
     await this.findOneCluster(id);
     await this.clusterRepository.update(id, dto);
     return this.findOneCluster(id);
   }
 
   async removeCluster(id: number, user: any) {
-    assertCanManageCbi(user, 'competency clusters');
+    assertCanManageTaxonomy(user, 'competency clusters');
     await this.findOneCluster(id);
     await this.clusterRepository.update(id, { status: 'Deleted' });
     return { message: 'CompetencyCluster deleted successfully' };

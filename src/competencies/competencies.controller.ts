@@ -27,13 +27,15 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 
-// Roles permitted to manage CBI competency taxonomy (Types / Clusters /
-// Competencies). Mirrors the CBI Templates controller — anyone who can
-// run CBI sessions can also maintain the underlying taxonomy.
-const CBI_WRITE_ROLES = [
+// Roles permitted to manage competency taxonomy (Types / Clusters /
+// Competencies) on both the CBI and Job Profile sides. Shared list so
+// power users in either module can maintain the shared building blocks.
+// OFFICE_REVIEWER is excluded — that role is review-only by design.
+const TAXONOMY_WRITE_ROLES = [
   UserRole.ADMIN,
   UserRole.OFFICE_MANAGER,
   UserRole.CBI_USER,
+  UserRole.JOB_PROFILE_USER,
 ] as const;
 
 @ApiTags('Competencies')
@@ -46,7 +48,7 @@ export class CompetenciesController {
   // ─── CompetencyType endpoints (MUST be before :id routes) ───
 
   @Post('types')
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Create a competency type' })
   @ApiResponse({ status: 201, description: 'Type created successfully' })
   createType(@Body() dto: CreateCompetencyTypeDto, @Request() req) {
@@ -69,7 +71,7 @@ export class CompetenciesController {
   }
 
   @Patch('types/:id')
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Update a competency type' })
   @ApiResponse({ status: 200, description: 'Type updated successfully' })
   updateType(
@@ -81,7 +83,7 @@ export class CompetenciesController {
   }
 
   @Delete('types/:id')
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Delete a competency type' })
   @ApiResponse({ status: 200, description: 'Type deleted successfully' })
   removeType(@Param('id') id: string, @Request() req) {
@@ -91,7 +93,7 @@ export class CompetenciesController {
   // ─── CompetencyCluster endpoints (MUST be before :id routes) ───
 
   @Post('clusters')
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Create a competency cluster' })
   @ApiResponse({ status: 201, description: 'Cluster created successfully' })
   createCluster(@Body() dto: CreateCompetencyClusterDto, @Request() req) {
@@ -114,7 +116,7 @@ export class CompetenciesController {
   }
 
   @Patch('clusters/:id')
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Update a competency cluster' })
   @ApiResponse({ status: 200, description: 'Cluster updated successfully' })
   updateCluster(
@@ -126,7 +128,7 @@ export class CompetenciesController {
   }
 
   @Delete('clusters/:id')
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Delete a competency cluster' })
   @ApiResponse({ status: 200, description: 'Cluster deleted successfully' })
   removeCluster(@Param('id') id: string, @Request() req) {
@@ -136,7 +138,7 @@ export class CompetenciesController {
   // ─── Competency endpoints (generic :id routes LAST) ───
 
   @Post()
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Create a new competency' })
   @ApiResponse({
     status: 201,
@@ -168,7 +170,7 @@ export class CompetenciesController {
   }
 
   @Patch(':id')
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Update a competency' })
   @ApiResponse({
     status: 200,
@@ -184,7 +186,7 @@ export class CompetenciesController {
   }
 
   @Delete(':id')
-  @Roles(...CBI_WRITE_ROLES)
+  @Roles(...TAXONOMY_WRITE_ROLES)
   @ApiOperation({ summary: 'Delete a competency' })
   @ApiResponse({
     status: 200,

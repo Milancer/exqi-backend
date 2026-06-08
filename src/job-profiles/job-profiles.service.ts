@@ -38,6 +38,7 @@ import { UpdateJpCompetencyClusterDto } from './dto/jp-competency-cluster/update
 import { CreateJpCompetencyDto } from './dto/jp-competency/create-jp-competency.dto';
 import { UpdateJpCompetencyDto } from './dto/jp-competency/update-jp-competency.dto';
 import { BusinessProcessesService } from '../business-processes/business-processes.service';
+import { assertCanManageTaxonomy } from '../competencies/competencies.service';
 
 @Injectable()
 export class JobProfilesService {
@@ -1202,9 +1203,7 @@ export class JobProfilesService {
   // ═══════════════════════════════════════════════════════════════
 
   async createJpType(dto: CreateJpCompetencyTypeDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can create JP competency types');
-    }
+    assertCanManageTaxonomy(user, 'JP competency types');
     const type = this.jpTypeRepository.create({
       ...dto,
       client_id: user.clientId || 1,
@@ -1227,18 +1226,14 @@ export class JobProfilesService {
   }
 
   async updateJpType(id: number, dto: UpdateJpCompetencyTypeDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can update JP competency types');
-    }
+    assertCanManageTaxonomy(user, 'JP competency types');
     await this.findOneJpType(id);
     await this.jpTypeRepository.update(id, dto);
     return this.findOneJpType(id);
   }
 
   async removeJpType(id: number, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can delete JP competency types');
-    }
+    assertCanManageTaxonomy(user, 'JP competency types');
     await this.findOneJpType(id);
     await this.jpTypeRepository.update(id, { status: 'Deleted' });
     return { message: 'JP CompetencyType deleted successfully' };
@@ -1249,11 +1244,7 @@ export class JobProfilesService {
   // ═══════════════════════════════════════════════════════════════
 
   async createJpCluster(dto: CreateJpCompetencyClusterDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException(
-        'Only ADMIN can create JP competency clusters',
-      );
-    }
+    assertCanManageTaxonomy(user, 'JP competency clusters');
     const cluster = this.jpClusterRepository.create({
       ...dto,
       client_id: user.clientId || 1,
@@ -1286,22 +1277,14 @@ export class JobProfilesService {
     dto: UpdateJpCompetencyClusterDto,
     user: any,
   ) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException(
-        'Only ADMIN can update JP competency clusters',
-      );
-    }
+    assertCanManageTaxonomy(user, 'JP competency clusters');
     await this.findOneJpCluster(id);
     await this.jpClusterRepository.update(id, dto);
     return this.findOneJpCluster(id);
   }
 
   async removeJpCluster(id: number, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException(
-        'Only ADMIN can delete JP competency clusters',
-      );
-    }
+    assertCanManageTaxonomy(user, 'JP competency clusters');
     await this.findOneJpCluster(id);
     await this.jpClusterRepository.update(id, { status: 'Deleted' });
     return { message: 'JP CompetencyCluster deleted successfully' };
@@ -1312,9 +1295,7 @@ export class JobProfilesService {
   // ═══════════════════════════════════════════════════════════════
 
   async createJpCompetency(dto: CreateJpCompetencyDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can create JP competencies');
-    }
+    assertCanManageTaxonomy(user, 'JP competencies');
     const competency = this.jpCompetencyRepository.create({
       ...dto,
       client_id: user.clientId || 1,
@@ -1348,18 +1329,14 @@ export class JobProfilesService {
   }
 
   async updateJpCompetency(id: number, dto: UpdateJpCompetencyDto, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can update JP competencies');
-    }
+    assertCanManageTaxonomy(user, 'JP competencies');
     await this.findOneJpCompetency(id);
     await this.jpCompetencyRepository.update(id, dto);
     return this.findOneJpCompetency(id);
   }
 
   async removeJpCompetency(id: number, user: any) {
-    if (user.role !== UserRole.ADMIN) {
-      throw new ForbiddenException('Only ADMIN can delete JP competencies');
-    }
+    assertCanManageTaxonomy(user, 'JP competencies');
     await this.findOneJpCompetency(id);
     await this.jpCompetencyRepository.update(id, { status: 'Deleted' });
     return { message: 'JP Competency deleted successfully' };
