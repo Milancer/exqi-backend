@@ -300,12 +300,16 @@ export class JobProfilesService {
       );
     }
 
-    // Pull business_process_node_ids out of the dto - it's a relation, not a column.
-    const { business_process_node_ids, ...dtoColumns } = dto as any;
+    // Pull BP-selection fields out of the dto - they're a relation, not columns.
+    const {
+      business_process_node_ids,
+      business_processes,
+      ...dtoColumns
+    } = dto as any;
 
     // Compute diff against the existing profile before applying the update.
-    // Exclude business_process_node_ids from the column-level diff; we handle
-    // it separately and add a synthetic change entry below if it differed.
+    // Exclude BP-selection fields from the column-level diff; we handle them
+    // separately and add a synthetic change entry below if they differed.
     const changes = this.diffRecords(jobProfile as any, dtoColumns as any, [
       'updated_at',
       'created_at',
@@ -319,26 +323,59 @@ export class JobProfilesService {
       await this.jobProfileRepository.update(id, dtoColumns);
     }
 
-    if (Array.isArray(business_process_node_ids)) {
-      const previousIds = ((jobProfile as any).businessProcesses ?? [])
-        .map((j: any) => j.business_process_node_id)
-        .sort((a: number, b: number) => a - b);
-      const nextIds = [...business_process_node_ids].sort(
-        (a: number, b: number) => a - b,
-      );
-      const sameSelection =
-        previousIds.length === nextIds.length &&
-        previousIds.every((v: number, i: number) => v === nextIds[i]);
+    // Normalize either input shape into the rich {node_id, R/A/C/I} array.
+    // `business_processes` (rich) wins if both are provided.
+    let selections:
+      | Array<{
+          node_id: number;
+          is_responsible?: boolean;
+          is_accountable?: boolean;
+          is_consulted?: boolean;
+          is_informed?: boolean;
+        }>
+      | undefined;
+    if (Array.isArray(business_processes)) {
+      selections = business_processes;
+    } else if (Array.isArray(business_process_node_ids)) {
+      // Legacy path: all flags default to false.
+      selections = business_process_node_ids.map((id: number) => ({
+        node_id: id,
+      }));
+    }
 
-      if (!sameSelection) {
+    if (selections) {
+      const previousRows = ((jobProfile as any).businessProcesses ?? []) as Array<{
+        business_process_node_id: number;
+        is_responsible: boolean;
+        is_accountable: boolean;
+        is_consulted: boolean;
+        is_informed: boolean;
+      }>;
+      const fingerprint = (rows: any[]) =>
+        rows
+          .map((r) =>
+            [
+              r.node_id ?? r.business_process_node_id,
+              r.is_responsible ? 'R' : '',
+              r.is_accountable ? 'A' : '',
+              r.is_consulted ? 'C' : '',
+              r.is_informed ? 'I' : '',
+            ].join(':'),
+          )
+          .sort()
+          .join('|');
+      const previousFp = fingerprint(previousRows);
+      const nextFp = fingerprint(selections);
+
+      if (previousFp !== nextFp) {
         await this.businessProcessesService.setSelectionForJobProfile(
           id,
-          business_process_node_ids,
+          selections,
         );
         changes.push({
           field: 'business_processes',
-          old: previousIds,
-          new: nextIds,
+          old: previousFp,
+          new: nextFp,
         });
       }
     }

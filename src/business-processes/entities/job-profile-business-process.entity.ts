@@ -1,6 +1,7 @@
 import {
   Entity,
   PrimaryColumn,
+  Column,
   ManyToOne,
   JoinColumn,
   CreateDateColumn,
@@ -18,6 +19,10 @@ import { BusinessProcessNode } from './business-process-node.entity';
  *
  * Composite PK (job_profile_id, business_process_node_id) prevents duplicates
  * and gives us a free index for the JP-side lookup.
+ *
+ * RACI flags describe how this job profile relates to the process. Multiple
+ * flags can be true at once (e.g. a profile that does the work AND must be
+ * informed of outcomes is both R and I).
  */
 @Entity('job_profile_business_processes')
 export class JobProfileBusinessProcess {
@@ -28,6 +33,22 @@ export class JobProfileBusinessProcess {
   @ApiProperty()
   @PrimaryColumn()
   business_process_node_id: number;
+
+  @ApiProperty({ description: 'Does the work' })
+  @Column({ type: 'boolean', default: false })
+  is_responsible: boolean;
+
+  @ApiProperty({ description: 'Owns the outcome (ideally one per process)' })
+  @Column({ type: 'boolean', default: false })
+  is_accountable: boolean;
+
+  @ApiProperty({ description: 'Input is sought before decisions' })
+  @Column({ type: 'boolean', default: false })
+  is_consulted: boolean;
+
+  @ApiProperty({ description: 'Kept informed after the fact' })
+  @Column({ type: 'boolean', default: false })
+  is_informed: boolean;
 
   @ApiProperty()
   @CreateDateColumn()

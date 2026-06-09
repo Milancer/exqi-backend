@@ -84,7 +84,9 @@ export class BusinessProcessesService {
   }
 
   /**
-   * Replace the BP selection on a Job Profile atomically.
+   * Replace the BP selection on a Job Profile atomically, with per-node
+   * RACI flags. Each selection carries four booleans (R/A/C/I) — all default
+   * to false, multiple can be true on the same row.
    *
    * Persists only leaf-most picks: if a user selects M1.1.3 (a Procedure) we
    * store that one row, and the chain back to "Enterprise" is derived at read
@@ -93,15 +95,29 @@ export class BusinessProcessesService {
    */
   async setSelectionForJobProfile(
     jobProfileId: number,
-    nodeIds: number[],
+    selections: Array<{
+      node_id: number;
+      is_responsible?: boolean;
+      is_accountable?: boolean;
+      is_consulted?: boolean;
+      is_informed?: boolean;
+    }>,
   ): Promise<BusinessProcessNode[]> {
-    const unique = Array.from(new Set(nodeIds.filter((id) => Number.isInteger(id))));
+    // Dedupe by node_id, keeping the last seen RACI flags.
+    const byId = new Map<number, (typeof selections)[number]>();
+    for (const s of selections) {
+      if (Number.isInteger(s.node_id)) byId.set(s.node_id, s);
+    }
+    const unique = Array.from(byId.values());
+    const uniqueIds = unique.map((s) => s.node_id);
 
-    if (unique.length > 0) {
-      const existing = await this.nodeRepository.find({ where: { id: In(unique) } });
-      if (existing.length !== unique.length) {
+    if (uniqueIds.length > 0) {
+      const existing = await this.nodeRepository.find({
+        where: { id: In(uniqueIds) },
+      });
+      if (existing.length !== uniqueIds.length) {
         const found = new Set(existing.map((n) => n.id));
-        const missing = unique.filter((id) => !found.has(id));
+        const missing = uniqueIds.filter((id) => !found.has(id));
         throw new NotFoundException(
           `Unknown business_process_node id(s): ${missing.join(', ')}`,
         );
@@ -120,10 +136,14 @@ export class BusinessProcessesService {
     await this.joinRepository.delete({ job_profile_id: jobProfileId });
 
     if (unique.length > 0) {
-      const rows = unique.map((id) =>
+      const rows = unique.map((s) =>
         this.joinRepository.create({
           job_profile_id: jobProfileId,
-          business_process_node_id: id,
+          business_process_node_id: s.node_id,
+          is_responsible: !!s.is_responsible,
+          is_accountable: !!s.is_accountable,
+          is_consulted: !!s.is_consulted,
+          is_informed: !!s.is_informed,
         }),
       );
       await this.joinRepository.save(rows);
